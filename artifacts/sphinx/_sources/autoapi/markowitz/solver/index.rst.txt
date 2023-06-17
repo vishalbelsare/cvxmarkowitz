@@ -1,0 +1,47 @@
+:py:mod:`markowitz.solver`
+==========================
+
+.. py:module:: markowitz.solver
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   markowitz.solver.Solver
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   markowitz.solver.to_vector
+
+
+
+.. py:function:: to_vector(assets, dictionary=None, value=0.0)
+
+
+.. py:class:: Solver(assets)
+
+   .. py:method:: funding(self)
+      :property:
+
+
+   .. py:method:: leverage(self)
+      :property:
+
+
+   .. py:method:: build(self)
+
+
+   .. py:method:: solve(self, **kwargs)
+
+
+

@@ -1,0 +1,50 @@
+:py:mod:`markowitz.bounds`
+==========================
+
+.. py:module:: markowitz.bounds
+
+.. autoapi-nested-parse::
+
+   Bounds
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   markowitz.bounds.Bounds
+
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   markowitz.bounds.assets
+
+
+.. py:class:: Bounds
+
+   .. py:attribute:: lower
+      :annotation: :float
+
+      
+
+   .. py:attribute:: upper
+      :annotation: :float
+
+      
+
+
+.. py:data:: assets
+   :annotation: = ['AAPL', 'MSFT']
+
+   
+

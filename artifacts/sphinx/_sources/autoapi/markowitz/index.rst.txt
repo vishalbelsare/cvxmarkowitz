@@ -4,3 +4,13 @@
 .. py:module:: markowitz
 
 
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   bounds/index.rst
+   solver/index.rst
+
+
