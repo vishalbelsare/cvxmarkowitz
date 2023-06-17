@@ -16,17 +16,6 @@ Classes
 
 
 
-Functions
-~~~~~~~~~
-
-.. autoapisummary::
-
-   markowitz.solver.to_vector
-
-
-
-.. py:function:: to_vector(assets, dictionary=None, value=0.0)
-
 
 .. py:class:: Solver(assets)
 
@@ -42,6 +31,17 @@ Functions
 
 
    .. py:method:: solve(self, **kwargs)
+
+
+   .. py:method:: risk_model(self)
+      :property:
+
+
+   .. py:method:: risk(self)
+      :property:
+
+
+   .. py:method:: expected_return(self, returns)
 
 
 
