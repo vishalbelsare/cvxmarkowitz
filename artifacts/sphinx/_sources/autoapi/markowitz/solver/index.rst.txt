@@ -44,4 +44,7 @@ Classes
    .. py:method:: expected_return(self, returns)
 
 
+   .. py:method:: update_data(self, **kwargs)
+
+
 

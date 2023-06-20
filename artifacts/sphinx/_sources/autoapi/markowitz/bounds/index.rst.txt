@@ -42,6 +42,9 @@ Attributes
 
       
 
+   .. py:method:: __post_init__(self)
+
+
 
 .. py:data:: assets
    :annotation: = ['AAPL', 'MSFT']
