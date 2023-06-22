@@ -24,3 +24,46 @@ Submodules
    solver/index.rst
 
 
+Package Contents
+----------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   markowitz.Model
+
+
+
+
+.. py:class:: Model
+
+   Bases: :py:obj:`abc.ABC`
+
+   Abstract risk model
+
+   .. py:attribute:: parameter
+      :annotation: :Dict[str, cvxpy.Parameter]
+
+      
+
+   .. py:method:: estimate(self, weights, **kwargs)
+      :abstractmethod:
+
+      Estimate the variance given the portfolio weights
+
+
+   .. py:method:: update(self, **kwargs)
+      :abstractmethod:
+
+      Update the data in the risk model
+
+
+   .. py:method:: constraints(self, weights, **kwargs)
+      :abstractmethod:
+
+      Return the constraints for the risk model
+
+
+

@@ -77,7 +77,7 @@
 <span class="kn">import</span> <span class="nn">cvxpy</span> <span class="k">as</span> <span class="nn">cp</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<span class="kn">from</span> <span class="nn">cvx.risk.model</span> <span class="kn">import</span> <span class="n">RiskModel</span>
+<span class="kn">from</span> <span class="nn">.model</span> <span class="kn">import</span> <span class="n">Model</span>
 
 
 <span class="c1"># def to_vector(assets, dictionary=None, value=0.0):</span>
@@ -118,7 +118,7 @@
 
     <span class="nd">@risk_model</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">risk_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">RiskModel</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Model</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_risk_model</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
