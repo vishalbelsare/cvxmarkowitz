@@ -1,0 +1,15 @@
+:py:mod:`markowitz.portfolio`
+=============================
+
+.. py:module:: markowitz.portfolio
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   min_risk/index.rst
+
+
