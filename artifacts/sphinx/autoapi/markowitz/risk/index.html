@@ -99,6 +99,10 @@
 <li class="toctree-l2"><a class="reference internal" href="cvar/cvar/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">markowitz.risk.cvar.cvar</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="factor/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">markowitz.risk.factor</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="factor/factor/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">markowitz.risk.factor.factor</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="sample/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">markowitz.risk.sample</span></code></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="sample/sample/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">markowitz.risk.sample.sample</span></code></a></li>
 </ul>
@@ -119,7 +123,10 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#markowitz.risk.CVar" title="markowitz.risk.CVar"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CVar</span></code></a></p></td>
 <td><p>Conditional value at risk model</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#markowitz.risk.SampleCovariance" title="markowitz.risk.SampleCovariance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SampleCovariance</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#markowitz.risk.FactorModel" title="markowitz.risk.FactorModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FactorModel</span></code></a></p></td>
+<td><p>Factor risk model</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#markowitz.risk.SampleCovariance" title="markowitz.risk.SampleCovariance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SampleCovariance</span></code></a></p></td>
 <td><p>Risk model based on the Cholesky decomposition of the sample cov matrix</p></td>
 </tr>
 </tbody>
@@ -164,6 +171,46 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="markowitz.risk.CVar.constraints">
 <span class="sig-name descname"><span class="pre">constraints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#markowitz.risk.CVar.constraints" title="Permalink to this definition"></a></dt>
+<dd><p>Return the constraints for the risk model</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="markowitz.risk.FactorModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">markowitz.risk.</span></span><span class="sig-name descname"><span class="pre">FactorModel</span></span><a class="reference internal" href="../../../_modules/markowitz/risk/factor/factor.html#FactorModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.risk.FactorModel" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">cvx.markowitz.Model</span></code></p>
+<p>Factor risk model</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="markowitz.risk.FactorModel.assets">
+<span class="sig-name descname"><span class="pre">assets</span></span><em class="property"><span class="w"> </span><span class="pre">:int</span> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#markowitz.risk.FactorModel.assets" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="markowitz.risk.FactorModel.k">
+<span class="sig-name descname"><span class="pre">k</span></span><em class="property"><span class="w"> </span><span class="pre">:int</span> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#markowitz.risk.FactorModel.k" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="markowitz.risk.FactorModel.__post_init__">
+<span class="sig-name descname"><span class="pre">__post_init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#markowitz.risk.FactorModel.__post_init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="markowitz.risk.FactorModel.estimate">
+<span class="sig-name descname"><span class="pre">estimate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#markowitz.risk.FactorModel.estimate" title="Permalink to this definition"></a></dt>
+<dd><p>Compute the total variance</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="markowitz.risk.FactorModel.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#markowitz.risk.FactorModel.update" title="Permalink to this definition"></a></dt>
+<dd><p>Update the data in the risk model</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="markowitz.risk.FactorModel.constraints">
+<span class="sig-name descname"><span class="pre">constraints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#markowitz.risk.FactorModel.constraints" title="Permalink to this definition"></a></dt>
 <dd><p>Return the constraints for the risk model</p>
 </dd></dl>
 

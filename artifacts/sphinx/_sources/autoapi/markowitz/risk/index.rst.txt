@@ -11,6 +11,7 @@ Subpackages
    :maxdepth: 3
 
    cvar/index.rst
+   factor/index.rst
    sample/index.rst
 
 
@@ -23,6 +24,7 @@ Classes
 .. autoapisummary::
 
    markowitz.risk.CVar
+   markowitz.risk.FactorModel
    markowitz.risk.SampleCovariance
 
 
@@ -55,6 +57,41 @@ Classes
    .. py:method:: estimate(self, weights, **kwargs)
 
       Estimate the risk by computing the Cholesky decomposition of self.cov
+
+
+   .. py:method:: update(self, **kwargs)
+
+      Update the data in the risk model
+
+
+   .. py:method:: constraints(self, weights, **kwargs)
+
+      Return the constraints for the risk model
+
+
+
+.. py:class:: FactorModel
+
+   Bases: :py:obj:`cvx.markowitz.Model`
+
+   Factor risk model
+
+   .. py:attribute:: assets
+      :annotation: :int = 0
+
+      
+
+   .. py:attribute:: k
+      :annotation: :int = 0
+
+      
+
+   .. py:method:: __post_init__(self)
+
+
+   .. py:method:: estimate(self, weights, **kwargs)
+
+      Compute the total variance
 
 
    .. py:method:: update(self, **kwargs)

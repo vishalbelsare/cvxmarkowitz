@@ -1,0 +1,63 @@
+:py:mod:`markowitz.risk.factor`
+===============================
+
+.. py:module:: markowitz.risk.factor
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   factor/index.rst
+
+
+Package Contents
+----------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   markowitz.risk.factor.FactorModel
+
+
+
+
+.. py:class:: FactorModel
+
+   Bases: :py:obj:`cvx.markowitz.Model`
+
+   Factor risk model
+
+   .. py:attribute:: assets
+      :annotation: :int = 0
+
+      
+
+   .. py:attribute:: k
+      :annotation: :int = 0
+
+      
+
+   .. py:method:: __post_init__(self)
+
+
+   .. py:method:: estimate(self, weights, **kwargs)
+
+      Compute the total variance
+
+
+   .. py:method:: update(self, **kwargs)
+
+      Update the data in the risk model
+
+
+   .. py:method:: constraints(self, weights, **kwargs)
+
+      Return the constraints for the risk model
+
+
+
