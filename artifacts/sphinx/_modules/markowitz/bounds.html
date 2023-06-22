@@ -120,10 +120,13 @@
         <span class="p">]</span> <span class="o">=</span> <span class="n">upper</span>  <span class="c1"># kwargs.get(&quot;upper&quot;, np.ones(m))</span></div>
 
 <div class="viewcode-block" id="Bounds.constraints"><a class="viewcode-back" href="../../autoapi/markowitz/bounds/index.html#markowitz.bounds.Bounds.constraints">[docs]</a>    <span class="k">def</span> <span class="nf">constraints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">[</span>
-            <span class="n">weights</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_f</span><span class="p">(</span><span class="s2">&quot;lower&quot;</span><span class="p">)],</span>
-            <span class="n">weights</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_f</span><span class="p">(</span><span class="s2">&quot;upper&quot;</span><span class="p">)],</span>
-        <span class="p">]</span></div></div>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="sa">f</span><span class="s2">&quot;lower bound </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">:</span> <span class="n">weights</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_f</span><span class="p">(</span><span class="s2">&quot;lower&quot;</span><span class="p">)],</span>
+            <span class="sa">f</span><span class="s2">&quot;upper bound </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">:</span> <span class="n">weights</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_f</span><span class="p">(</span><span class="s2">&quot;upper&quot;</span><span class="p">)],</span>
+        <span class="p">}</span></div></div>
+        <span class="c1"># weights &gt;= self.parameter[self._f(&quot;lower&quot;)],</span>
+        <span class="c1"># weights &lt;= self.parameter[self._f(&quot;upper&quot;)],</span>
+        <span class="c1"># ]</span>
 </pre></div>
 
            </div>

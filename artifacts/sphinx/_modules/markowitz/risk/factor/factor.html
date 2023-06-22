@@ -142,11 +142,16 @@
 <div class="viewcode-block" id="FactorModel.constraints"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/factor/factor/index.html#markowitz.risk.factor.factor.FactorModel.constraints">[docs]</a>    <span class="k">def</span> <span class="nf">constraints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter</span><span class="p">[</span><span class="s2">&quot;exposure&quot;</span><span class="p">]</span> <span class="o">@</span> <span class="n">weights</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">bounds_assets</span><span class="o">.</span><span class="n">constraints</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
-            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">bounds_factors</span><span class="o">.</span><span class="n">constraints</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-            <span class="o">+</span> <span class="p">[</span><span class="n">y</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter</span><span class="p">[</span><span class="s2">&quot;exposure&quot;</span><span class="p">]</span> <span class="o">@</span> <span class="n">weights</span><span class="p">]</span>
-        <span class="p">)</span></div></div>
+        <span class="n">factor</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;factors&quot;</span><span class="p">:</span> <span class="n">y</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter</span><span class="p">[</span><span class="s2">&quot;exposure&quot;</span><span class="p">]</span> <span class="o">@</span> <span class="n">weights</span><span class="p">}</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">bounds_assets</span><span class="o">.</span><span class="n">constraints</span><span class="p">(</span><span class="n">weights</span><span class="p">),</span>
+            <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">bounds_factors</span><span class="o">.</span><span class="n">constraints</span><span class="p">(</span><span class="n">y</span><span class="p">),</span>
+            <span class="o">**</span><span class="n">factor</span><span class="p">,</span>
+        <span class="p">}</span></div></div>
+        <span class="c1">#</span>
+        <span class="c1">#    + [y == self.parameter[&quot;exposure&quot;] @ weights]</span>
+        <span class="c1">#        }</span>
 </pre></div>
 
            </div>
