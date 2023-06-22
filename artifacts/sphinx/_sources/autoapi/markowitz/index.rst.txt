@@ -4,6 +4,15 @@
 .. py:module:: markowitz
 
 
+Subpackages
+-----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
+
+   risk/index.rst
+
+
 Submodules
 ----------
 .. toctree::
