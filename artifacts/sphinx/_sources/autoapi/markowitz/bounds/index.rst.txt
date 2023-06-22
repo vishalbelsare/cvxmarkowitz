@@ -22,32 +22,42 @@ Classes
 
 
 
-Attributes
-~~~~~~~~~~
-
-.. autoapisummary::
-
-   markowitz.bounds.assets
-
-
 .. py:class:: Bounds
 
-   .. py:attribute:: lower
-      :annotation: :float
+   Bases: :py:obj:`markowitz.model.Model`
+
+   Abstract risk model
+
+   .. py:attribute:: m
+      :annotation: :int = 0
 
       
 
-   .. py:attribute:: upper
-      :annotation: :float
+   .. py:attribute:: name
+      :annotation: :str = 
 
       
+
+   .. py:method:: estimate(self, weights, **kwargs)
+      :abstractmethod:
+
+      No estimation for bounds
+
+
+   .. py:method:: _f(self, str)
+
 
    .. py:method:: __post_init__(self)
 
 
+   .. py:method:: update(self, **kwargs)
 
-.. py:data:: assets
-   :annotation: = ['AAPL', 'MSFT']
+      Update the data in the risk model
 
-   
+
+   .. py:method:: constraints(self, weights, **kwargs)
+
+      Return the constraints for the risk model
+
+
 
