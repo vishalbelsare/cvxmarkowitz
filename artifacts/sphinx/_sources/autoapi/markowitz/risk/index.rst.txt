@@ -10,6 +10,7 @@ Subpackages
    :titlesonly:
    :maxdepth: 3
 
+   cvar/index.rst
    sample/index.rst
 
 
@@ -21,8 +22,49 @@ Classes
 
 .. autoapisummary::
 
+   markowitz.risk.CVar
    markowitz.risk.SampleCovariance
 
+
+
+
+.. py:class:: CVar
+
+   Bases: :py:obj:`cvx.markowitz.Model`
+
+   Conditional value at risk model
+
+   .. py:attribute:: alpha
+      :annotation: :float = 0.95
+
+      
+
+   .. py:attribute:: n
+      :annotation: :int = 0
+
+      
+
+   .. py:attribute:: m
+      :annotation: :int = 0
+
+      
+
+   .. py:method:: __post_init__(self)
+
+
+   .. py:method:: estimate(self, weights, **kwargs)
+
+      Estimate the risk by computing the Cholesky decomposition of self.cov
+
+
+   .. py:method:: update(self, **kwargs)
+
+      Update the data in the risk model
+
+
+   .. py:method:: constraints(self, weights, **kwargs)
+
+      Return the constraints for the risk model
 
 
 

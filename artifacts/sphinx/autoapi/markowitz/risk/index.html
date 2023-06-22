@@ -22,7 +22,7 @@
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="markowitz.risk.sample" href="sample/index.html" />
+    <link rel="next" title="markowitz.risk.cvar" href="cvar/index.html" />
     <link rel="prev" title="markowitz.portfolio.min_risk" href="../portfolio/min_risk/index.html" /> 
 </head>
 
@@ -95,6 +95,10 @@
 <h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="cvar/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">markowitz.risk.cvar</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cvar/cvar/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">markowitz.risk.cvar.cvar</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="sample/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">markowitz.risk.sample</span></code></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="sample/sample/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">markowitz.risk.sample.sample</span></code></a></li>
 </ul>
@@ -112,11 +116,59 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#markowitz.risk.SampleCovariance" title="markowitz.risk.SampleCovariance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SampleCovariance</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#markowitz.risk.CVar" title="markowitz.risk.CVar"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CVar</span></code></a></p></td>
+<td><p>Conditional value at risk model</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#markowitz.risk.SampleCovariance" title="markowitz.risk.SampleCovariance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SampleCovariance</span></code></a></p></td>
 <td><p>Risk model based on the Cholesky decomposition of the sample cov matrix</p></td>
 </tr>
 </tbody>
 </table>
+<dl class="py class">
+<dt class="sig sig-object py" id="markowitz.risk.CVar">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">markowitz.risk.</span></span><span class="sig-name descname"><span class="pre">CVar</span></span><a class="reference internal" href="../../../_modules/markowitz/risk/cvar/cvar.html#CVar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.risk.CVar" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">cvx.markowitz.Model</span></code></p>
+<p>Conditional value at risk model</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="markowitz.risk.CVar.alpha">
+<span class="sig-name descname"><span class="pre">alpha</span></span><em class="property"><span class="w"> </span><span class="pre">:float</span> <span class="pre">=</span> <span class="pre">0.95</span></em><a class="headerlink" href="#markowitz.risk.CVar.alpha" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="markowitz.risk.CVar.n">
+<span class="sig-name descname"><span class="pre">n</span></span><em class="property"><span class="w"> </span><span class="pre">:int</span> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#markowitz.risk.CVar.n" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="markowitz.risk.CVar.m">
+<span class="sig-name descname"><span class="pre">m</span></span><em class="property"><span class="w"> </span><span class="pre">:int</span> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#markowitz.risk.CVar.m" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="markowitz.risk.CVar.__post_init__">
+<span class="sig-name descname"><span class="pre">__post_init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#markowitz.risk.CVar.__post_init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="markowitz.risk.CVar.estimate">
+<span class="sig-name descname"><span class="pre">estimate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#markowitz.risk.CVar.estimate" title="Permalink to this definition"></a></dt>
+<dd><p>Estimate the risk by computing the Cholesky decomposition of self.cov</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="markowitz.risk.CVar.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#markowitz.risk.CVar.update" title="Permalink to this definition"></a></dt>
+<dd><p>Update the data in the risk model</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="markowitz.risk.CVar.constraints">
+<span class="sig-name descname"><span class="pre">constraints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#markowitz.risk.CVar.constraints" title="Permalink to this definition"></a></dt>
+<dd><p>Return the constraints for the risk model</p>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="markowitz.risk.SampleCovariance">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">markowitz.risk.</span></span><span class="sig-name descname"><span class="pre">SampleCovariance</span></span><a class="reference internal" href="../../../_modules/markowitz/risk/sample/sample.html#SampleCovariance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.risk.SampleCovariance" title="Permalink to this definition"></a></dt>
@@ -161,7 +213,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../portfolio/min_risk/index.html" class="btn btn-neutral float-left" title="markowitz.portfolio.min_risk" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="sample/index.html" class="btn btn-neutral float-right" title="markowitz.risk.sample" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="cvar/index.html" class="btn btn-neutral float-right" title="markowitz.risk.cvar" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
