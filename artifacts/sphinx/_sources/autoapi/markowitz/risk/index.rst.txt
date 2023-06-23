@@ -46,7 +46,7 @@ Classes
 
       
 
-   .. py:attribute:: m
+   .. py:attribute:: assets
       :annotation: :int = 0
 
       
@@ -69,6 +69,9 @@ Classes
       Return the constraints for the risk model
 
 
+   .. py:method:: variables(self)
+
+
 
 .. py:class:: FactorModel
 
@@ -81,7 +84,7 @@ Classes
 
       
 
-   .. py:attribute:: k
+   .. py:attribute:: factors
       :annotation: :int = 0
 
       
@@ -104,6 +107,10 @@ Classes
       Return the constraints for the risk model
 
 
+   .. py:method:: variables(self)
+      :property:
+
+
 
 .. py:class:: SampleCovariance
 
@@ -111,7 +118,7 @@ Classes
 
    Risk model based on the Cholesky decomposition of the sample cov matrix
 
-   .. py:attribute:: num
+   .. py:attribute:: assets
       :annotation: :int = 0
 
       
@@ -129,9 +136,13 @@ Classes
       Update the data in the risk model
 
 
-   .. py:method:: constraints(self, weights)
+   .. py:method:: constraints(self, weights, **kwargs)
 
       Return the constraints for the risk model
+
+
+   .. py:method:: variables(self)
+      :property:
 
 
 

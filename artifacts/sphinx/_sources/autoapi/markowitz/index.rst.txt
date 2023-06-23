@@ -49,6 +49,11 @@ Classes
 
       
 
+   .. py:attribute:: data
+      :annotation: :Dict[str, cvxpy.Parameter]
+
+      
+
    .. py:method:: estimate(self, weights, **kwargs)
       :abstractmethod:
 
@@ -65,6 +70,12 @@ Classes
       :abstractmethod:
 
       Return the constraints for the risk model
+
+
+   .. py:method:: assets(self)
+      :property:
+
+      Return the number of assets
 
 
 

@@ -28,7 +28,7 @@ Classes
 
    Abstract risk model
 
-   .. py:attribute:: m
+   .. py:attribute:: assets
       :annotation: :int = 0
 
       

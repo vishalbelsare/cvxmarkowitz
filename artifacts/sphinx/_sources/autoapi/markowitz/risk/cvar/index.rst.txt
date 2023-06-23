@@ -42,7 +42,7 @@ Classes
 
       
 
-   .. py:attribute:: m
+   .. py:attribute:: assets
       :annotation: :int = 0
 
       
@@ -63,6 +63,9 @@ Classes
    .. py:method:: constraints(self, weights, **kwargs)
 
       Return the constraints for the risk model
+
+
+   .. py:method:: variables(self)
 
 
 
