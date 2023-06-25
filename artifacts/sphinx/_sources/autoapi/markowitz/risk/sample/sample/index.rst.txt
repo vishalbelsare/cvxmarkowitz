@@ -28,6 +28,11 @@ Classes
 
    Risk model based on the Cholesky decomposition of the sample cov matrix
 
+   .. py:attribute:: bounds
+      :annotation: :cvx.markowitz.bounds.Bounds
+
+      
+
    .. py:method:: __post_init__(self)
 
 

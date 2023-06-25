@@ -42,6 +42,11 @@ Classes
 
       
 
+   .. py:attribute:: bounds
+      :annotation: :cvx.markowitz.bounds.Bounds
+
+      
+
    .. py:method:: __post_init__(self)
 
 
