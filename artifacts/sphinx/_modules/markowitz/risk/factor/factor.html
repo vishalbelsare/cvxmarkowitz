@@ -116,7 +116,13 @@
         <span class="p">)</span>
         <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;bounds_factors&quot;</span><span class="p">,</span> <span class="n">Bounds</span><span class="p">(</span><span class="n">assets</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">factors</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;factors&quot;</span><span class="p">)</span>
-        <span class="p">)</span></div>
+        <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bounds_assets</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">item</span>
+
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bounds_factors</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">item</span></div>
 
 <div class="viewcode-block" id="FactorModel.estimate"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/factor/factor/index.html#markowitz.risk.factor.factor.FactorModel.estimate">[docs]</a>    <span class="k">def</span> <span class="nf">estimate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
