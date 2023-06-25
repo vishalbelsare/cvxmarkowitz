@@ -1,0 +1,15 @@
+:py:mod:`markowitz.models`
+==========================
+
+.. py:module:: markowitz.models
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   expected_returns/index.rst
+
+

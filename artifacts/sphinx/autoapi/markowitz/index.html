@@ -22,7 +22,7 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="markowitz.portfolio" href="portfolio/index.html" />
+    <link rel="next" title="markowitz.models" href="models/index.html" />
     <link rel="prev" title="API Reference" href="../index.html" /> 
 </head>
 
@@ -49,6 +49,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">markowitz</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="models/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">markowitz.models</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="portfolio/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">markowitz.portfolio</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="risk/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">markowitz.risk</span></code></a></li>
 </ul>
@@ -102,6 +103,10 @@
 <h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="models/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">markowitz.models</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="models/expected_returns/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">markowitz.models.expected_returns</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="portfolio/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">markowitz.portfolio</span></code></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="portfolio/min_risk/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">markowitz.portfolio.min_risk</span></code></a></li>
 </ul>
@@ -155,6 +160,11 @@
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <p>Abstract risk model</p>
 <dl class="py attribute">
+<dt class="sig sig-object py" id="markowitz.Model.assets">
+<span class="sig-name descname"><span class="pre">assets</span></span><em class="property"><span class="w"> </span><span class="pre">:int</span> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#markowitz.Model.assets" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="markowitz.Model.parameter">
 <span class="sig-name descname"><span class="pre">parameter</span></span><em class="property"><span class="w"> </span><span class="pre">:Dict[str,</span> <span class="pre">cvxpy.Parameter]</span></em><a class="headerlink" href="#markowitz.Model.parameter" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
@@ -182,12 +192,6 @@
 <dd><p>Return the constraints for the risk model</p>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="markowitz.Model.assets">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">assets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#markowitz.Model.assets" title="Permalink to this definition"></a></dt>
-<dd><p>Return the number of assets</p>
-</dd></dl>
-
 </dd></dl>
 
 </section>
@@ -199,7 +203,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../index.html" class="btn btn-neutral float-left" title="API Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="portfolio/index.html" class="btn btn-neutral float-right" title="markowitz.portfolio" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="models/index.html" class="btn btn-neutral float-right" title="markowitz.models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

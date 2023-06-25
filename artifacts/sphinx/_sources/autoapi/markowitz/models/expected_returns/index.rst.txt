@@ -1,0 +1,45 @@
+:py:mod:`markowitz.models.expected_returns`
+===========================================
+
+.. py:module:: markowitz.models.expected_returns
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   markowitz.models.expected_returns.ExpectedReturns
+
+
+
+
+.. py:class:: ExpectedReturns
+
+   Bases: :py:obj:`cvx.markowitz.Model`
+
+   Abstract risk model
+
+   .. py:method:: __post_init__(self)
+
+
+   .. py:method:: estimate(self, weights, **kwargs)
+
+      Estimate the variance given the portfolio weights
+
+
+   .. py:method:: update(self, **kwargs)
+
+      Update the data in the risk model
+
+
+   .. py:method:: constraints(self, weights, **kwargs)
+      :abstractmethod:
+
+      Return the constraints for the risk model
+
+
+

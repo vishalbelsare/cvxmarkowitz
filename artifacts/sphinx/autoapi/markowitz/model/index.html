@@ -114,6 +114,11 @@
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <p>Abstract risk model</p>
 <dl class="py attribute">
+<dt class="sig sig-object py" id="markowitz.model.Model.assets">
+<span class="sig-name descname"><span class="pre">assets</span></span><em class="property"><span class="w"> </span><span class="pre">:int</span> <span class="pre">=</span> <span class="pre">0</span></em><a class="reference internal" href="../../../_modules/markowitz/model.html#Model.assets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.model.Model.assets" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="markowitz.model.Model.parameter">
 <span class="sig-name descname"><span class="pre">parameter</span></span><em class="property"><span class="w"> </span><span class="pre">:Dict[str,</span> <span class="pre">cvxpy.Parameter]</span></em><a class="reference internal" href="../../../_modules/markowitz/model.html#Model.parameter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.model.Model.parameter" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
@@ -139,12 +144,6 @@
 <dt class="sig sig-object py" id="markowitz.model.Model.constraints">
 <em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">constraints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/markowitz/model.html#Model.constraints"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.model.Model.constraints" title="Permalink to this definition"></a></dt>
 <dd><p>Return the constraints for the risk model</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="markowitz.model.Model.assets">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">assets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/markowitz/model.html#Model.assets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.model.Model.assets" title="Permalink to this definition"></a></dt>
-<dd><p>Return the number of assets</p>
 </dd></dl>
 
 </dd></dl>

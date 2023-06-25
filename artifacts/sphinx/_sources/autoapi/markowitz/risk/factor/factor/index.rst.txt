@@ -28,11 +28,6 @@ Classes
 
    Factor risk model
 
-   .. py:attribute:: assets
-      :annotation: :int = 0
-
-      
-
    .. py:attribute:: factors
       :annotation: :int = 0
 

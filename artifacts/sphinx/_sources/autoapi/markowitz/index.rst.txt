@@ -10,6 +10,7 @@ Subpackages
    :titlesonly:
    :maxdepth: 3
 
+   models/index.rst
    portfolio/index.rst
    risk/index.rst
 
@@ -44,6 +45,11 @@ Classes
 
    Abstract risk model
 
+   .. py:attribute:: assets
+      :annotation: :int = 0
+
+      
+
    .. py:attribute:: parameter
       :annotation: :Dict[str, cvxpy.Parameter]
 
@@ -70,12 +76,6 @@ Classes
       :abstractmethod:
 
       Return the constraints for the risk model
-
-
-   .. py:method:: assets(self)
-      :property:
-
-      Return the number of assets
 
 
 

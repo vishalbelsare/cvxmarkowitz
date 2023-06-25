@@ -32,11 +32,6 @@ Classes
 
    Risk model based on the Cholesky decomposition of the sample cov matrix
 
-   .. py:attribute:: assets
-      :annotation: :int = 0
-
-      
-
    .. py:method:: __post_init__(self)
 
 

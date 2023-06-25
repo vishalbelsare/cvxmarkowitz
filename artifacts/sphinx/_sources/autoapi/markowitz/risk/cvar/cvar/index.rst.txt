@@ -33,11 +33,6 @@ Classes
 
       
 
-   .. py:attribute:: assets
-      :annotation: :int = 0
-
-      
-
    .. py:method:: __post_init__(self)
 
 
