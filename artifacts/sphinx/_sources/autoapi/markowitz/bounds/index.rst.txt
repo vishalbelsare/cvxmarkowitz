@@ -33,7 +33,12 @@ Classes
 
       
 
-   .. py:method:: estimate(self, weights, **kwargs)
+   .. py:attribute:: acting_on
+      :annotation: :str = weights
+
+      
+
+   .. py:method:: estimate(self, variables)
       :abstractmethod:
 
       No estimation for bounds
@@ -50,7 +55,7 @@ Classes
       Update the data in the risk model
 
 
-   .. py:method:: constraints(self, weights, **kwargs)
+   .. py:method:: constraints(self, variables)
 
       Return the constraints for the risk model
 

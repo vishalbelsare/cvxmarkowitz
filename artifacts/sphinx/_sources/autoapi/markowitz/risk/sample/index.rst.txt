@@ -35,7 +35,7 @@ Classes
    .. py:method:: __post_init__(self)
 
 
-   .. py:method:: estimate(self, weights, **kwargs)
+   .. py:method:: estimate(self, variables)
 
       Estimate the risk by computing the Cholesky decomposition of self.cov
 

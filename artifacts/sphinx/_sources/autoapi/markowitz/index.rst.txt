@@ -60,7 +60,7 @@ Classes
 
       
 
-   .. py:method:: estimate(self, weights, **kwargs)
+   .. py:method:: estimate(self, variables)
       :abstractmethod:
 
       Estimate the variance given the portfolio weights
@@ -72,8 +72,7 @@ Classes
       Update the data in the risk model
 
 
-   .. py:method:: constraints(self, weights, **kwargs)
-      :abstractmethod:
+   .. py:method:: constraints(self, variables)
 
       Return the constraints for the risk model
 

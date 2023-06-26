@@ -40,9 +40,15 @@ Classes
    .. py:method:: __post_init__(self)
 
 
-   .. py:method:: estimate(self, weights, **kwargs)
+   .. py:method:: estimate(self, variables)
 
       Compute the total variance
+
+
+   .. py:method:: residual_risk(self, variables)
+
+
+   .. py:method:: systematic_risk(self, variables)
 
 
    .. py:method:: update(self, **kwargs)
@@ -50,7 +56,7 @@ Classes
       Update the data in the risk model
 
 
-   .. py:method:: constraints(self, weights, **kwargs)
+   .. py:method:: constraints(self, variables)
 
       Return the constraints for the risk model
 
@@ -59,7 +65,7 @@ Classes
       :property:
 
 
-   .. py:method:: factor_weights(self, weights)
+   .. py:method:: factor_weights(self, variables)
 
 
 

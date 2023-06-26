@@ -96,9 +96,9 @@
             <span class="n">value</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">)),</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="SampleCovariance.estimate"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/sample/sample/index.html#markowitz.risk.SampleCovariance.estimate">[docs]</a>    <span class="k">def</span> <span class="nf">estimate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="SampleCovariance.estimate"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/sample/sample/index.html#markowitz.risk.SampleCovariance.estimate">[docs]</a>    <span class="k">def</span> <span class="nf">estimate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Estimate the risk by computing the Cholesky decomposition of self.cov&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">cp</span><span class="o">.</span><span class="n">norm2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;chol&quot;</span><span class="p">]</span> <span class="o">@</span> <span class="n">weights</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">cp</span><span class="o">.</span><span class="n">norm2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;chol&quot;</span><span class="p">]</span> <span class="o">@</span> <span class="n">variables</span><span class="p">[</span><span class="s2">&quot;weights&quot;</span><span class="p">])</span></div>
 
 <div class="viewcode-block" id="SampleCovariance.update"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/sample/sample/index.html#markowitz.risk.SampleCovariance.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">cov</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;cov&quot;</span><span class="p">]</span>
@@ -114,7 +114,7 @@
 
     <span class="nd">@property</span>
 <div class="viewcode-block" id="SampleCovariance.variables"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/sample/sample/index.html#markowitz.risk.SampleCovariance.variables">[docs]</a>    <span class="k">def</span> <span class="nf">variables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">),</span> <span class="kc">None</span></div></div>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;weights&quot;</span><span class="p">:</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">)}</span></div></div>
 </pre></div>
 
            </div>
