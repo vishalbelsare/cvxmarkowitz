@@ -11,6 +11,7 @@ Submodules
    :maxdepth: 1
 
    expected_returns/index.rst
+   holding_costs/index.rst
    trading_costs/index.rst
 
 

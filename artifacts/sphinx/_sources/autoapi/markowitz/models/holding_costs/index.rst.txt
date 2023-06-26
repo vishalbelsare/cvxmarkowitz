@@ -1,0 +1,45 @@
+:py:mod:`markowitz.models.holding_costs`
+========================================
+
+.. py:module:: markowitz.models.holding_costs
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   markowitz.models.holding_costs.HoldingCosts
+
+
+
+
+.. py:class:: HoldingCosts
+
+   Bases: :py:obj:`cvx.markowitz.Model`
+
+   Abstract risk model
+
+   .. py:method:: __post_init__(self)
+
+
+   .. py:method:: estimate(self, weights, **kwargs)
+
+      Estimate the variance given the portfolio weights
+
+
+   .. py:method:: update(self, **kwargs)
+
+      Update the data in the risk model
+
+
+   .. py:method:: constraints(self, weights, **kwargs)
+      :abstractmethod:
+
+      Return the constraints for the risk model
+
+
+
