@@ -11,7 +11,6 @@ Subpackages
    :maxdepth: 3
 
    models/index.rst
-   portfolio/index.rst
    risk/index.rst
 
 
