@@ -46,11 +46,6 @@ Classes
 
       
 
-   .. py:attribute:: bounds
-      :annotation: :cvx.markowitz.bounds.Bounds
-
-      
-
    .. py:method:: __post_init__(self)
 
 
@@ -84,16 +79,6 @@ Classes
 
       
 
-   .. py:attribute:: bounds_assets
-      :annotation: :cvx.markowitz.bounds.Bounds
-
-      
-
-   .. py:attribute:: bounds_factors
-      :annotation: :cvx.markowitz.bounds.Bounds
-
-      
-
    .. py:method:: __post_init__(self)
 
 
@@ -116,17 +101,15 @@ Classes
       :property:
 
 
+   .. py:method:: factor_weights(self, weights)
+
+
 
 .. py:class:: SampleCovariance
 
    Bases: :py:obj:`cvx.markowitz.Model`
 
    Risk model based on the Cholesky decomposition of the sample cov matrix
-
-   .. py:attribute:: bounds
-      :annotation: :cvx.markowitz.bounds.Bounds
-
-      
 
    .. py:method:: __post_init__(self)
 

@@ -33,16 +33,6 @@ Classes
 
       
 
-   .. py:attribute:: bounds_assets
-      :annotation: :cvx.markowitz.bounds.Bounds
-
-      
-
-   .. py:attribute:: bounds_factors
-      :annotation: :cvx.markowitz.bounds.Bounds
-
-      
-
    .. py:method:: __post_init__(self)
 
 
@@ -63,6 +53,9 @@ Classes
 
    .. py:method:: variables(self)
       :property:
+
+
+   .. py:method:: factor_weights(self, weights)
 
 
 
