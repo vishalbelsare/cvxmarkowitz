@@ -150,8 +150,6 @@
             <span class="s2">&quot;factor_weights&quot;</span><span class="p">:</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">factors</span><span class="p">),</span>
         <span class="p">}</span></div>
 
-        <span class="c1"># return cp.Variable(self.assets), cp.Variable(self.factors)</span>
-
 <div class="viewcode-block" id="FactorModel.factor_weights"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/factor/factor/index.html#markowitz.risk.factor.factor.FactorModel.factor_weights">[docs]</a>    <span class="k">def</span> <span class="nf">factor_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;exposure&quot;</span><span class="p">]</span> <span class="o">@</span> <span class="n">variables</span><span class="p">[</span><span class="s2">&quot;weights&quot;</span><span class="p">]</span></div></div>
 </pre></div>
