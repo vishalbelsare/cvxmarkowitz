@@ -45,10 +45,10 @@ Classes
       Compute the total variance
 
 
-   .. py:method:: residual_risk(self, variables)
+   .. py:method:: _residual_risk(self, variables)
 
 
-   .. py:method:: systematic_risk(self, variables)
+   .. py:method:: _systematic_risk(self, variables)
 
 
    .. py:method:: update(self, **kwargs)

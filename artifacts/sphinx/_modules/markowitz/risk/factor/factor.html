@@ -112,27 +112,17 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute the total variance</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># for name, variable in variables.items():</span>
-        <span class="c1">#    print(name)</span>
-        <span class="c1">#    print(type(variable))</span>
-        <span class="c1">#    print(variable.value)</span>
-
-        <span class="n">var_residual</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">residual_risk</span><span class="p">(</span><span class="n">variables</span><span class="p">)</span>
-        <span class="n">var_systematic</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">systematic_risk</span><span class="p">(</span><span class="n">variables</span><span class="p">)</span>
-
-        <span class="c1"># print(var_residual.value)</span>
-        <span class="c1"># print(var_systematic.value)</span>
-        <span class="c1"># print(self.data[&quot;chol&quot;].value)</span>
-        <span class="c1"># print((self.data[&quot;chol&quot;] @ self.variables[&quot;factor_weights&quot;]).value)</span>
+        <span class="n">var_residual</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_residual_risk</span><span class="p">(</span><span class="n">variables</span><span class="p">)</span>
+        <span class="n">var_systematic</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_systematic_risk</span><span class="p">(</span><span class="n">variables</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">cp</span><span class="o">.</span><span class="n">norm2</span><span class="p">(</span><span class="n">cp</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">var_systematic</span><span class="p">,</span> <span class="n">var_residual</span><span class="p">]))</span></div>
 
-<div class="viewcode-block" id="FactorModel.residual_risk"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/factor/factor/index.html#markowitz.risk.factor.factor.FactorModel.residual_risk">[docs]</a>    <span class="k">def</span> <span class="nf">residual_risk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">):</span>
+<div class="viewcode-block" id="FactorModel._residual_risk"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/factor/factor/index.html#markowitz.risk.factor.factor.FactorModel._residual_risk">[docs]</a>    <span class="k">def</span> <span class="nf">_residual_risk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">cp</span><span class="o">.</span><span class="n">norm2</span><span class="p">(</span>
             <span class="n">cp</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;idiosyncratic_risk&quot;</span><span class="p">],</span> <span class="n">variables</span><span class="p">[</span><span class="s2">&quot;weights&quot;</span><span class="p">])</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="FactorModel.systematic_risk"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/factor/factor/index.html#markowitz.risk.factor.factor.FactorModel.systematic_risk">[docs]</a>    <span class="k">def</span> <span class="nf">systematic_risk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">):</span>
+<div class="viewcode-block" id="FactorModel._systematic_risk"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/factor/factor/index.html#markowitz.risk.factor.factor.FactorModel._systematic_risk">[docs]</a>    <span class="k">def</span> <span class="nf">_systematic_risk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">cp</span><span class="o">.</span><span class="n">norm2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;chol&quot;</span><span class="p">]</span> <span class="o">@</span> <span class="n">variables</span><span class="p">[</span><span class="s2">&quot;factor_weights&quot;</span><span class="p">])</span></div>
 
 <div class="viewcode-block" id="FactorModel.update"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/factor/factor/index.html#markowitz.risk.factor.factor.FactorModel.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
