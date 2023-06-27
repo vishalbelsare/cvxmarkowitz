@@ -94,7 +94,7 @@
 <div class="viewcode-block" id="Model.data"><a class="viewcode-back" href="../../autoapi/markowitz/model/index.html#markowitz.Model.data">[docs]</a>    <span class="n">data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">cp</span><span class="o">.</span><span class="n">Parameter</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span></div>
 
     <span class="nd">@abstractmethod</span>
-<div class="viewcode-block" id="Model.estimate"><a class="viewcode-back" href="../../autoapi/markowitz/model/index.html#markowitz.Model.estimate">[docs]</a>    <span class="k">def</span> <span class="nf">estimate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">):</span>
+<div class="viewcode-block" id="Model.estimate"><a class="viewcode-back" href="../../autoapi/markowitz/model/index.html#markowitz.Model.estimate">[docs]</a>    <span class="k">def</span> <span class="nf">estimate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">]):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Estimate the variance given the portfolio weights</span>
 <span class="sd">        &quot;&quot;&quot;</span></div>
@@ -105,7 +105,7 @@
 <span class="sd">        Update the data in the risk model</span>
 <span class="sd">        &quot;&quot;&quot;</span></div>
 
-<div class="viewcode-block" id="Model.constraints"><a class="viewcode-back" href="../../autoapi/markowitz/model/index.html#markowitz.Model.constraints">[docs]</a>    <span class="k">def</span> <span class="nf">constraints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">):</span>
+<div class="viewcode-block" id="Model.constraints"><a class="viewcode-back" href="../../autoapi/markowitz/model/index.html#markowitz.Model.constraints">[docs]</a>    <span class="k">def</span> <span class="nf">constraints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">]):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the constraints for the risk model</span>
 <span class="sd">        &quot;&quot;&quot;</span>

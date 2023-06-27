@@ -38,7 +38,7 @@ Classes
 
       
 
-   .. py:method:: estimate(self, variables)
+   .. py:method:: estimate(self, variables: Dict[str, cvxpy.Variable])
       :abstractmethod:
 
       No estimation for bounds
@@ -55,7 +55,7 @@ Classes
       Update the data in the risk model
 
 
-   .. py:method:: constraints(self, variables)
+   .. py:method:: constraints(self, variables: Dict[str, cvxpy.Variable])
 
       Return the constraints for the risk model
 

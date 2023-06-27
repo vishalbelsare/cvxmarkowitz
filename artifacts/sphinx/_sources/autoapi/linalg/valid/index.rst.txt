@@ -22,7 +22,7 @@ Functions
 
 
 
-.. py:function:: valid(matrix)
+.. py:function:: valid(matrix: numpy.ndarray) -> tuple[numpy.ndarray, numpy.ndarray]
 
    Construct the valid subset of matrix (correlation) matrix
    :param matrix: n x n matrix

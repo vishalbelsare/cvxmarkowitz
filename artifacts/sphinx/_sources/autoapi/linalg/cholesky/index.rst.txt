@@ -22,7 +22,7 @@ Functions
 
 
 
-.. py:function:: cholesky(cov)
+.. py:function:: cholesky(cov: numpy.ndarray) -> numpy.ndarray
 
    Compute the cholesky decomposition of a covariance matrix
 
