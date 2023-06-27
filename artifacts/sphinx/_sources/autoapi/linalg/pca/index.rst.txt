@@ -37,9 +37,9 @@ Attributes
 
 .. py:function:: pca(returns, n_components=10)
 
-   Compute the first n principal components for a return matrix
+   Compute the first n principal components for a return matrix without sklearn
 
    :param returns: DataFrame of prices
-   :param n_components: Number of components
+   :param n_components: Number of compoFnents
 
 
