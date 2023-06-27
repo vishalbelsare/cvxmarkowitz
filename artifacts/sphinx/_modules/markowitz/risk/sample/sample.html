@@ -77,11 +77,11 @@
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
 
 <span class="kn">import</span> <span class="nn">cvxpy</span> <span class="k">as</span> <span class="nn">cp</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">cvx.linalg</span> <span class="kn">import</span> <span class="n">cholesky</span>
 <span class="kn">from</span> <span class="nn">cvx.markowitz</span> <span class="kn">import</span> <span class="n">Model</span>
 
 
@@ -96,22 +96,15 @@
             <span class="n">value</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">)),</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="SampleCovariance.estimate"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/sample/sample/index.html#markowitz.risk.SampleCovariance.estimate">[docs]</a>    <span class="k">def</span> <span class="nf">estimate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">):</span>
+<div class="viewcode-block" id="SampleCovariance.estimate"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/sample/sample/index.html#markowitz.risk.SampleCovariance.estimate">[docs]</a>    <span class="k">def</span> <span class="nf">estimate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">]):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Estimate the risk by computing the Cholesky decomposition of self.cov&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">cp</span><span class="o">.</span><span class="n">norm2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;chol&quot;</span><span class="p">]</span> <span class="o">@</span> <span class="n">variables</span><span class="p">[</span><span class="s2">&quot;weights&quot;</span><span class="p">])</span></div>
 
 <div class="viewcode-block" id="SampleCovariance.update"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/sample/sample/index.html#markowitz.risk.SampleCovariance.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">chol</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;chol&quot;</span><span class="p">]</span>
         <span class="n">rows</span> <span class="o">=</span> <span class="n">chol</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="c1"># assert (</span>
-        <span class="c1">#    rows &lt;= self.assets</span>
-        <span class="c1"># ), f&quot;Covariance matrix is too large. Has to be smaller than {self.assets}&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;chol&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;chol&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">[:</span><span class="n">rows</span><span class="p">,</span> <span class="p">:</span><span class="n">rows</span><span class="p">]</span> <span class="o">=</span> <span class="n">chol</span></div>
-
-    <span class="nd">@property</span>
-<div class="viewcode-block" id="SampleCovariance.variables"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/sample/sample/index.html#markowitz.risk.SampleCovariance.variables">[docs]</a>    <span class="k">def</span> <span class="nf">variables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;weights&quot;</span><span class="p">:</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">)}</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;chol&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">[:</span><span class="n">rows</span><span class="p">,</span> <span class="p">:</span><span class="n">rows</span><span class="p">]</span> <span class="o">=</span> <span class="n">chol</span></div></div>
 </pre></div>
 
            </div>

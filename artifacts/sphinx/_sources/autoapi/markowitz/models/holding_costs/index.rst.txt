@@ -31,7 +31,7 @@ Classes
    .. py:method:: __post_init__(self)
 
 
-   .. py:method:: estimate(self, variables)
+   .. py:method:: estimate(self, variables: Dict[str, cvxpy.Variable])
 
       Estimate the variance given the portfolio weights
 

@@ -61,8 +61,4 @@ Classes
       Return the constraints for the risk model
 
 
-   .. py:method:: variables(self)
-      :property:
-
-
 

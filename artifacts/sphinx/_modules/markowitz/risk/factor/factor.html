@@ -81,7 +81,6 @@
 <span class="kn">import</span> <span class="nn">cvxpy</span> <span class="k">as</span> <span class="nn">cp</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">cvx.linalg</span> <span class="kn">import</span> <span class="n">cholesky</span>
 <span class="kn">from</span> <span class="nn">cvx.markowitz</span> <span class="kn">import</span> <span class="n">Model</span>
 
 
@@ -141,18 +140,7 @@
         <span class="k">return</span> <span class="p">{</span>
             <span class="s2">&quot;factors&quot;</span><span class="p">:</span> <span class="n">variables</span><span class="p">[</span><span class="s2">&quot;factor_weights&quot;</span><span class="p">]</span>
             <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;exposure&quot;</span><span class="p">]</span> <span class="o">@</span> <span class="n">variables</span><span class="p">[</span><span class="s2">&quot;weights&quot;</span><span class="p">]</span>
-        <span class="p">}</span></div>
-
-    <span class="nd">@property</span>
-<div class="viewcode-block" id="FactorModel.variables"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/factor/factor/index.html#markowitz.risk.factor.factor.FactorModel.variables">[docs]</a>    <span class="k">def</span> <span class="nf">variables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">{</span>
-            <span class="s2">&quot;weights&quot;</span><span class="p">:</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">),</span>
-            <span class="s2">&quot;factor_weights&quot;</span><span class="p">:</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">factors</span><span class="p">),</span>
         <span class="p">}</span></div></div>
-
-    <span class="c1">#</span>
-    <span class="c1"># def factor_weights(self, variables):</span>
-    <span class="c1">#     return self.data[&quot;exposure&quot;] @ variables[&quot;weights&quot;]</span>
 </pre></div>
 
            </div>
