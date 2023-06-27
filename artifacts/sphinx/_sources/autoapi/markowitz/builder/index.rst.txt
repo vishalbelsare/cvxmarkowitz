@@ -65,4 +65,8 @@ Classes
       Return the solution as a dictionary
 
 
+   .. py:method:: data(self)
+      :property:
+
+
 
