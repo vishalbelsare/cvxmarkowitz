@@ -45,7 +45,7 @@ Classes
    .. py:method:: __post_init__(self)
 
 
-   .. py:method:: estimate(self, variables: Dict[str, cvxpy.Variable])
+   .. py:method:: estimate(self, variables: Dict[str, cvxpy.Variable]) -> cvxpy.Expression
 
       Estimate the risk by computing the Cholesky decomposition of self.cov
 

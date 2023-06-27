@@ -62,12 +62,12 @@ Classes
       Return the objective function
 
 
-   .. py:method:: build(self)
+   .. py:method:: build(self) -> cvxpy.Problem
 
       Build the cvxpy problem
 
 
-   .. py:method:: solution(self, names)
+   .. py:method:: solution(self, names) -> Dict[str, float]
 
       Return the solution as a dictionary
 

@@ -40,7 +40,7 @@ Classes
    .. py:method:: __post_init__(self)
 
 
-   .. py:method:: estimate(self, variables)
+   .. py:method:: estimate(self, variables) -> cvxpy.Expression
 
       Compute the total variance
 

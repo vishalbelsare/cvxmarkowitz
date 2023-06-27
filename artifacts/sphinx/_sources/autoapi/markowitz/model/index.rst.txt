@@ -43,7 +43,7 @@ Classes
 
       
 
-   .. py:method:: estimate(self, variables: Dict[str, cvxpy.Variable])
+   .. py:method:: estimate(self, variables: Dict[str, cvxpy.Variable]) -> cvxpy.Expression
       :abstractmethod:
 
       Estimate the variance given the portfolio weights
@@ -55,7 +55,7 @@ Classes
       Update the data in the risk model
 
 
-   .. py:method:: constraints(self, variables: Dict[str, cvxpy.Variable])
+   .. py:method:: constraints(self, variables: Dict[str, cvxpy.Variable]) -> Dict[str, cvxpy.Expression]
 
       Return the constraints for the risk model
 

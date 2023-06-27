@@ -62,23 +62,23 @@ Functions
    .. py:method:: __post_init__(self)
 
 
-   .. py:method:: explained_variance(self)
+   .. py:method:: explained_variance(self) -> numpy.ndarray
       :property:
 
 
-   .. py:method:: cov(self)
+   .. py:method:: cov(self) -> numpy.ndarray
       :property:
 
 
-   .. py:method:: systematic_returns(self)
+   .. py:method:: systematic_returns(self) -> numpy.ndarray
       :property:
 
 
-   .. py:method:: idiosyncratic_returns(self)
+   .. py:method:: idiosyncratic_returns(self) -> numpy.ndarray
       :property:
 
 
-   .. py:method:: idiosyncratic_risk(self)
+   .. py:method:: idiosyncratic_risk(self) -> numpy.ndarray
       :property:
 
 
