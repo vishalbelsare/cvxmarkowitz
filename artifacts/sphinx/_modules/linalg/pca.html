@@ -81,7 +81,7 @@
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 
-<div class="viewcode-block" id="PCA"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.PCA">[docs]</a><span class="n">PCA</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span>
+<div class="viewcode-block" id="PCA"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.pca.PCA">[docs]</a><span class="n">PCA</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span>
     <span class="s2">&quot;PCA&quot;</span><span class="p">,</span>
     <span class="p">[</span>
         <span class="s2">&quot;asset_names&quot;</span><span class="p">,</span>
@@ -96,7 +96,7 @@
 <span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="pca"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.pca">[docs]</a><span class="k">def</span> <span class="nf">pca</span><span class="p">(</span><span class="n">returns</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<div class="viewcode-block" id="pca"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.pca.pca">[docs]</a><span class="k">def</span> <span class="nf">pca</span><span class="p">(</span><span class="n">returns</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute the first n principal components for a return matrix without sklearn</span>
 
@@ -129,9 +129,7 @@
     <span class="k">return</span> <span class="n">PCA</span><span class="p">(</span>
         <span class="n">asset_names</span><span class="o">=</span><span class="n">returns</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
         <span class="n">factor_names</span><span class="o">=</span><span class="n">factors</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
-        <span class="n">explained_variance</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
-            <span class="n">data</span><span class="o">=</span><span class="n">eigenvalues</span><span class="p">[:</span><span class="n">n_components</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">eigenvalues</span><span class="p">))</span>
-        <span class="p">),</span>
+        <span class="n">explained_variance</span><span class="o">=</span><span class="n">eigenvalues</span><span class="p">[:</span><span class="n">n_components</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">eigenvalues</span><span class="p">)),</span>
         <span class="n">factors</span><span class="o">=</span><span class="n">factors</span><span class="p">,</span>
         <span class="n">exposure</span><span class="o">=</span><span class="n">exposure</span><span class="p">,</span>
         <span class="n">cov</span><span class="o">=</span><span class="n">factors</span><span class="o">.</span><span class="n">cov</span><span class="p">(),</span>
