@@ -1,0 +1,68 @@
+:py:mod:`markowitz.solver`
+==========================
+
+.. py:module:: markowitz.solver
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   markowitz.solver.Solver
+
+
+
+
+.. py:class:: Solver
+
+   .. py:attribute:: assets
+      :annotation: :int = 0
+
+      
+
+   .. py:attribute:: factors
+      :annotation: :int
+
+      
+
+   .. py:attribute:: model
+      :annotation: :Dict[str, cvx.markowitz.Model]
+
+      
+
+   .. py:attribute:: constraints
+      :annotation: :Dict[str, cvxpy.Constraint]
+
+      
+
+   .. py:attribute:: variables
+      :annotation: :Dict[str, cvxpy.Variable]
+
+      
+
+   .. py:method:: update(self, **kwargs)
+
+      Update the model
+
+
+   .. py:method:: objective(self)
+      :property:
+
+      Return the objective function
+
+
+   .. py:method:: build(self)
+
+      Build the cvxpy problem
+
+
+   .. py:method:: solution(self, names)
+
+      Return the solution as a dictionary
+
+
+

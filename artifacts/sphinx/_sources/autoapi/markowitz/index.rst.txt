@@ -22,6 +22,7 @@ Submodules
 
    bounds/index.rst
    model/index.rst
+   solver/index.rst
 
 
 Package Contents
