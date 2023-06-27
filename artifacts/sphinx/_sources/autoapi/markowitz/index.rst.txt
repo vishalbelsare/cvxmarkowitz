@@ -21,8 +21,8 @@ Submodules
    :maxdepth: 1
 
    bounds/index.rst
+   builder/index.rst
    model/index.rst
-   solver/index.rst
 
 
 Package Contents
