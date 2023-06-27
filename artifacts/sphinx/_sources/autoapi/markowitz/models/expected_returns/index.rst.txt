@@ -3,6 +3,11 @@
 
 .. py:module:: markowitz.models.expected_returns
 
+.. autoapi-nested-parse::
+
+   Model for expected returns
+
+
 
 Module Contents
 ---------------
