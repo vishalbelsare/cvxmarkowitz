@@ -3,6 +3,11 @@
 
 .. py:module:: linalg
 
+.. autoapi-nested-parse::
+
+   Linalg module
+
+
 
 Submodules
 ----------
@@ -31,6 +36,8 @@ Functions
 
 
 .. py:function:: cholesky(cov)
+
+   Compute the cholesky decomposition of a covariance matrix
 
 
 .. py:function:: pca(returns, n_components=10)

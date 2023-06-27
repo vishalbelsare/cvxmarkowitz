@@ -3,6 +3,11 @@
 
 .. py:module:: markowitz.models.holding_costs
 
+.. autoapi-nested-parse::
+
+   Model for holding costs
+
+
 
 Module Contents
 ---------------
@@ -21,7 +26,7 @@ Classes
 
    Bases: :py:obj:`cvx.markowitz.Model`
 
-   Abstract risk model
+   Model for holding costs
 
    .. py:method:: __post_init__(self)
 

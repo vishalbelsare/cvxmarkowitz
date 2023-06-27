@@ -3,6 +3,11 @@
 
 .. py:module:: linalg.cholesky
 
+.. autoapi-nested-parse::
+
+   Cholesky decomposition with numpy
+
+
 
 Module Contents
 ---------------
@@ -18,5 +23,7 @@ Functions
 
 
 .. py:function:: cholesky(cov)
+
+   Compute the cholesky decomposition of a covariance matrix
 
 

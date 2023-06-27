@@ -26,7 +26,7 @@ Classes
 
    Bases: :py:obj:`cvx.markowitz.Model`
 
-   Abstract risk model
+   Model for expected returns
 
    .. py:method:: __post_init__(self)
 

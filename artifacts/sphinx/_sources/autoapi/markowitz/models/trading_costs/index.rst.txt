@@ -3,6 +3,11 @@
 
 .. py:module:: markowitz.models.trading_costs
 
+.. autoapi-nested-parse::
+
+   Model for trading costs
+
+
 
 Module Contents
 ---------------
@@ -21,7 +26,7 @@ Classes
 
    Bases: :py:obj:`cvx.markowitz.Model`
 
-   Abstract risk model
+   Model for trading costs
 
    .. py:attribute:: power
       :annotation: :float = 1.0

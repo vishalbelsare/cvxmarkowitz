@@ -5,7 +5,7 @@
 
 .. autoapi-nested-parse::
 
-   PCA analysis
+   PCA analysis with numpy
 
 
 

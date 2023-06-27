@@ -3,6 +3,11 @@
 
 .. py:module:: linalg.valid
 
+.. autoapi-nested-parse::
+
+   Extract valid submatrix of a matrix
+
+
 
 Module Contents
 ---------------
