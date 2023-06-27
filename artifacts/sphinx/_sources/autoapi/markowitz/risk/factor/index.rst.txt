@@ -65,7 +65,4 @@ Classes
       :property:
 
 
-   .. py:method:: factor_weights(self, variables)
-
-
 
