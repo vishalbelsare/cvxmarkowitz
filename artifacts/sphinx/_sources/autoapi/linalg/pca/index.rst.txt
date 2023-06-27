@@ -12,6 +12,14 @@
 Module Contents
 ---------------
 
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   linalg.pca.PPCA
+
+
 
 Functions
 ~~~~~~~~~
@@ -41,5 +49,37 @@ Attributes
 
    :param returns: DataFrame of prices
    :param n_components: Number of compoFnents
+
+
+.. py:class:: PPCA
+
+   .. py:attribute:: n_components
+      :annotation: :int = 0
+
+      
+
+   .. py:attribute:: returns
+      :annotation: :numpy.ndarray
+
+      
+
+   .. py:method:: __post_init__(self)
+
+
+   .. py:method:: cov(self)
+      :property:
+
+
+   .. py:method:: systematic_returns(self)
+      :property:
+
+
+   .. py:method:: idiosyncratic_returns(self)
+      :property:
+
+
+   .. py:method:: idiosyncratic_risk(self)
+      :property:
+
 
 
