@@ -17,13 +17,6 @@ Classes
 
 
 
-.. py:exception:: CvxError
-
-   Bases: :py:obj:`Exception`
-
-   Common base class for all non-exit exceptions.
-
-
 .. py:class:: Builder
 
    .. py:attribute:: assets
