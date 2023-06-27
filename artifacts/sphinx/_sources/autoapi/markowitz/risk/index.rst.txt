@@ -41,7 +41,7 @@ Classes
 
       
 
-   .. py:attribute:: n
+   .. py:attribute:: rows
       :annotation: :int = 0
 
       
