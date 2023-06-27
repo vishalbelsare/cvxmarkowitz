@@ -23,6 +23,14 @@ Submodules
 Package Contents
 ----------------
 
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   linalg.PCA
+
+
 
 Functions
 ~~~~~~~~~
@@ -30,7 +38,6 @@ Functions
 .. autoapisummary::
 
    linalg.cholesky
-   linalg.pca
    linalg.valid
 
 
@@ -40,12 +47,40 @@ Functions
    Compute the cholesky decomposition of a covariance matrix
 
 
-.. py:function:: pca(returns, n_components=10)
+.. py:class:: PCA
 
-   Compute the first n principal components for a return matrix without sklearn
+   .. py:attribute:: n_components
+      :annotation: :int = 0
 
-   :param returns: DataFrame of prices
-   :param n_components: Number of compoFnents
+      
+
+   .. py:attribute:: returns
+      :annotation: :numpy.ndarray
+
+      
+
+   .. py:method:: __post_init__(self)
+
+
+   .. py:method:: explained_variance(self)
+      :property:
+
+
+   .. py:method:: cov(self)
+      :property:
+
+
+   .. py:method:: systematic_returns(self)
+      :property:
+
+
+   .. py:method:: idiosyncratic_returns(self)
+      :property:
+
+
+   .. py:method:: idiosyncratic_risk(self)
+      :property:
+
 
 
 .. py:function:: valid(matrix)

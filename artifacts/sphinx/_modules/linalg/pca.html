@@ -75,68 +75,17 @@
 <span class="sd">&quot;&quot;&quot;PCA analysis with numpy&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<div class="viewcode-block" id="PCA"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.pca.PCA">[docs]</a><span class="n">PCA</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span>
-    <span class="s2">&quot;PCA&quot;</span><span class="p">,</span>
-    <span class="p">[</span>
-        <span class="s2">&quot;explained_variance&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;factors&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;exposure&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;cov&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;systematic_returns&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;idiosyncratic_returns&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;idiosyncratic_risk&quot;</span><span class="p">,</span>
-    <span class="p">],</span>
-<span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="pca"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.pca.pca">[docs]</a><span class="k">def</span> <span class="nf">pca</span><span class="p">(</span><span class="n">returns</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Compute the first n principal components for a return matrix without sklearn</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        returns: DataFrame of prices</span>
-<span class="sd">        n_components: Number of compoFnents</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">if</span> <span class="n">n_components</span> <span class="o">&gt;</span> <span class="n">returns</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The number of components cannot exceed the number of assets&quot;</span><span class="p">)</span>
-
-    <span class="c1"># compute the principal components without sklearn</span>
-    <span class="c1"># 1. compute the correlation</span>
-    <span class="n">cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">returns</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-    <span class="c1"># 2. compute the eigenvalues and eigenvectors</span>
-    <span class="n">eigenvalues</span><span class="p">,</span> <span class="n">eigenvectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">cov</span><span class="p">)</span>
-    <span class="c1"># 3. sort the eigenvalues in descending order</span>
-    <span class="n">idx</span> <span class="o">=</span> <span class="n">eigenvalues</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">eigenvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">eigenvalues</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
-    <span class="n">eigenvectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">eigenvectors</span><span class="p">[:,</span> <span class="n">idx</span><span class="p">])</span>
-    <span class="c1"># 4. compute the factors</span>
-    <span class="n">factors</span> <span class="o">=</span> <span class="n">returns</span> <span class="o">@</span> <span class="n">eigenvectors</span><span class="p">[:,</span> <span class="p">:</span><span class="n">n_components</span><span class="p">]</span>
-    <span class="c1"># 5. compute the exposure</span>
-    <span class="n">exposure</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">eigenvectors</span><span class="p">[:,</span> <span class="p">:</span><span class="n">n_components</span><span class="p">])</span>
-
-    <span class="k">return</span> <span class="n">PCA</span><span class="p">(</span>
-        <span class="n">explained_variance</span><span class="o">=</span><span class="n">eigenvalues</span><span class="p">[:</span><span class="n">n_components</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">eigenvalues</span><span class="p">)),</span>
-        <span class="n">factors</span><span class="o">=</span><span class="n">factors</span><span class="p">,</span>
-        <span class="n">exposure</span><span class="o">=</span><span class="n">exposure</span><span class="p">,</span>
-        <span class="n">cov</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">factors</span><span class="o">.</span><span class="n">T</span><span class="p">),</span>
-        <span class="n">systematic_returns</span><span class="o">=</span><span class="n">factors</span> <span class="o">@</span> <span class="n">exposure</span><span class="p">,</span>
-        <span class="n">idiosyncratic_returns</span><span class="o">=</span><span class="n">returns</span> <span class="o">-</span> <span class="n">factors</span> <span class="o">@</span> <span class="n">exposure</span><span class="p">,</span>
-        <span class="n">idiosyncratic_risk</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">returns</span> <span class="o">-</span> <span class="n">factors</span> <span class="o">@</span> <span class="n">exposure</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
-    <span class="p">)</span></div>
-
 
 <span class="nd">@dataclass</span>
-<div class="viewcode-block" id="PPCA"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.pca.PPCA">[docs]</a><span class="k">class</span> <span class="nc">PPCA</span><span class="p">:</span>
-<div class="viewcode-block" id="PPCA.n_components"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.pca.PPCA.n_components">[docs]</a>    <span class="n">n_components</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span></div>
-<div class="viewcode-block" id="PPCA.returns"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.pca.PPCA.returns">[docs]</a>    <span class="n">returns</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span></div>
+<div class="viewcode-block" id="PCA"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.PCA">[docs]</a><span class="k">class</span> <span class="nc">PCA</span><span class="p">:</span>
+<div class="viewcode-block" id="PCA.n_components"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.PCA.n_components">[docs]</a>    <span class="n">n_components</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span></div>
+<div class="viewcode-block" id="PCA.returns"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.PCA.returns">[docs]</a>    <span class="n">returns</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span></div>
 
-<div class="viewcode-block" id="PPCA.__post_init__"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.pca.PPCA.__post_init__">[docs]</a>    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PCA.__post_init__"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.PCA.__post_init__">[docs]</a>    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_components</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">returns</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="s2">&quot;The number of components cannot exceed the number of assets&quot;</span>
@@ -146,10 +95,10 @@
         <span class="c1"># 1. compute the correlation</span>
         <span class="n">cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">returns</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
         <span class="c1"># 2. compute the eigenvalues and eigenvectors</span>
-        <span class="n">eigenvalues</span><span class="p">,</span> <span class="n">eigenvectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">cov</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">,</span> <span class="n">eigenvectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">cov</span><span class="p">)</span>
         <span class="c1"># 3. sort the eigenvalues in descending order</span>
-        <span class="n">idx</span> <span class="o">=</span> <span class="n">eigenvalues</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">eigenvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">eigenvalues</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">eigenvalues</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eigenvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
         <span class="n">eigenvectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">eigenvectors</span><span class="p">[:,</span> <span class="n">idx</span><span class="p">])</span>
         <span class="c1"># 4. compute the factors</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">factors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">returns</span> <span class="o">@</span> <span class="n">eigenvectors</span><span class="p">[:,</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_components</span><span class="p">]</span>
@@ -157,19 +106,23 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">exposure</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">eigenvectors</span><span class="p">[:,</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_components</span><span class="p">])</span></div>
 
     <span class="nd">@property</span>
-<div class="viewcode-block" id="PPCA.cov"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.pca.PPCA.cov">[docs]</a>    <span class="k">def</span> <span class="nf">cov</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PCA.explained_variance"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.PCA.explained_variance">[docs]</a>    <span class="k">def</span> <span class="nf">explained_variance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">[:</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_components</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">))</span></div>
+
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="PCA.cov"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.PCA.cov">[docs]</a>    <span class="k">def</span> <span class="nf">cov</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">factors</span><span class="o">.</span><span class="n">T</span><span class="p">)</span></div>
 
     <span class="nd">@property</span>
-<div class="viewcode-block" id="PPCA.systematic_returns"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.pca.PPCA.systematic_returns">[docs]</a>    <span class="k">def</span> <span class="nf">systematic_returns</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PCA.systematic_returns"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.PCA.systematic_returns">[docs]</a>    <span class="k">def</span> <span class="nf">systematic_returns</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">factors</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">exposure</span></div>
 
     <span class="nd">@property</span>
-<div class="viewcode-block" id="PPCA.idiosyncratic_returns"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.pca.PPCA.idiosyncratic_returns">[docs]</a>    <span class="k">def</span> <span class="nf">idiosyncratic_returns</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PCA.idiosyncratic_returns"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.PCA.idiosyncratic_returns">[docs]</a>    <span class="k">def</span> <span class="nf">idiosyncratic_returns</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">returns</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">systematic_returns</span></div>
 
     <span class="nd">@property</span>
-<div class="viewcode-block" id="PPCA.idiosyncratic_risk"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.pca.PPCA.idiosyncratic_risk">[docs]</a>    <span class="k">def</span> <span class="nf">idiosyncratic_risk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PCA.idiosyncratic_risk"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.PCA.idiosyncratic_risk">[docs]</a>    <span class="k">def</span> <span class="nf">idiosyncratic_risk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">idiosyncratic_returns</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></div></div>
 </pre></div>
 

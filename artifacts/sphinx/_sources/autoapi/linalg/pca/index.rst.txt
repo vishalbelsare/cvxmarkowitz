@@ -17,41 +17,12 @@ Classes
 
 .. autoapisummary::
 
-   linalg.pca.PPCA
-
-
-
-Functions
-~~~~~~~~~
-
-.. autoapisummary::
-
-   linalg.pca.pca
-
-
-
-Attributes
-~~~~~~~~~~
-
-.. autoapisummary::
-
    linalg.pca.PCA
 
 
-.. py:data:: PCA
-   
-
-   
-
-.. py:function:: pca(returns, n_components=10)
-
-   Compute the first n principal components for a return matrix without sklearn
-
-   :param returns: DataFrame of prices
-   :param n_components: Number of compoFnents
 
 
-.. py:class:: PPCA
+.. py:class:: PCA
 
    .. py:attribute:: n_components
       :annotation: :int = 0
@@ -64,6 +35,10 @@ Attributes
       
 
    .. py:method:: __post_init__(self)
+
+
+   .. py:method:: explained_variance(self)
+      :property:
 
 
    .. py:method:: cov(self)

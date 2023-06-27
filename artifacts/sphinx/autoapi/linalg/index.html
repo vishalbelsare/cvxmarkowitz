@@ -56,6 +56,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#package-contents">Package Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#classes">Classes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#functions">Functions</a></li>
 </ul>
 </li>
@@ -105,6 +106,20 @@
 </section>
 <section id="package-contents">
 <h2>Package Contents<a class="headerlink" href="#package-contents" title="Permalink to this heading"></a></h2>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#linalg.PCA" title="linalg.PCA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PCA</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
 <section id="functions">
 <h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h3>
 <table class="autosummary longtable docutils align-default">
@@ -116,10 +131,7 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#linalg.cholesky" title="linalg.cholesky"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cholesky</span></code></a></p></td>
 <td><p>Cholesky decomposition with numpy</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="pca/index.html#module-linalg.pca" title="linalg.pca"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pca</span></code></a></p></td>
-<td><p>PCA analysis with numpy</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="valid/index.html#module-linalg.valid" title="linalg.valid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">valid</span></code></a>(matrix)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="valid/index.html#module-linalg.valid" title="linalg.valid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">valid</span></code></a>(matrix)</p></td>
 <td><p>Construct the valid subset of matrix (correlation) matrix</p></td>
 </tr>
 </tbody>
@@ -130,18 +142,49 @@
 <dd><p>Compute the cholesky decomposition of a covariance matrix</p>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="linalg.pca">
-<span class="sig-prename descclassname"><span class="pre">linalg.</span></span><span class="sig-name descname"><span class="pre">pca</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">returns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#linalg.pca" title="Permalink to this definition"></a></dt>
-<dd><p>Compute the first n principal components for a return matrix without sklearn</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>returns</strong> – DataFrame of prices</p></li>
-<li><p><strong>n_components</strong> – Number of compoFnents</p></li>
-</ul>
-</dd>
-</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="linalg.PCA">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linalg.</span></span><span class="sig-name descname"><span class="pre">PCA</span></span><a class="reference internal" href="../../_modules/linalg/pca.html#PCA"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linalg.PCA" title="Permalink to this definition"></a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="linalg.PCA.n_components">
+<span class="sig-name descname"><span class="pre">n_components</span></span><em class="property"><span class="w"> </span><span class="pre">:int</span> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#linalg.PCA.n_components" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="linalg.PCA.returns">
+<span class="sig-name descname"><span class="pre">returns</span></span><em class="property"><span class="w"> </span><span class="pre">:numpy.ndarray</span></em><a class="headerlink" href="#linalg.PCA.returns" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linalg.PCA.__post_init__">
+<span class="sig-name descname"><span class="pre">__post_init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#linalg.PCA.__post_init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linalg.PCA.explained_variance">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">explained_variance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#linalg.PCA.explained_variance" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linalg.PCA.cov">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cov</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#linalg.PCA.cov" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linalg.PCA.systematic_returns">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">systematic_returns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#linalg.PCA.systematic_returns" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linalg.PCA.idiosyncratic_returns">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">idiosyncratic_returns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#linalg.PCA.idiosyncratic_returns" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linalg.PCA.idiosyncratic_risk">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">idiosyncratic_risk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#linalg.PCA.idiosyncratic_risk" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="py function">
