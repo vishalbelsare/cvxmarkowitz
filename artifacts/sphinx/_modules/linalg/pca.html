@@ -78,7 +78,6 @@
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 
 <div class="viewcode-block" id="PCA"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.pca.PCA">[docs]</a><span class="n">PCA</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span>
@@ -120,11 +119,7 @@
     <span class="c1"># 4. compute the factors</span>
     <span class="n">factors</span> <span class="o">=</span> <span class="n">returns</span> <span class="o">@</span> <span class="n">eigenvectors</span><span class="p">[:,</span> <span class="p">:</span><span class="n">n_components</span><span class="p">]</span>
     <span class="c1"># 5. compute the exposure</span>
-    <span class="n">exposure</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-        <span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">eigenvectors</span><span class="p">[:,</span> <span class="p">:</span><span class="n">n_components</span><span class="p">]),</span>
-        <span class="n">columns</span><span class="o">=</span><span class="n">returns</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
-        <span class="n">index</span><span class="o">=</span><span class="n">factors</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
-    <span class="p">)</span>
+    <span class="n">exposure</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">eigenvectors</span><span class="p">[:,</span> <span class="p">:</span><span class="n">n_components</span><span class="p">])</span>
 
     <span class="k">return</span> <span class="n">PCA</span><span class="p">(</span>
         <span class="n">asset_names</span><span class="o">=</span><span class="n">returns</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
@@ -133,8 +128,8 @@
         <span class="n">factors</span><span class="o">=</span><span class="n">factors</span><span class="p">,</span>
         <span class="n">exposure</span><span class="o">=</span><span class="n">exposure</span><span class="p">,</span>
         <span class="n">cov</span><span class="o">=</span><span class="n">factors</span><span class="o">.</span><span class="n">cov</span><span class="p">(),</span>
-        <span class="n">systematic_returns</span><span class="o">=</span><span class="n">factors</span> <span class="o">@</span> <span class="n">exposure</span><span class="p">,</span>
-        <span class="n">idiosyncratic_returns</span><span class="o">=</span><span class="n">returns</span> <span class="o">-</span> <span class="n">factors</span> <span class="o">@</span> <span class="n">exposure</span><span class="p">,</span>
+        <span class="n">systematic_returns</span><span class="o">=</span><span class="n">factors</span><span class="o">.</span><span class="n">values</span> <span class="o">@</span> <span class="n">exposure</span><span class="p">,</span>
+        <span class="n">idiosyncratic_returns</span><span class="o">=</span><span class="n">returns</span><span class="o">.</span><span class="n">values</span> <span class="o">-</span> <span class="n">factors</span><span class="o">.</span><span class="n">values</span> <span class="o">@</span> <span class="n">exposure</span><span class="p">,</span>
     <span class="p">)</span></div>
 </pre></div>
 
