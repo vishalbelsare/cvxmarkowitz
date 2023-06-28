@@ -1,7 +1,7 @@
-:py:mod:`markowitz.bounds`
-==========================
+:py:mod:`markowitz.models.bounds`
+=================================
 
-.. py:module:: markowitz.bounds
+.. py:module:: markowitz.models.bounds
 
 .. autoapi-nested-parse::
 
@@ -17,14 +17,14 @@ Classes
 
 .. autoapisummary::
 
-   markowitz.bounds.Bounds
+   markowitz.models.bounds.Bounds
 
 
 
 
 .. py:class:: Bounds
 
-   Bases: :py:obj:`markowitz.model.Model`
+   Bases: :py:obj:`cvx.markowitz.model.Model`
 
    Abstract risk model
 
