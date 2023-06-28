@@ -92,6 +92,53 @@
 
 
 <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="viewcode-block" id="_Problem"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder._Problem">[docs]</a><span class="k">class</span> <span class="nc">_Problem</span><span class="p">:</span>
+<div class="viewcode-block" id="_Problem.problem"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder._Problem.problem">[docs]</a>    <span class="n">problem</span><span class="p">:</span> <span class="n">cp</span><span class="o">.</span><span class="n">Problem</span></div>
+<div class="viewcode-block" id="_Problem.model"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder._Problem.model">[docs]</a>    <span class="n">model</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Model</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span></div>
+<div class="viewcode-block" id="_Problem.constraints"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder._Problem.constraints">[docs]</a>    <span class="n">constraints</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">cp</span><span class="o">.</span><span class="n">Constraint</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span></div>
+<div class="viewcode-block" id="_Problem.variables"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder._Problem.variables">[docs]</a>    <span class="n">variables</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span></div>
+<div class="viewcode-block" id="_Problem.parameter"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder._Problem.parameter">[docs]</a>    <span class="n">parameter</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">cp</span><span class="o">.</span><span class="n">Parameter</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span></div>
+    <span class="c1"># problem has var_dict and param_dict</span>
+
+<div class="viewcode-block" id="_Problem.update"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder._Problem.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update the model</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">CvxError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing data for </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> in model </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="n">model</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="c1"># set the parameters in the problem</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">problem</span><span class="o">.</span><span class="n">param_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">problem</span><span class="o">.</span><span class="n">param_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">value</span></div>
+
+<div class="viewcode-block" id="_Problem.solve"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder._Problem.solve">[docs]</a>    <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Solve the problem</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">problem</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Problem.solution"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder._Problem.solution">[docs]</a>    <span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="o">=</span><span class="s2">&quot;weights&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the solution</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">problem</span><span class="o">.</span><span class="n">var_dict</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span><span class="o">.</span><span class="n">value</span></div>
+
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="_Problem.value"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder._Problem.value">[docs]</a>    <span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">problem</span><span class="o">.</span><span class="n">value</span></div>
+
+<div class="viewcode-block" id="_Problem.is_dpp"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder._Problem.is_dpp">[docs]</a>    <span class="k">def</span> <span class="nf">is_dpp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">problem</span><span class="o">.</span><span class="n">is_dpp</span><span class="p">()</span></div></div>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <div class="viewcode-block" id="Builder"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder.Builder">[docs]</a><span class="k">class</span> <span class="nc">Builder</span><span class="p">:</span>
 <div class="viewcode-block" id="Builder.assets"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder.Builder.assets">[docs]</a>    <span class="n">assets</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span></div>
 <div class="viewcode-block" id="Builder.factors"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder.Builder.factors">[docs]</a>    <span class="n">factors</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span></div>
@@ -124,20 +171,9 @@
             <span class="n">assets</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;assets&quot;</span><span class="p">,</span> <span class="n">acting_on</span><span class="o">=</span><span class="s2">&quot;weights&quot;</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="Builder.update"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder.Builder.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Update the model</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="n">CvxError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing data for </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> in model </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-            <span class="n">model</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
-
     <span class="nd">@property</span>
-<div class="viewcode-block" id="Builder.objective"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder.Builder.objective">[docs]</a>    <span class="c1"># @abstractmethod</span>
-    <span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="nd">@abstractmethod</span>
+<div class="viewcode-block" id="Builder.objective"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder.Builder.objective">[docs]</a>    <span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the objective function</span>
 <span class="sd">        &quot;&quot;&quot;</span></div>
@@ -152,13 +188,15 @@
             <span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">constraints</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name_model</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">name_constraint</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">constraint</span>
 
-        <span class="k">return</span> <span class="n">cp</span><span class="o">.</span><span class="n">Problem</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">objective</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">constraints</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span></div>
-
-<div class="viewcode-block" id="Builder.solution"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder.Builder.solution">[docs]</a>    <span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">names</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return the solution as a dictionary</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;weights&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">[:</span> <span class="nb">len</span><span class="p">(</span><span class="n">names</span><span class="p">)]))</span></div>
+        <span class="n">problem</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Problem</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">objective</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">constraints</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+        <span class="k">assert</span> <span class="n">problem</span><span class="o">.</span><span class="n">is_dpp</span><span class="p">(),</span> <span class="s2">&quot;Problem is not DPP&quot;</span>
+        <span class="k">return</span> <span class="n">_Problem</span><span class="p">(</span>
+            <span class="n">problem</span><span class="o">=</span><span class="n">problem</span><span class="p">,</span>
+            <span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span>
+            <span class="n">constraints</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">constraints</span><span class="p">,</span>
+            <span class="n">variables</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">,</span>
+            <span class="n">parameter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parameter</span><span class="p">,</span>
+        <span class="p">)</span></div>
 
     <span class="nd">@property</span>
 <div class="viewcode-block" id="Builder.data"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder.Builder.data">[docs]</a>    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

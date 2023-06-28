@@ -100,7 +100,10 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#markowitz.builder.Builder" title="markowitz.builder.Builder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Builder</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#markowitz.builder._Problem" title="markowitz.builder._Problem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_Problem</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#markowitz.builder.Builder" title="markowitz.builder.Builder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Builder</span></code></a></p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -110,6 +113,64 @@
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">markowitz.builder.</span></span><span class="sig-name descname"><span class="pre">CvxError</span></span><a class="reference internal" href="../../../_modules/markowitz/builder.html#CvxError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.builder.CvxError" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">Exception</span></code></p>
 <p>Common base class for all non-exit exceptions.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="markowitz.builder._Problem">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">markowitz.builder.</span></span><span class="sig-name descname"><span class="pre">_Problem</span></span><a class="reference internal" href="../../../_modules/markowitz/builder.html#_Problem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.builder._Problem" title="Permalink to this definition"></a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="markowitz.builder._Problem.problem">
+<span class="sig-name descname"><span class="pre">problem</span></span><em class="property"><span class="w"> </span><span class="pre">:cvxpy.Problem</span></em><a class="reference internal" href="../../../_modules/markowitz/builder.html#_Problem.problem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.builder._Problem.problem" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="markowitz.builder._Problem.model">
+<span class="sig-name descname"><span class="pre">model</span></span><em class="property"><span class="w"> </span><span class="pre">:Dict[str,</span> <span class="pre">cvx.markowitz.Model]</span></em><a class="reference internal" href="../../../_modules/markowitz/builder.html#_Problem.model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.builder._Problem.model" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="markowitz.builder._Problem.constraints">
+<span class="sig-name descname"><span class="pre">constraints</span></span><em class="property"><span class="w"> </span><span class="pre">:Dict[str,</span> <span class="pre">cvxpy.Constraint]</span></em><a class="reference internal" href="../../../_modules/markowitz/builder.html#_Problem.constraints"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.builder._Problem.constraints" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="markowitz.builder._Problem.variables">
+<span class="sig-name descname"><span class="pre">variables</span></span><em class="property"><span class="w"> </span><span class="pre">:Dict[str,</span> <span class="pre">cvxpy.Variable]</span></em><a class="reference internal" href="../../../_modules/markowitz/builder.html#_Problem.variables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.builder._Problem.variables" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="markowitz.builder._Problem.parameter">
+<span class="sig-name descname"><span class="pre">parameter</span></span><em class="property"><span class="w"> </span><span class="pre">:Dict[str,</span> <span class="pre">cvxpy.Parameter]</span></em><a class="reference internal" href="../../../_modules/markowitz/builder.html#_Problem.parameter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.builder._Problem.parameter" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="markowitz.builder._Problem.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/markowitz/builder.html#_Problem.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.builder._Problem.update" title="Permalink to this definition"></a></dt>
+<dd><p>Update the model</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="markowitz.builder._Problem.solve">
+<span class="sig-name descname"><span class="pre">solve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/markowitz/builder.html#_Problem.solve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.builder._Problem.solve" title="Permalink to this definition"></a></dt>
+<dd><p>Solve the problem</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="markowitz.builder._Problem.solution">
+<span class="sig-name descname"><span class="pre">solution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'weights'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/markowitz/builder.html#_Problem.solution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.builder._Problem.solution" title="Permalink to this definition"></a></dt>
+<dd><p>Return the solution</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="markowitz.builder._Problem.value">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/markowitz/builder.html#_Problem.value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.builder._Problem.value" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="markowitz.builder._Problem.is_dpp">
+<span class="sig-name descname"><span class="pre">is_dpp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/markowitz/builder.html#_Problem.is_dpp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.builder._Problem.is_dpp" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
@@ -151,12 +212,6 @@
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="markowitz.builder.Builder.update">
-<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/markowitz/builder.html#Builder.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.builder.Builder.update" title="Permalink to this definition"></a></dt>
-<dd><p>Update the model</p>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="markowitz.builder.Builder.objective">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">objective</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/markowitz/builder.html#Builder.objective"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.builder.Builder.objective" title="Permalink to this definition"></a></dt>
 <dd><p>Return the objective function</p>
@@ -166,12 +221,6 @@
 <dt class="sig sig-object py" id="markowitz.builder.Builder.build">
 <span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">cvxpy.Problem</span></span></span><a class="reference internal" href="../../../_modules/markowitz/builder.html#Builder.build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.builder.Builder.build" title="Permalink to this definition"></a></dt>
 <dd><p>Build the cvxpy problem</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="markowitz.builder.Builder.solution">
-<span class="sig-name descname"><span class="pre">solution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/markowitz/builder.html#Builder.solution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.builder.Builder.solution" title="Permalink to this definition"></a></dt>
-<dd><p>Return the solution as a dictionary</p>
 </dd></dl>
 
 <dl class="py method">

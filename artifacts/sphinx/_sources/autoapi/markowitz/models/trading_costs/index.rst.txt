@@ -28,11 +28,6 @@ Classes
 
    Model for trading costs
 
-   .. py:attribute:: power
-      :annotation: :float = 1.0
-
-      
-
    .. py:method:: __post_init__(self)
 
 

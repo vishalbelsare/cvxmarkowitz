@@ -12,6 +12,7 @@ Classes
 
 .. autoapisummary::
 
+   markowitz.builder._Problem
    markowitz.builder.Builder
 
 
@@ -22,6 +23,56 @@ Classes
    Bases: :py:obj:`Exception`
 
    Common base class for all non-exit exceptions.
+
+
+.. py:class:: _Problem
+
+   .. py:attribute:: problem
+      :annotation: :cvxpy.Problem
+
+      
+
+   .. py:attribute:: model
+      :annotation: :Dict[str, cvx.markowitz.Model]
+
+      
+
+   .. py:attribute:: constraints
+      :annotation: :Dict[str, cvxpy.Constraint]
+
+      
+
+   .. py:attribute:: variables
+      :annotation: :Dict[str, cvxpy.Variable]
+
+      
+
+   .. py:attribute:: parameter
+      :annotation: :Dict[str, cvxpy.Parameter]
+
+      
+
+   .. py:method:: update(self, **kwargs)
+
+      Update the model
+
+
+   .. py:method:: solve(self, **kwargs)
+
+      Solve the problem
+
+
+   .. py:method:: solution(self, variable='weights')
+
+      Return the solution
+
+
+   .. py:method:: value(self)
+      :property:
+
+
+   .. py:method:: is_dpp(self)
+
 
 
 .. py:class:: Builder
@@ -59,11 +110,6 @@ Classes
    .. py:method:: __post_init__(self)
 
 
-   .. py:method:: update(self, **kwargs)
-
-      Update the model
-
-
    .. py:method:: objective(self)
       :property:
 
@@ -73,11 +119,6 @@ Classes
    .. py:method:: build(self) -> cvxpy.Problem
 
       Build the cvxpy problem
-
-
-   .. py:method:: solution(self, names) -> Dict[str, float]
-
-      Return the solution as a dictionary
 
 
    .. py:method:: data(self)
