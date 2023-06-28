@@ -116,7 +116,7 @@ Classes
       Return the objective function
 
 
-   .. py:method:: build(self) -> cvxpy.Problem
+   .. py:method:: build(self)
 
       Build the cvxpy problem
 
