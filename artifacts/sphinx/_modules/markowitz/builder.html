@@ -82,6 +82,9 @@
 <span class="kn">import</span> <span class="nn">cvxpy</span> <span class="k">as</span> <span class="nn">cp</span>
 
 <span class="kn">from</span> <span class="nn">cvx.markowitz</span> <span class="kn">import</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">cvx.markowitz.models.bounds</span> <span class="kn">import</span> <span class="n">Bounds</span>
+<span class="kn">from</span> <span class="nn">cvx.markowitz.risk</span> <span class="kn">import</span> <span class="n">FactorModel</span>
+<span class="kn">from</span> <span class="nn">cvx.markowitz.risk</span> <span class="kn">import</span> <span class="n">SampleCovariance</span>
 
 
 <div class="viewcode-block" id="CvxError"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder.CvxError">[docs]</a><span class="k">class</span> <span class="nc">CvxError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
@@ -97,6 +100,30 @@
 <div class="viewcode-block" id="Builder.variables"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder.Builder.variables">[docs]</a>    <span class="n">variables</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span></div>
 <div class="viewcode-block" id="Builder.parameter"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder.Builder.parameter">[docs]</a>    <span class="n">parameter</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">cp</span><span class="o">.</span><span class="n">Parameter</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span></div>
 
+<div class="viewcode-block" id="Builder.__post_init__"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder.Builder.__post_init__">[docs]</a>    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># pick the correct risk model</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">factors</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;risk&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">FactorModel</span><span class="p">(</span><span class="n">assets</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">,</span> <span class="n">factors</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">factors</span><span class="p">)</span>
+
+            <span class="c1"># add variable for factor weights</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;factor_weights&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">factors</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;factor_weights&quot;</span>
+            <span class="p">)</span>
+            <span class="c1"># add bounds for factor weights</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;bounds_factors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Bounds</span><span class="p">(</span>
+                <span class="n">assets</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">factors</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;factors&quot;</span><span class="p">,</span> <span class="n">acting_on</span><span class="o">=</span><span class="s2">&quot;factor_weights&quot;</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;risk&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">SampleCovariance</span><span class="p">(</span><span class="n">assets</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">)</span>
+
+        <span class="c1"># Note that for the SampleCovariance model the factor_weights are None.</span>
+        <span class="c1"># They are only included for the harmony of the interfaces for both models.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;weights&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;weights&quot;</span><span class="p">)</span>
+        <span class="c1"># add bounds on assets</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;bound_assets&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Bounds</span><span class="p">(</span>
+            <span class="n">assets</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;assets&quot;</span><span class="p">,</span> <span class="n">acting_on</span><span class="o">=</span><span class="s2">&quot;weights&quot;</span>
+        <span class="p">)</span></div>
+
 <div class="viewcode-block" id="Builder.update"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder.Builder.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Update the model</span>
@@ -109,8 +136,8 @@
             <span class="n">model</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
     <span class="nd">@property</span>
-    <span class="nd">@abstractmethod</span>
-<div class="viewcode-block" id="Builder.objective"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder.Builder.objective">[docs]</a>    <span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Builder.objective"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder.Builder.objective">[docs]</a>    <span class="c1"># @abstractmethod</span>
+    <span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the objective function</span>
 <span class="sd">        &quot;&quot;&quot;</span></div>

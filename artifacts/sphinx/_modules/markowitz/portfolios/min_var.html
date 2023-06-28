@@ -79,11 +79,8 @@
 <span class="kn">import</span> <span class="nn">cvxpy</span> <span class="k">as</span> <span class="nn">cp</span>
 
 <span class="kn">from</span> <span class="nn">cvx.markowitz.builder</span> <span class="kn">import</span> <span class="n">Builder</span>
-<span class="kn">from</span> <span class="nn">cvx.markowitz.models.bounds</span> <span class="kn">import</span> <span class="n">Bounds</span>
 <span class="kn">from</span> <span class="nn">cvx.markowitz.models.holding_costs</span> <span class="kn">import</span> <span class="n">HoldingCosts</span>
 <span class="kn">from</span> <span class="nn">cvx.markowitz.models.trading_costs</span> <span class="kn">import</span> <span class="n">TradingCosts</span>
-<span class="kn">from</span> <span class="nn">cvx.markowitz.risk</span> <span class="kn">import</span> <span class="n">FactorModel</span>
-<span class="kn">from</span> <span class="nn">cvx.markowitz.risk</span> <span class="kn">import</span> <span class="n">SampleCovariance</span>
 
 
 <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -100,29 +97,7 @@
         <span class="k">return</span> <span class="n">cp</span><span class="o">.</span><span class="n">Minimize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;risk&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">estimate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="MinVar.__post_init__"><a class="viewcode-back" href="../../../autoapi/markowitz/portfolios/min_var/index.html#markowitz.portfolios.min_var.MinVar.__post_init__">[docs]</a>    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># pick the correct risk model</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">factors</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;risk&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">FactorModel</span><span class="p">(</span><span class="n">assets</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">,</span> <span class="n">factors</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">factors</span><span class="p">)</span>
-
-            <span class="c1"># add variable for factor weights</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;factor_weights&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">factors</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;factor_weights&quot;</span>
-            <span class="p">)</span>
-            <span class="c1"># add bounds for factor weights</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;bounds_factors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Bounds</span><span class="p">(</span>
-                <span class="n">assets</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">factors</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;factors&quot;</span><span class="p">,</span> <span class="n">acting_on</span><span class="o">=</span><span class="s2">&quot;factor_weights&quot;</span>
-            <span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;risk&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">SampleCovariance</span><span class="p">(</span><span class="n">assets</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">)</span>
-
-        <span class="c1"># Note that for the SampleCovariance model the factor_weights are None.</span>
-        <span class="c1"># They are only included for the harmony of the interfaces for both models.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;weights&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;weights&quot;</span><span class="p">)</span>
-        <span class="c1"># add bounds on assets</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;bound_assets&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Bounds</span><span class="p">(</span>
-            <span class="n">assets</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;assets&quot;</span><span class="p">,</span> <span class="n">acting_on</span><span class="o">=</span><span class="s2">&quot;weights&quot;</span>
-        <span class="p">)</span>
-
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__post_init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">constraints</span><span class="p">[</span><span class="s2">&quot;long-only&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;weights&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">constraints</span><span class="p">[</span><span class="s2">&quot;fully-invested&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;weights&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="mf">1.0</span></div></div>
 </pre></div>
