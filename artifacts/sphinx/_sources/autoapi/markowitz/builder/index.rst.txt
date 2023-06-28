@@ -51,6 +51,11 @@ Classes
 
       
 
+   .. py:attribute:: parameter
+      :annotation: :Dict[str, cvxpy.Parameter]
+
+      
+
    .. py:method:: update(self, **kwargs)
 
       Update the model
