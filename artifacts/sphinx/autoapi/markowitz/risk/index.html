@@ -223,13 +223,20 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="markowitz.risk.SampleCovariance.estimate">
 <span class="sig-name descname"><span class="pre">estimate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variables</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">cvxpy.Variable</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">cvxpy.Expression</span></span></span><a class="headerlink" href="#markowitz.risk.SampleCovariance.estimate" title="Permalink to this definition"></a></dt>
-<dd><p>Estimate the risk by computing the Cholesky decomposition of self.cov</p>
+<dd><p>Estimate the risk by computing the Cholesky decomposition of
+self.cov</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="markowitz.risk.SampleCovariance.update">
 <span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#markowitz.risk.SampleCovariance.update" title="Permalink to this definition"></a></dt>
 <dd><p>Update the data in the risk model</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="markowitz.risk.SampleCovariance.constraints">
+<span class="sig-name descname"><span class="pre">constraints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variables</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#markowitz.risk.SampleCovariance.constraints" title="Permalink to this definition"></a></dt>
+<dd><p>Return the constraints for the risk model</p>
 </dd></dl>
 
 </dd></dl>

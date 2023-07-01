@@ -78,7 +78,7 @@ Functions
       :property:
 
 
-   .. py:method:: idiosyncratic_risk(self) -> numpy.ndarray
+   .. py:method:: idiosyncratic_vola(self) -> numpy.ndarray
       :property:
 
 

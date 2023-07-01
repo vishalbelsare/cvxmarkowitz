@@ -22,6 +22,7 @@ Submodules
    :maxdepth: 1
 
    builder/index.rst
+   cvxerror/index.rst
    model/index.rst
 
 

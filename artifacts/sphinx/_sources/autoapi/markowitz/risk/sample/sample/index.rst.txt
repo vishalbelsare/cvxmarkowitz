@@ -33,12 +33,18 @@ Classes
 
    .. py:method:: estimate(self, variables: Dict[str, cvxpy.Variable]) -> cvxpy.Expression
 
-      Estimate the risk by computing the Cholesky decomposition of self.cov
+      Estimate the risk by computing the Cholesky decomposition of
+      self.cov
 
 
    .. py:method:: update(self, **kwargs)
 
       Update the data in the risk model
+
+
+   .. py:method:: constraints(self, variables)
+
+      Return the constraints for the risk model
 
 
 
