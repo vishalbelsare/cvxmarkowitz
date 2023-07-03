@@ -253,9 +253,9 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
 }
 </script>
     <h1>report.html</h1>
-    <p>Report generated on 03-Jul-2023 at 07:58:57 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.2.0</p>
+    <p>Report generated on 03-Jul-2023 at 22:58:52 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.2.0</p>
     <h2>Summary</h2>
-    <p>34 tests ran in 4.44 seconds. </p>
+    <p>34 tests ran in 1.49 seconds. </p>
     <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">34 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">0 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
     <h2>Results</h2>
     <table id="results-table">
@@ -270,37 +270,16 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">tests/test_markowitz/test_builder.py::test_missing_data</td>
+          <td class="col-name">tests/test_linalg/test_cholesky.py::test_cholesky</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">tests/test_markowitz/test_builder.py::test_dummy</td>
-          <td class="col-duration">0.02</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>[Parameter((1, 1)), Parameter((1,), nonneg=True), Parameter((1,)), Parameter((1,))]
-dict_keys([&#x27;chol&#x27;, &#x27;vola_uncertainty&#x27;, &#x27;lower_assets&#x27;, &#x27;upper_assets&#x27;])
-{(&#x27;risk&#x27;, &#x27;chol&#x27;): Parameter((1, 1)), (&#x27;risk&#x27;, &#x27;vola_uncertainty&#x27;): Parameter((1,), nonneg=True), (&#x27;bound_assets&#x27;, &#x27;lower_assets&#x27;): Parameter((1,)), (&#x27;bound_assets&#x27;, &#x27;upper_assets&#x27;): Parameter((1,))}
-<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">tests/test_markowitz/test_bounds.py::test_constraints</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">tests/test_markowitz/test_bounds.py::test_raise_not_implemented</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -318,19 +297,8 @@ dict_keys([&#x27;chol&#x27;, &#x27;vola_uncertainty&#x27;, &#x27;lower_assets&#x
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">tests/test_markowitz/test_risk/test_cvar/test_cvar.py::test_estimate_risk</td>
-          <td class="col-duration">0.06</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>dict_keys([&#x27;returns&#x27;, &#x27;lower_assets&#x27;, &#x27;upper_assets&#x27;])
-dict_keys([&#x27;returns&#x27;, &#x27;lower_assets&#x27;, &#x27;upper_assets&#x27;])
-<br/></div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">tests/test_linalg/test_pca.py::test_shape</td>
-          <td class="col-duration">0.02</td>
+          <td class="col-name">tests/test_markowitz/test_bounds.py::test_raise_not_implemented</td>
+          <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -338,7 +306,7 @@ dict_keys([&#x27;returns&#x27;, &#x27;lower_assets&#x27;, &#x27;upper_assets&#x2
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">tests/test_linalg/test_pca.py::test_pca</td>
+          <td class="col-name">tests/test_linalg/test_pca.py::test_too_many_factors</td>
           <td class="col-duration">0.01</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -348,24 +316,6 @@ dict_keys([&#x27;returns&#x27;, &#x27;lower_assets&#x27;, &#x27;upper_assets&#x2
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">tests/test_linalg/test_pca.py::test_idiosyncratic</td>
-          <td class="col-duration">0.01</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">tests/test_linalg/test_pca.py::test_idiosyncratic_with_max_factors</td>
-          <td class="col-duration">0.01</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">tests/test_linalg/test_pca.py::test_too_many_factors</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -374,22 +324,68 @@ dict_keys([&#x27;returns&#x27;, &#x27;lower_assets&#x27;, &#x27;upper_assets&#x2
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">tests/test_markowitz/test_portfolios/test_min_var.py::test_min_var</td>
-          <td class="col-duration">0.03</td>
+          <td class="col-name">tests/test_linalg/test_pca.py::test_shape</td>
+          <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>dict_keys([&#x27;chol&#x27;, &#x27;vola_uncertainty&#x27;, &#x27;lower_assets&#x27;, &#x27;upper_assets&#x27;])
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">tests/test_linalg/test_pca.py::test_idiosyncratic_with_max_factors</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">tests/test_linalg/test_pca.py::test_pca</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">tests/test_linalg/test_valid.py::test_valid</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">tests/test_linalg/test_valid.py::test_invalid</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">tests/test_markowitz/test_risk/test_cvar/test_cvar.py::test_estimate_risk</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>dict_keys([&#x27;returns&#x27;, &#x27;lower_assets&#x27;, &#x27;upper_assets&#x27;])
+dict_keys([&#x27;returns&#x27;, &#x27;lower_assets&#x27;, &#x27;upper_assets&#x27;])
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">tests/test_markowitz/test_portfolios/test_min_var.py::test_min_var_robust</td>
+          <td class="col-name">tests/test_markowitz/test_portfolios/test_max_sharpe.py::test_max_sharpe</td>
           <td class="col-duration">0.03</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>dict_keys([&#x27;chol&#x27;, &#x27;vola_uncertainty&#x27;, &#x27;lower_assets&#x27;, &#x27;upper_assets&#x27;])
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>dict_keys([&#x27;mu&#x27;, &#x27;mu_uncertainty&#x27;, &#x27;chol&#x27;, &#x27;vola_uncertainty&#x27;, &#x27;maximal volatility&#x27;, &#x27;lower_assets&#x27;, &#x27;upper_assets&#x27;])
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -421,7 +417,84 @@ dict_keys([&#x27;returns&#x27;, &#x27;lower_assets&#x27;, &#x27;upper_assets&#x2
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">tests/test_linalg/test_cholesky.py::test_cholesky</td>
+          <td class="col-name">tests/test_markowitz/test_builder.py::test_missing_data</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">tests/test_markowitz/test_builder.py::test_dummy</td>
+          <td class="col-duration">0.01</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>[Parameter((1, 1)), Parameter((1,), nonneg=True), Parameter((1,)), Parameter((1,))]
+dict_keys([&#x27;chol&#x27;, &#x27;vola_uncertainty&#x27;, &#x27;lower_assets&#x27;, &#x27;upper_assets&#x27;])
+{(&#x27;risk&#x27;, &#x27;chol&#x27;): Parameter((1, 1)), (&#x27;risk&#x27;, &#x27;vola_uncertainty&#x27;): Parameter((1,), nonneg=True), (&#x27;bound_assets&#x27;, &#x27;lower_assets&#x27;): Parameter((1,)), (&#x27;bound_assets&#x27;, &#x27;upper_assets&#x27;): Parameter((1,))}
+<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">tests/test_markowitz/test_risk/test_sample/test_sample.py::test_robust_sample_large</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">tests/test_markowitz/test_risk/test_sample/test_sample.py::test_robust_sample</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">tests/test_markowitz/test_risk/test_sample/test_sample.py::test_min_variance</td>
+          <td class="col-duration">0.02</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>dict_keys([&#x27;chol&#x27;, &#x27;vola_uncertainty&#x27;, &#x27;lower_assets&#x27;, &#x27;upper_assets&#x27;])
+dict_keys([&#x27;chol&#x27;, &#x27;vola_uncertainty&#x27;, &#x27;lower_assets&#x27;, &#x27;upper_assets&#x27;])
+<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">tests/test_markowitz/test_risk/test_sample/test_sample.py::test_sample</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">tests/test_markowitz/test_risk/test_sample/test_sample.py::test_mismatch</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">tests/test_markowitz/test_risk/test_sample/test_sample.py::test_sample_large</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">tests/test_markowitz/test_models/test_holding_costs.py::test_holding_costs</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -440,7 +513,7 @@ dict_keys([&#x27;returns&#x27;, &#x27;lower_assets&#x27;, &#x27;upper_assets&#x2
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">tests/test_markowitz/test_risk/test_factor/test_factor.py::test_timeseries_model</td>
-          <td class="col-duration">0.01</td>
+          <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -448,16 +521,12 @@ dict_keys([&#x27;returns&#x27;, &#x27;lower_assets&#x27;, &#x27;upper_assets&#x2
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">tests/test_markowitz/test_risk/test_factor/test_factor.py::test_estimate_risk</td>
-          <td class="col-duration">0.08</td>
+          <td class="col-name">tests/test_markowitz/test_risk/test_factor/test_factor.py::test_mismatch</td>
+          <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>dict_keys([&#x27;chol&#x27;, &#x27;systematic_vola_uncertainty&#x27;, &#x27;idiosyncratic_vola&#x27;, &#x27;idiosyncratic_vola_uncertainty&#x27;, &#x27;exposure&#x27;, &#x27;lower_factors&#x27;, &#x27;upper_factors&#x27;, &#x27;lower_assets&#x27;, &#x27;upper_assets&#x27;])
-dict_keys([&#x27;chol&#x27;, &#x27;systematic_vola_uncertainty&#x27;, &#x27;idiosyncratic_vola&#x27;, &#x27;idiosyncratic_vola_uncertainty&#x27;, &#x27;exposure&#x27;, &#x27;lower_factors&#x27;, &#x27;upper_factors&#x27;, &#x27;lower_assets&#x27;, &#x27;upper_assets&#x27;])
-[-0.05436581 -0.1         0.02804586 -0.03367916  0.0411357  -0.1
- -0.01591565  0.00499386  0.01245009 -0.014609    0.          0.        ]
-<br/></div></td></tr></tbody>
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -470,7 +539,20 @@ dict_keys([&#x27;chol&#x27;, &#x27;systematic_vola_uncertainty&#x27;, &#x27;idio
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">tests/test_markowitz/test_risk/test_factor/test_factor.py::test_mismatch</td>
+          <td class="col-name">tests/test_markowitz/test_risk/test_factor/test_factor.py::test_estimate_risk</td>
+          <td class="col-duration">0.05</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>dict_keys([&#x27;chol&#x27;, &#x27;systematic_vola_uncertainty&#x27;, &#x27;idiosyncratic_vola&#x27;, &#x27;idiosyncratic_vola_uncertainty&#x27;, &#x27;exposure&#x27;, &#x27;lower_factors&#x27;, &#x27;upper_factors&#x27;, &#x27;lower_assets&#x27;, &#x27;upper_assets&#x27;])
+dict_keys([&#x27;chol&#x27;, &#x27;systematic_vola_uncertainty&#x27;, &#x27;idiosyncratic_vola&#x27;, &#x27;idiosyncratic_vola_uncertainty&#x27;, &#x27;exposure&#x27;, &#x27;lower_factors&#x27;, &#x27;upper_factors&#x27;, &#x27;lower_assets&#x27;, &#x27;upper_assets&#x27;])
+[-0.05436581 -0.1         0.02804586 -0.03367916  0.0411357  -0.1
+ -0.01591565  0.00499386  0.01245009 -0.014609    0.          0.        ]
+<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">tests/test_markowitz/test_models/test_trading_costs.py::test_trading_costs</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -488,102 +570,20 @@ dict_keys([&#x27;chol&#x27;, &#x27;systematic_vola_uncertainty&#x27;, &#x27;idio
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">tests/test_markowitz/test_models/test_trading_costs.py::test_trading_costs</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">tests/test_markowitz/test_models/test_holding_costs.py::test_holding_costs</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">tests/test_markowitz/test_risk/test_sample/test_sample.py::test_mismatch</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">tests/test_markowitz/test_risk/test_sample/test_sample.py::test_robust_sample_large</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">tests/test_markowitz/test_risk/test_sample/test_sample.py::test_min_variance</td>
-          <td class="col-duration">0.03</td>
+          <td class="col-name">tests/test_markowitz/test_portfolios/test_min_var.py::test_min_var_robust</td>
+          <td class="col-duration">0.02</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
             <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>dict_keys([&#x27;chol&#x27;, &#x27;vola_uncertainty&#x27;, &#x27;lower_assets&#x27;, &#x27;upper_assets&#x27;])
-dict_keys([&#x27;chol&#x27;, &#x27;vola_uncertainty&#x27;, &#x27;lower_assets&#x27;, &#x27;upper_assets&#x27;])
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">tests/test_markowitz/test_risk/test_sample/test_sample.py::test_robust_sample</td>
-          <td class="col-duration">0.00</td>
+          <td class="col-name">tests/test_markowitz/test_portfolios/test_min_var.py::test_min_var</td>
+          <td class="col-duration">0.02</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">tests/test_markowitz/test_risk/test_sample/test_sample.py::test_sample_large</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">tests/test_markowitz/test_risk/test_sample/test_sample.py::test_sample</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">tests/test_linalg/test_valid.py::test_valid</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">tests/test_linalg/test_valid.py::test_invalid</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">tests/test_markowitz/test_portfolios/test_max_sharpe.py::test_max_sharpe</td>
-          <td class="col-duration">0.04</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>dict_keys([&#x27;mu&#x27;, &#x27;mu_uncertainty&#x27;, &#x27;chol&#x27;, &#x27;vola_uncertainty&#x27;, &#x27;maximal volatility&#x27;, &#x27;lower_assets&#x27;, &#x27;upper_assets&#x27;])
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>dict_keys([&#x27;chol&#x27;, &#x27;vola_uncertainty&#x27;, &#x27;lower_assets&#x27;, &#x27;upper_assets&#x27;])
 <br/></div></td></tr></tbody></table></body></html>
