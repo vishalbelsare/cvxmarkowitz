@@ -12,5 +12,6 @@ Submodules
 
    max_sharpe/index.rst
    min_var/index.rst
+   utils/index.rst
 
 
