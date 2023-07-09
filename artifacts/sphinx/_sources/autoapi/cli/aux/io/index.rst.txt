@@ -1,0 +1,25 @@
+:py:mod:`cli.aux.io`
+====================
+
+.. py:module:: cli.aux.io
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   cli.aux.io.exists
+
+
+
+.. py:function:: exists(problem_file=None)
+
+   Check if the problem file exists.
+   The function returns None if the file does not exist or the argument is None.
+
+

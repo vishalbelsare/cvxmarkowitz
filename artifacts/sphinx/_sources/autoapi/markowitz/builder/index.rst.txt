@@ -50,7 +50,7 @@ Classes
       Update the model
 
 
-   .. py:method:: solve(self, **kwargs)
+   .. py:method:: solve(self, solver=cp.ECOS, **kwargs)
 
       Solve the problem
 

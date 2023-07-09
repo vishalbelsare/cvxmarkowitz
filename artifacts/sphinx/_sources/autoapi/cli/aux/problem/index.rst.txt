@@ -1,0 +1,26 @@
+:py:mod:`cli.aux.problem`
+=========================
+
+.. py:module:: cli.aux.problem
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   cli.aux.problem.deserialize_problem
+   cli.aux.problem.serialize_problem
+
+
+
+.. py:function:: deserialize_problem(problem_file)
+
+
+.. py:function:: serialize_problem(problem, problem_file)
+
+

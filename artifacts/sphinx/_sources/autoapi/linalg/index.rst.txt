@@ -17,6 +17,7 @@ Submodules
 
    cholesky/index.rst
    pca/index.rst
+   random/index.rst
    valid/index.rst
 
 

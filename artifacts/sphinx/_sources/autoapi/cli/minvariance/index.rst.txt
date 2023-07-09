@@ -1,0 +1,22 @@
+:py:mod:`cli.minvariance`
+=========================
+
+.. py:module:: cli.minvariance
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   cli.minvariance.minvariance
+
+
+
+.. py:function:: minvariance(json_file, problem_file=None, assets=None, factors=None) -> None
+
+

@@ -1,0 +1,26 @@
+:py:mod:`cli`
+=============
+
+.. py:module:: cli
+
+
+Subpackages
+-----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
+
+   aux/index.rst
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   minvariance/index.rst
+   smallest_ev/index.rst
+   weather/index.rst
+
+

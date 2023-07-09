@@ -1,0 +1,30 @@
+:py:mod:`cli.aux.json`
+======================
+
+.. py:module:: cli.aux.json
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   cli.aux.json.read_json
+   cli.aux.json.write_json
+
+
+
+.. py:function:: read_json(json_file)
+
+   Read a json file and return a generator of key-value pairs
+
+
+.. py:function:: write_json(json_file, data)
+
+   Write a json file with the data
+
+
