@@ -30,24 +30,9 @@ Classes
 
       
 
-   .. py:attribute:: constraints
-      :annotation: :Dict[str, cvxpy.Constraint]
-
-      
-
-   .. py:attribute:: variables
-      :annotation: :Dict[str, cvxpy.Variable]
-
-      
-
-   .. py:attribute:: parameter
-      :annotation: :Dict[str, cvxpy.Parameter]
-
-      
-
    .. py:method:: update(self, **kwargs)
 
-      Update the model
+      Update the problem
 
 
    .. py:method:: solve(self, solver=cp.ECOS, **kwargs)
@@ -65,6 +50,10 @@ Classes
 
 
    .. py:method:: is_dpp(self)
+
+
+   .. py:method:: data(self)
+      :property:
 
 
 
@@ -112,10 +101,6 @@ Classes
    .. py:method:: build(self)
 
       Build the cvxpy problem
-
-
-   .. py:method:: data(self)
-      :property:
 
 
 
