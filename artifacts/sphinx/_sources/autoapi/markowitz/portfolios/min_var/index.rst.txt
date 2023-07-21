@@ -25,7 +25,7 @@ Functions
 
 
 
-.. py:function:: estimate_dimensions(input_data)
+.. py:function:: estimate_dimensions(**kwargs)
 
    Estimate the dimensions of the problem from the input data
 

@@ -24,7 +24,7 @@ Classes
 
 .. py:class:: HoldingCosts
 
-   Bases: :py:obj:`cvx.markowitz.Model`
+   Bases: :py:obj:`cvx.markowitz.model.Model`
 
    Model for holding costs
 

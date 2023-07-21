@@ -26,7 +26,7 @@ Classes
       
 
    .. py:attribute:: model
-      :annotation: :Dict[str, cvx.markowitz.Model]
+      :annotation: :Dict[str, cvx.markowitz.model.Model]
 
       
 
@@ -40,11 +40,6 @@ Classes
       Solve the problem
 
 
-   .. py:method:: solution(self, variable='weights')
-
-      Return the solution
-
-
    .. py:method:: value(self)
       :property:
 
@@ -53,6 +48,22 @@ Classes
 
 
    .. py:method:: data(self)
+      :property:
+
+
+   .. py:method:: parameter(self)
+      :property:
+
+
+   .. py:method:: variables(self)
+      :property:
+
+
+   .. py:method:: weights(self)
+      :property:
+
+
+   .. py:method:: factor_weights(self)
       :property:
 
 
@@ -70,7 +81,7 @@ Classes
       
 
    .. py:attribute:: model
-      :annotation: :Dict[str, cvx.markowitz.Model]
+      :annotation: :Dict[str, cvx.markowitz.model.Model]
 
       
 
@@ -101,6 +112,18 @@ Classes
    .. py:method:: build(self)
 
       Build the cvxpy problem
+
+
+   .. py:method:: weights(self)
+      :property:
+
+
+   .. py:method:: risk(self)
+      :property:
+
+
+   .. py:method:: factor_weights(self)
+      :property:
 
 
 

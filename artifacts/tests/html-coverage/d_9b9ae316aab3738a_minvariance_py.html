@@ -65,7 +65,7 @@
             <a id="nextFileLink" class="nav" href="d_9b9ae316aab3738a_smallest_ev_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.2.7">coverage.py v7.2.7</a>,
-            created at 2023-07-19 19:15 +0000
+            created at 2023-07-21 21:21 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"/>
@@ -128,7 +128,7 @@
     <p class="pln"><span class="n"><a id="t46" href="#t46">46</a></span><span class="t">                <span class="com"># useful as the user can specify coarse upper bounds</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t47" href="#t47">47</a></span><span class="t">                <span class="nam">problem</span> <span class="op">=</span> <span class="nam">MinVar</span><span class="op">(</span><span class="nam">assets</span><span class="op">=</span><span class="nam">assets</span><span class="op">,</span> <span class="nam">factors</span><span class="op">=</span><span class="nam">factors</span><span class="op">)</span><span class="op">.</span><span class="nam">build</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t48" href="#t48">48</a></span><span class="t">            <span class="key">else</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t49" href="#t49">49</a></span><span class="t">                <span class="nam">assets</span><span class="op">,</span> <span class="nam">factors</span> <span class="op">=</span> <span class="nam">estimate_dimensions</span><span class="op">(</span><span class="nam">input_data</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t49" href="#t49">49</a></span><span class="t">                <span class="nam">assets</span><span class="op">,</span> <span class="nam">factors</span> <span class="op">=</span> <span class="nam">estimate_dimensions</span><span class="op">(</span><span class="op">**</span><span class="nam">input_data</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t50" href="#t50">50</a></span><span class="t">                <span class="nam">click</span><span class="op">.</span><span class="nam">echo</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t51" href="#t51">51</a></span><span class="t">                    <span class="str">f"Estimated the numbers of assets as {assets} and factors as {factors}"</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t52" href="#t52">52</a></span><span class="t">                <span class="op">)</span>&nbsp;</span><span class="r"></span></p>
@@ -141,7 +141,7 @@
     <p class="pln"><span class="n"><a id="t59" href="#t59">59</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t60" href="#t60">60</a></span><span class="t">        <span class="nam">problem</span><span class="op">.</span><span class="nam">update</span><span class="op">(</span><span class="op">**</span><span class="nam">input_data</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t61" href="#t61">61</a></span><span class="t">        <span class="nam">problem</span><span class="op">.</span><span class="nam">solve</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t62" href="#t62">62</a></span><span class="t">        <span class="nam">click</span><span class="op">.</span><span class="nam">echo</span><span class="op">(</span><span class="str">f"Solution: {problem.solution()}"</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t62" href="#t62">62</a></span><span class="t">        <span class="nam">click</span><span class="op">.</span><span class="nam">echo</span><span class="op">(</span><span class="str">f"Solution: {problem.weights}"</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t63" href="#t63">63</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t64" href="#t64">64</a></span><span class="t">    <span class="key">except</span> <span class="nam">Exception</span> <span class="key">as</span> <span class="nam">e</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t65" href="#t65">65</a></span><span class="t">        <span class="nam">click</span><span class="op">.</span><span class="nam">echo</span><span class="op">(</span><span class="nam">traceback</span><span class="op">.</span><span class="nam">print_exception</span><span class="op">(</span><span class="nam">type</span><span class="op">(</span><span class="nam">e</span><span class="op">)</span><span class="op">,</span> <span class="nam">e</span><span class="op">,</span> <span class="nam">e</span><span class="op">.</span><span class="nam">__traceback__</span><span class="op">)</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
@@ -155,7 +155,7 @@
             <a id="nextFileLink" class="nav" href="d_9b9ae316aab3738a_smallest_ev_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.2.7">coverage.py v7.2.7</a>,
-            created at 2023-07-19 19:15 +0000
+            created at 2023-07-21 21:21 +0000
         </p>
     </div>
 </footer>

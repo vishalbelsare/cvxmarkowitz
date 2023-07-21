@@ -94,8 +94,11 @@
         <span class="c1"># compute the principal components without sklearn</span>
         <span class="c1"># 1. compute the correlation</span>
         <span class="n">cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">returns</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        <span class="n">cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">cov</span><span class="p">)</span>
+
         <span class="c1"># 2. compute the eigenvalues and eigenvectors</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">,</span> <span class="n">eigenvectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">cov</span><span class="p">)</span>
+
         <span class="c1"># 3. sort the eigenvalues in descending order</span>
         <span class="n">idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">eigenvalues</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">eigenvalues</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
@@ -111,7 +114,7 @@
 
     <span class="nd">@property</span>
 <div class="viewcode-block" id="PCA.cov"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.PCA.cov">[docs]</a>    <span class="k">def</span> <span class="nf">cov</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">factors</span><span class="o">.</span><span class="n">T</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">factors</span><span class="o">.</span><span class="n">T</span><span class="p">))</span></div>
 
     <span class="nd">@property</span>
 <div class="viewcode-block" id="PCA.systematic_returns"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.PCA.systematic_returns">[docs]</a>    <span class="k">def</span> <span class="nf">systematic_returns</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>

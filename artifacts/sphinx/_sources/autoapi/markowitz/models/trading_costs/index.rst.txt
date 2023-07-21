@@ -24,14 +24,14 @@ Classes
 
 .. py:class:: TradingCosts
 
-   Bases: :py:obj:`cvx.markowitz.Model`
+   Bases: :py:obj:`cvx.markowitz.model.Model`
 
    Model for trading costs
 
    .. py:method:: __post_init__(self)
 
 
-   .. py:method:: estimate(self, variables: Dict[str, cvxpy.Variable]) -> cvxpy.Expression
+   .. py:method:: estimate(self, variables: Dict[str | D, cvxpy.Variable]) -> cvxpy.Expression
 
       Estimate the variance given the portfolio weights
 

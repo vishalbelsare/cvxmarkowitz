@@ -1,0 +1,160 @@
+:py:mod:`markowitz.names`
+=========================
+
+.. py:module:: markowitz.names
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   markowitz.names.DataNames
+   markowitz.names.ModelName
+   markowitz.names.ConstraintName
+
+
+
+
+.. py:class:: DataNames
+
+   .. py:attribute:: RETURNS
+      :annotation: = returns
+
+      
+
+   .. py:attribute:: MU
+      :annotation: = mu
+
+      
+
+   .. py:attribute:: MU_UNCERTAINTY
+      :annotation: = mu_uncertainty
+
+      
+
+   .. py:attribute:: CHOLESKY
+      :annotation: = chol
+
+      
+
+   .. py:attribute:: VOLA_UNCERTAINTY
+      :annotation: = vola_uncertainty
+
+      
+
+   .. py:attribute:: LOWER_BOUND_ASSETS
+      :annotation: = lower_assets
+
+      
+
+   .. py:attribute:: LOWER_BOUND_FACTORS
+      :annotation: = lower_factors
+
+      
+
+   .. py:attribute:: UPPER_BOUND_ASSETS
+      :annotation: = upper_assets
+
+      
+
+   .. py:attribute:: UPPER_BOUND_FACTORS
+      :annotation: = upper_factors
+
+      
+
+   .. py:attribute:: EXPOSURE
+      :annotation: = exposure
+
+      
+
+   .. py:attribute:: HOLDING_COSTS
+      :annotation: = holding_costs
+
+      
+
+   .. py:attribute:: IDIOSYNCRATIC_VOLA
+      :annotation: = idiosyncratic_vola
+
+      
+
+   .. py:attribute:: IDIOSYNCRATIC_VOLA_UNCERTAINTY
+      :annotation: = idiosyncratic_vola_uncertainty
+
+      
+
+   .. py:attribute:: SYSTEMATIC_VOLA_UNCERTAINTY
+      :annotation: = systematic_vola_uncertainty
+
+      
+
+   .. py:attribute:: FACTOR_WEIGHTS
+      :annotation: = factor_weights
+
+      
+
+   .. py:attribute:: WEIGHTS
+      :annotation: = weights
+
+      
+
+   .. py:attribute:: _ABS
+      :annotation: = _abs
+
+      
+
+
+.. py:class:: ModelName
+
+   .. py:attribute:: RISK
+      :annotation: = risk
+
+      
+
+   .. py:attribute:: RETURN
+      :annotation: = return
+
+      
+
+   .. py:attribute:: BOUND_ASSETS
+      :annotation: = bound_assets
+
+      
+
+   .. py:attribute:: BOUND_FACTORS
+      :annotation: = bound_factors
+
+      
+
+
+.. py:class:: ConstraintName
+
+   .. py:attribute:: BUDGET
+      :annotation: = budget
+
+      
+
+   .. py:attribute:: CONCENTRATION
+      :annotation: = concentration
+
+      
+
+   .. py:attribute:: LONG_ONLY
+      :annotation: = long_only
+
+      
+
+   .. py:attribute:: LEVERAGE
+      :annotation: = leverage
+
+      
+
+   .. py:attribute:: RISK
+      :annotation: = risk
+
+      
+
+

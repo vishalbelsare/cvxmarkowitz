@@ -52,10 +52,10 @@
 <li class="toctree-l4 current"><a class="reference internal" href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">markowitz.models</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../portfolios/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">markowitz.portfolios</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../risk/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">markowitz.risk</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">markowitz.utils</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../index.html#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../index.html#package-contents">Package Contents</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../cli/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cli</span></code></a></li>
@@ -112,7 +112,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="markowitz.models.trading_costs.TradingCosts">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">markowitz.models.trading_costs.</span></span><span class="sig-name descname"><span class="pre">TradingCosts</span></span><a class="reference internal" href="../../../../_modules/markowitz/models/trading_costs.html#TradingCosts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.models.trading_costs.TradingCosts" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">cvx.markowitz.Model</span></code></p>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">cvx.markowitz.model.Model</span></code></p>
 <p>Model for trading costs</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="markowitz.models.trading_costs.TradingCosts.__post_init__">
@@ -121,7 +121,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="markowitz.models.trading_costs.TradingCosts.estimate">
-<span class="sig-name descname"><span class="pre">estimate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variables</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">cvxpy.Variable</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">cvxpy.Expression</span></span></span><a class="reference internal" href="../../../../_modules/markowitz/models/trading_costs.html#TradingCosts.estimate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.models.trading_costs.TradingCosts.estimate" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">estimate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variables</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">D</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">cvxpy.Variable</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">cvxpy.Expression</span></span></span><a class="reference internal" href="../../../../_modules/markowitz/models/trading_costs.html#TradingCosts.estimate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.models.trading_costs.TradingCosts.estimate" title="Permalink to this definition"></a></dt>
 <dd><p>Estimate the variance given the portfolio weights</p>
 </dd></dl>
 

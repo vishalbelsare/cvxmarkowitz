@@ -80,9 +80,11 @@
 
 <span class="kn">import</span> <span class="nn">cvxpy</span> <span class="k">as</span> <span class="nn">cp</span>
 
-<span class="kn">from</span> <span class="nn">cvx.markowitz</span> <span class="kn">import</span> <span class="n">Model</span>
 <span class="kn">from</span> <span class="nn">cvx.markowitz.cvxerror</span> <span class="kn">import</span> <span class="n">CvxError</span>
+<span class="kn">from</span> <span class="nn">cvx.markowitz.model</span> <span class="kn">import</span> <span class="n">Model</span>
 <span class="kn">from</span> <span class="nn">cvx.markowitz.models.bounds</span> <span class="kn">import</span> <span class="n">Bounds</span>
+<span class="kn">from</span> <span class="nn">cvx.markowitz.names</span> <span class="kn">import</span> <span class="n">DataNames</span> <span class="k">as</span> <span class="n">D</span>
+<span class="kn">from</span> <span class="nn">cvx.markowitz.names</span> <span class="kn">import</span> <span class="n">ModelName</span> <span class="k">as</span> <span class="n">M</span>
 <span class="kn">from</span> <span class="nn">cvx.markowitz.risk</span> <span class="kn">import</span> <span class="n">FactorModel</span><span class="p">,</span> <span class="n">SampleCovariance</span>
 
 
@@ -90,7 +92,6 @@
 <div class="viewcode-block" id="_Problem"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder._Problem">[docs]</a><span class="k">class</span> <span class="nc">_Problem</span><span class="p">:</span>
 <div class="viewcode-block" id="_Problem.problem"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder._Problem.problem">[docs]</a>    <span class="n">problem</span><span class="p">:</span> <span class="n">cp</span><span class="o">.</span><span class="n">Problem</span></div>
 <div class="viewcode-block" id="_Problem.model"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder._Problem.model">[docs]</a>    <span class="n">model</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Model</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span></div>
-    <span class="c1"># problem has var_dict and param_dict</span>
 
 <div class="viewcode-block" id="_Problem.update"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder._Problem.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -107,10 +108,6 @@
             <span class="c1"># exactly the correct shape.</span>
             <span class="n">model</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">problem</span><span class="o">.</span><span class="n">param_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
-
         <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="_Problem.solve"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder._Problem.solve">[docs]</a>    <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="n">cp</span><span class="o">.</span><span class="n">ECOS</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -124,12 +121,6 @@
 
         <span class="k">return</span> <span class="n">value</span></div>
 
-<div class="viewcode-block" id="_Problem.solution"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder._Problem.solution">[docs]</a>    <span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="o">=</span><span class="s2">&quot;weights&quot;</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return the solution</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">problem</span><span class="o">.</span><span class="n">var_dict</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span><span class="o">.</span><span class="n">value</span></div>
-
     <span class="nd">@property</span>
 <div class="viewcode-block" id="_Problem.value"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder._Problem.value">[docs]</a>    <span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">problem</span><span class="o">.</span><span class="n">value</span></div>
@@ -141,7 +132,23 @@
 <div class="viewcode-block" id="_Problem.data"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder._Problem.data">[docs]</a>    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                <span class="k">yield</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">key</span><span class="p">),</span> <span class="n">value</span></div></div>
+                <span class="k">yield</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">key</span><span class="p">),</span> <span class="n">value</span></div>
+
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="_Problem.parameter"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder._Problem.parameter">[docs]</a>    <span class="k">def</span> <span class="nf">parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">problem</span><span class="o">.</span><span class="n">param_dict</span></div>
+
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="_Problem.variables"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder._Problem.variables">[docs]</a>    <span class="k">def</span> <span class="nf">variables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">problem</span><span class="o">.</span><span class="n">var_dict</span></div>
+
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="_Problem.weights"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder._Problem.weights">[docs]</a>    <span class="k">def</span> <span class="nf">weights</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">D</span><span class="o">.</span><span class="n">WEIGHTS</span><span class="p">]</span><span class="o">.</span><span class="n">value</span></div>
+
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="_Problem.factor_weights"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder._Problem.factor_weights">[docs]</a>    <span class="k">def</span> <span class="nf">factor_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">D</span><span class="o">.</span><span class="n">FACTOR_WEIGHTS</span><span class="p">]</span><span class="o">.</span><span class="n">value</span></div></div>
 
 
 <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -156,32 +163,31 @@
 <div class="viewcode-block" id="Builder.__post_init__"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder.Builder.__post_init__">[docs]</a>    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># pick the correct risk model</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">factors</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;risk&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">FactorModel</span><span class="p">(</span><span class="n">assets</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">,</span> <span class="n">factors</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">factors</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="n">M</span><span class="o">.</span><span class="n">RISK</span><span class="p">]</span> <span class="o">=</span> <span class="n">FactorModel</span><span class="p">(</span><span class="n">assets</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">,</span> <span class="n">factors</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">factors</span><span class="p">)</span>
 
             <span class="c1"># add variable for factor weights</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;factor_weights&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">factors</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;factor_weights&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">D</span><span class="o">.</span><span class="n">FACTOR_WEIGHTS</span><span class="p">]</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">factors</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">D</span><span class="o">.</span><span class="n">FACTOR_WEIGHTS</span>
             <span class="p">)</span>
             <span class="c1"># add bounds for factor weights</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;bounds_factors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Bounds</span><span class="p">(</span>
-                <span class="n">assets</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">factors</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;factors&quot;</span><span class="p">,</span> <span class="n">acting_on</span><span class="o">=</span><span class="s2">&quot;factor_weights&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="n">M</span><span class="o">.</span><span class="n">BOUND_FACTORS</span><span class="p">]</span> <span class="o">=</span> <span class="n">Bounds</span><span class="p">(</span>
+                <span class="n">assets</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">factors</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;factors&quot;</span><span class="p">,</span> <span class="n">acting_on</span><span class="o">=</span><span class="n">D</span><span class="o">.</span><span class="n">FACTOR_WEIGHTS</span>
             <span class="p">)</span>
             <span class="c1"># add variable for absolute factor weights</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;_abs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">factors</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;_abs&quot;</span><span class="p">,</span> <span class="n">nonneg</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">D</span><span class="o">.</span><span class="n">_ABS</span><span class="p">]</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">factors</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">D</span><span class="o">.</span><span class="n">_ABS</span><span class="p">,</span> <span class="n">nonneg</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;risk&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">SampleCovariance</span><span class="p">(</span><span class="n">assets</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">)</span>
-            <span class="c1">#</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="n">M</span><span class="o">.</span><span class="n">RISK</span><span class="p">]</span> <span class="o">=</span> <span class="n">SampleCovariance</span><span class="p">(</span><span class="n">assets</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">)</span>
             <span class="c1"># add variable for absolute weights</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;_abs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;_abs&quot;</span><span class="p">,</span> <span class="n">nonneg</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">D</span><span class="o">.</span><span class="n">_ABS</span><span class="p">]</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">D</span><span class="o">.</span><span class="n">_ABS</span><span class="p">,</span> <span class="n">nonneg</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="c1"># Note that for the SampleCovariance model the factor_weights are None.</span>
         <span class="c1"># They are only included for the harmony of the interfaces for both models.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;weights&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;weights&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">D</span><span class="o">.</span><span class="n">WEIGHTS</span><span class="p">]</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">D</span><span class="o">.</span><span class="n">WEIGHTS</span><span class="p">)</span>
 
         <span class="c1"># add bounds on assets</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;bound_assets&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Bounds</span><span class="p">(</span>
-            <span class="n">assets</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;assets&quot;</span><span class="p">,</span> <span class="n">acting_on</span><span class="o">=</span><span class="s2">&quot;weights&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="n">M</span><span class="o">.</span><span class="n">BOUND_ASSETS</span><span class="p">]</span> <span class="o">=</span> <span class="n">Bounds</span><span class="p">(</span>
+            <span class="n">assets</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;assets&quot;</span><span class="p">,</span> <span class="n">acting_on</span><span class="o">=</span><span class="n">D</span><span class="o">.</span><span class="n">WEIGHTS</span>
         <span class="p">)</span></div>
 
     <span class="nd">@property</span>
@@ -203,7 +209,20 @@
 
         <span class="n">problem</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Problem</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">objective</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">constraints</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
         <span class="k">assert</span> <span class="n">problem</span><span class="o">.</span><span class="n">is_dpp</span><span class="p">(),</span> <span class="s2">&quot;Problem is not DPP&quot;</span>
-        <span class="k">return</span> <span class="n">_Problem</span><span class="p">(</span><span class="n">problem</span><span class="o">=</span><span class="n">problem</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">)</span></div></div>
+
+        <span class="k">return</span> <span class="n">_Problem</span><span class="p">(</span><span class="n">problem</span><span class="o">=</span><span class="n">problem</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="Builder.weights"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder.Builder.weights">[docs]</a>    <span class="k">def</span> <span class="nf">weights</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">D</span><span class="o">.</span><span class="n">WEIGHTS</span><span class="p">]</span></div>
+
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="Builder.risk"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder.Builder.risk">[docs]</a>    <span class="k">def</span> <span class="nf">risk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="n">M</span><span class="o">.</span><span class="n">RISK</span><span class="p">]</span></div>
+
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="Builder.factor_weights"><a class="viewcode-back" href="../../autoapi/markowitz/builder/index.html#markowitz.builder.Builder.factor_weights">[docs]</a>    <span class="k">def</span> <span class="nf">factor_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">D</span><span class="o">.</span><span class="n">FACTOR_WEIGHTS</span><span class="p">]</span></div></div>
 </pre></div>
 
            </div>

@@ -23,7 +23,7 @@
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="markowitz.cvxerror" href="../cvxerror/index.html" />
-    <link rel="prev" title="markowitz.risk.sample.sample" href="../risk/sample/sample/index.html" /> 
+    <link rel="prev" title="markowitz.utils.aux" href="../utils/aux/index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -53,9 +53,9 @@
 <li class="toctree-l4 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">markowitz.builder</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../cvxerror/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">markowitz.cvxerror</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../model/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">markowitz.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../names/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">markowitz.names</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../index.html#package-contents">Package Contents</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../cli/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cli</span></code></a></li>
@@ -120,7 +120,7 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="markowitz.builder._Problem.model">
-<span class="sig-name descname"><span class="pre">model</span></span><em class="property"><span class="w"> </span><span class="pre">:Dict[str,</span> <span class="pre">cvx.markowitz.Model]</span></em><a class="reference internal" href="../../../_modules/markowitz/builder.html#_Problem.model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.builder._Problem.model" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">model</span></span><em class="property"><span class="w"> </span><span class="pre">:Dict[str,</span> <span class="pre">cvx.markowitz.model.Model]</span></em><a class="reference internal" href="../../../_modules/markowitz/builder.html#_Problem.model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.builder._Problem.model" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -136,12 +136,6 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="markowitz.builder._Problem.solution">
-<span class="sig-name descname"><span class="pre">solution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'weights'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/markowitz/builder.html#_Problem.solution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.builder._Problem.solution" title="Permalink to this definition"></a></dt>
-<dd><p>Return the solution</p>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="markowitz.builder._Problem.value">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/markowitz/builder.html#_Problem.value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.builder._Problem.value" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
@@ -154,6 +148,26 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="markowitz.builder._Problem.data">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/markowitz/builder.html#_Problem.data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.builder._Problem.data" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="markowitz.builder._Problem.parameter">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/markowitz/builder.html#_Problem.parameter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.builder._Problem.parameter" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="markowitz.builder._Problem.variables">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">variables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/markowitz/builder.html#_Problem.variables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.builder._Problem.variables" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="markowitz.builder._Problem.weights">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">weights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/markowitz/builder.html#_Problem.weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.builder._Problem.weights" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="markowitz.builder._Problem.factor_weights">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">factor_weights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/markowitz/builder.html#_Problem.factor_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.builder._Problem.factor_weights" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -173,7 +187,7 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="markowitz.builder.Builder.model">
-<span class="sig-name descname"><span class="pre">model</span></span><em class="property"><span class="w"> </span><span class="pre">:Dict[str,</span> <span class="pre">cvx.markowitz.Model]</span></em><a class="reference internal" href="../../../_modules/markowitz/builder.html#Builder.model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.builder.Builder.model" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">model</span></span><em class="property"><span class="w"> </span><span class="pre">:Dict[str,</span> <span class="pre">cvx.markowitz.model.Model]</span></em><a class="reference internal" href="../../../_modules/markowitz/builder.html#Builder.model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.builder.Builder.model" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -208,6 +222,21 @@
 <dd><p>Build the cvxpy problem</p>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="markowitz.builder.Builder.weights">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">weights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/markowitz/builder.html#Builder.weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.builder.Builder.weights" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="markowitz.builder.Builder.risk">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">risk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/markowitz/builder.html#Builder.risk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.builder.Builder.risk" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="markowitz.builder.Builder.factor_weights">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">factor_weights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/markowitz/builder.html#Builder.factor_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#markowitz.builder.Builder.factor_weights" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 </section>
@@ -218,7 +247,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../risk/sample/sample/index.html" class="btn btn-neutral float-left" title="markowitz.risk.sample.sample" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../utils/aux/index.html" class="btn btn-neutral float-left" title="markowitz.utils.aux" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../cvxerror/index.html" class="btn btn-neutral float-right" title="markowitz.cvxerror" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

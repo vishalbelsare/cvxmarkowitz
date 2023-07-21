@@ -13,6 +13,7 @@ Subpackages
    models/index.rst
    portfolios/index.rst
    risk/index.rst
+   utils/index.rst
 
 
 Submodules
@@ -24,57 +25,6 @@ Submodules
    builder/index.rst
    cvxerror/index.rst
    model/index.rst
-
-
-Package Contents
-----------------
-
-Classes
-~~~~~~~
-
-.. autoapisummary::
-
-   markowitz.Model
-
-
-
-
-.. py:class:: Model
-
-   Bases: :py:obj:`abc.ABC`
-
-   Abstract risk model
-
-   .. py:attribute:: assets
-      :annotation: :int
-
-      
-
-   .. py:attribute:: parameter
-      :annotation: :Dict[str, cvxpy.Parameter]
-
-      
-
-   .. py:attribute:: data
-      :annotation: :Dict[str, cvxpy.Parameter]
-
-      
-
-   .. py:method:: estimate(self, variables: Dict[str, cvxpy.Variable]) -> cvxpy.Expression
-      :abstractmethod:
-
-      Estimate the variance given the portfolio weights
-
-
-   .. py:method:: update(self, **kwargs)
-      :abstractmethod:
-
-      Update the data in the risk model
-
-
-   .. py:method:: constraints(self, variables: Dict[str, cvxpy.Variable]) -> Dict[str, cvxpy.Expression]
-
-      Return the constraints for the risk model
-
+   names/index.rst
 
 
