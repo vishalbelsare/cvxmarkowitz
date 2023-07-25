@@ -74,34 +74,15 @@
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="kn">import</span> <span class="nn">traceback</span>
 
-<span class="kn">import</span> <span class="nn">click</span>
+<span class="kn">import</span> <span class="nn">fire</span>
 
 <span class="kn">from</span> <span class="nn">cvx.cli.aux.io</span> <span class="kn">import</span> <span class="n">exists</span>
 <span class="kn">from</span> <span class="nn">cvx.cli.aux.json</span> <span class="kn">import</span> <span class="n">read_json</span>
-<span class="kn">from</span> <span class="nn">cvx.cli.aux.problem</span> <span class="kn">import</span> <span class="n">deserialize_problem</span><span class="p">,</span> <span class="n">serialize_problem</span>
+<span class="kn">from</span> <span class="nn">cvx.markowitz.builder</span> <span class="kn">import</span> <span class="n">deserialize</span>
 <span class="kn">from</span> <span class="nn">cvx.markowitz.portfolios.min_var</span> <span class="kn">import</span> <span class="n">MinVar</span><span class="p">,</span> <span class="n">estimate_dimensions</span>
 
 
-<span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;json_file&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">click</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">exists</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dir_okay</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;problem_file&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">click</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">dir_okay</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">option</span><span class="p">(</span>
-    <span class="s2">&quot;--assets&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;-a&quot;</span><span class="p">,</span>
-    <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
-    <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Number of assets&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">option</span><span class="p">(</span>
-    <span class="s2">&quot;--factors&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;-f &quot;</span><span class="p">,</span>
-    <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
-    <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Number of factors&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-<div class="viewcode-block" id="minvariance"><a class="viewcode-back" href="../../autoapi/cli/minvariance/index.html#cli.minvariance.minvariance">[docs]</a><span class="k">def</span> <span class="nf">minvariance</span><span class="p">(</span><span class="n">json_file</span><span class="p">,</span> <span class="n">problem_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">assets</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">factors</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="cli"><a class="viewcode-back" href="../../autoapi/cli/minvariance/index.html#cli.minvariance.cli">[docs]</a><span class="k">def</span> <span class="nf">cli</span><span class="p">(</span><span class="n">json_file</span><span class="p">,</span> <span class="n">problem_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">assets</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">factors</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="c1"># parse the json file with input data for the problem</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">input_data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">read_json</span><span class="p">(</span><span class="n">json_file</span><span class="p">))</span>
@@ -110,7 +91,7 @@
 
         <span class="k">if</span> <span class="n">does_exist</span><span class="p">:</span>
             <span class="c1"># the problem has been serialized before and we can reuse it</span>
-            <span class="n">problem</span> <span class="o">=</span> <span class="n">deserialize_problem</span><span class="p">(</span><span class="n">problem_file</span><span class="p">)</span>
+            <span class="n">problem</span> <span class="o">=</span> <span class="n">deserialize</span><span class="p">(</span><span class="n">problem_file</span><span class="p">)</span>
 
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># build the problem from scratch</span>
@@ -120,23 +101,30 @@
                 <span class="n">problem</span> <span class="o">=</span> <span class="n">MinVar</span><span class="p">(</span><span class="n">assets</span><span class="o">=</span><span class="n">assets</span><span class="p">,</span> <span class="n">factors</span><span class="o">=</span><span class="n">factors</span><span class="p">)</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">assets</span><span class="p">,</span> <span class="n">factors</span> <span class="o">=</span> <span class="n">estimate_dimensions</span><span class="p">(</span><span class="o">**</span><span class="n">input_data</span><span class="p">)</span>
-                <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span>
+                <span class="nb">print</span><span class="p">(</span>
                     <span class="sa">f</span><span class="s2">&quot;Estimated the numbers of assets as </span><span class="si">{</span><span class="n">assets</span><span class="si">}</span><span class="s2"> and factors as </span><span class="si">{</span><span class="n">factors</span><span class="si">}</span><span class="s2">&quot;</span>
                 <span class="p">)</span>
                 <span class="n">problem</span> <span class="o">=</span> <span class="n">MinVar</span><span class="p">(</span><span class="n">assets</span><span class="o">=</span><span class="n">assets</span><span class="p">,</span> <span class="n">factors</span><span class="o">=</span><span class="n">factors</span><span class="p">)</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
 
             <span class="c1"># We have constructed the problem, write it to file if the file has been specified</span>
             <span class="k">if</span> <span class="n">problem_file</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Serializing problem in </span><span class="si">{</span><span class="n">problem_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-                <span class="n">serialize_problem</span><span class="p">(</span><span class="n">problem</span><span class="p">,</span> <span class="n">problem_file</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Serializing problem in </span><span class="si">{</span><span class="n">problem_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">problem</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="n">problem_file</span><span class="p">)</span>
 
         <span class="n">problem</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">**</span><span class="n">input_data</span><span class="p">)</span>
         <span class="n">problem</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
-        <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Solution: </span><span class="si">{</span><span class="n">problem</span><span class="o">.</span><span class="n">weights</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">problem</span><span class="o">.</span><span class="n">weights</span>
 
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">print_exception</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">e</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">__traceback__</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">print_exception</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">e</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">__traceback__</span><span class="p">))</span>
         <span class="k">raise</span> <span class="n">e</span></div>
+
+
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../autoapi/cli/minvariance/index.html#cli.minvariance.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>  <span class="c1"># pragma: no cover</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Run the CLI using Fire</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fire</span><span class="o">.</span><span class="n">Fire</span><span class="p">(</span><span class="n">cli</span><span class="p">)</span></div>
 </pre></div>
 
            </div>

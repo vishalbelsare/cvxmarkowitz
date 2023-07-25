@@ -17,6 +17,17 @@ Classes
 
 
 
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   markowitz.builder.deserialize
+
+
+
+.. py:function:: deserialize(problem_file)
+
 
 .. py:class:: _Problem
 
@@ -65,6 +76,9 @@ Classes
 
    .. py:method:: factor_weights(self)
       :property:
+
+
+   .. py:method:: serialize(self, problem_file)
 
 
 

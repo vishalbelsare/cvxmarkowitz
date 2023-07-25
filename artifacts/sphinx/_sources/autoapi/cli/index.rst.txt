@@ -20,7 +20,6 @@ Submodules
    :maxdepth: 1
 
    minvariance/index.rst
-   smallest_ev/index.rst
-   weather/index.rst
+   weather_fire/index.rst
 
 

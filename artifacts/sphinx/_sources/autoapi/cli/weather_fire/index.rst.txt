@@ -1,0 +1,37 @@
+:py:mod:`cli.weather_fire`
+==========================
+
+.. py:module:: cli.weather_fire
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   cli.weather_fire.cli
+   cli.weather_fire.main
+
+
+
+.. py:function:: cli(metric: str, latitude: float = 37.4419, longitude: float = -122.143) -> None
+
+   Get the current weather for a given metric
+
+   :param metric: The metric to get the current weather for
+   :type metric: str
+   :param latitude: The latitude to get the current weather for, by default 37.4419
+   :type latitude: float, optional
+   :param longitude: The longitude to get the current weather for, by default -122.143
+   :type longitude: float, optional
+
+
+.. py:function:: main()
+
+   Run the CLI using Fire
+
+

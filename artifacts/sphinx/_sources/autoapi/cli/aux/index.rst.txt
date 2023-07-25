@@ -12,6 +12,5 @@ Submodules
 
    io/index.rst
    json/index.rst
-   problem/index.rst
 
 

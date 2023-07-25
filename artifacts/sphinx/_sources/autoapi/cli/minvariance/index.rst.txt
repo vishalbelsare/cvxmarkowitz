@@ -13,10 +13,16 @@ Functions
 
 .. autoapisummary::
 
-   cli.minvariance.minvariance
+   cli.minvariance.cli
+   cli.minvariance.main
 
 
 
-.. py:function:: minvariance(json_file, problem_file=None, assets=None, factors=None) -> None
+.. py:function:: cli(json_file, problem_file=None, assets=None, factors=None) -> None
+
+
+.. py:function:: main()
+
+   Run the CLI using Fire
 
 
