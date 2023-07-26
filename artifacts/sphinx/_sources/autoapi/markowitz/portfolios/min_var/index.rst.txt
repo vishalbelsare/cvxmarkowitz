@@ -16,19 +16,6 @@ Classes
 
 
 
-Functions
-~~~~~~~~~
-
-.. autoapisummary::
-
-   markowitz.portfolios.min_var.estimate_dimensions
-
-
-
-.. py:function:: estimate_dimensions(**kwargs)
-
-   Estimate the dimensions of the problem from the input data
-
 
 .. py:class:: MinVar
 
