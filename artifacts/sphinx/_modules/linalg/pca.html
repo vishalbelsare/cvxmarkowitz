@@ -71,21 +71,22 @@
            <div itemprop="articleBody">
              
   <h1>Source code for linalg.pca</h1><div class="highlight"><pre>
-<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;PCA analysis with numpy&quot;&quot;&quot;</span>
+<span></span><span class="sd">&quot;&quot;&quot;PCA analysis with numpy&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">cvx.linalg.types</span> <span class="kn">import</span> <span class="n">Matrix</span>
 
 
 <span class="nd">@dataclass</span>
 <div class="viewcode-block" id="PCA"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.PCA">[docs]</a><span class="k">class</span> <span class="nc">PCA</span><span class="p">:</span>
+<div class="viewcode-block" id="PCA.returns"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.PCA.returns">[docs]</a>    <span class="n">returns</span><span class="p">:</span> <span class="n">Matrix</span></div>
 <div class="viewcode-block" id="PCA.n_components"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.PCA.n_components">[docs]</a>    <span class="n">n_components</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span></div>
-<div class="viewcode-block" id="PCA.returns"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.PCA.returns">[docs]</a>    <span class="n">returns</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="PCA.__post_init__"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.PCA.__post_init__">[docs]</a>    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PCA.__post_init__"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.PCA.__post_init__">[docs]</a>    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_components</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">returns</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="s2">&quot;The number of components cannot exceed the number of assets&quot;</span>
@@ -109,24 +110,26 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">exposure</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">eigenvectors</span><span class="p">[:,</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_components</span><span class="p">])</span></div>
 
     <span class="nd">@property</span>
-<div class="viewcode-block" id="PCA.explained_variance"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.PCA.explained_variance">[docs]</a>    <span class="k">def</span> <span class="nf">explained_variance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">[:</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_components</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">))</span></div>
+<div class="viewcode-block" id="PCA.explained_variance"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.PCA.explained_variance">[docs]</a>    <span class="k">def</span> <span class="nf">explained_variance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Matrix</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">[:</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_components</span><span class="p">]</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">)</span>
+        <span class="p">)</span></div>
 
     <span class="nd">@property</span>
-<div class="viewcode-block" id="PCA.cov"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.PCA.cov">[docs]</a>    <span class="k">def</span> <span class="nf">cov</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<div class="viewcode-block" id="PCA.cov"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.PCA.cov">[docs]</a>    <span class="k">def</span> <span class="nf">cov</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Matrix</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">factors</span><span class="o">.</span><span class="n">T</span><span class="p">))</span></div>
 
     <span class="nd">@property</span>
-<div class="viewcode-block" id="PCA.systematic_returns"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.PCA.systematic_returns">[docs]</a>    <span class="k">def</span> <span class="nf">systematic_returns</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">factors</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">exposure</span></div>
+<div class="viewcode-block" id="PCA.systematic_returns"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.PCA.systematic_returns">[docs]</a>    <span class="k">def</span> <span class="nf">systematic_returns</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Matrix</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">factors</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">exposure</span><span class="p">)</span></div>
 
     <span class="nd">@property</span>
-<div class="viewcode-block" id="PCA.idiosyncratic_returns"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.PCA.idiosyncratic_returns">[docs]</a>    <span class="k">def</span> <span class="nf">idiosyncratic_returns</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<div class="viewcode-block" id="PCA.idiosyncratic_returns"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.PCA.idiosyncratic_returns">[docs]</a>    <span class="k">def</span> <span class="nf">idiosyncratic_returns</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Matrix</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">returns</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">systematic_returns</span></div>
 
     <span class="nd">@property</span>
-<div class="viewcode-block" id="PCA.idiosyncratic_vola"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.PCA.idiosyncratic_vola">[docs]</a>    <span class="k">def</span> <span class="nf">idiosyncratic_vola</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">idiosyncratic_returns</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></div></div>
+<div class="viewcode-block" id="PCA.idiosyncratic_vola"><a class="viewcode-back" href="../../autoapi/linalg/pca/index.html#linalg.PCA.idiosyncratic_vola">[docs]</a>    <span class="k">def</span> <span class="nf">idiosyncratic_vola</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Matrix</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">idiosyncratic_returns</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span></div></div>
 </pre></div>
 
            </div>

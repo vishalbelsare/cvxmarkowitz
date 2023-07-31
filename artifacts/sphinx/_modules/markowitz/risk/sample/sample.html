@@ -71,13 +71,11 @@
            <div itemprop="articleBody">
              
   <h1>Source code for markowitz.risk.sample.sample</h1><div class="highlight"><pre>
-<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;Risk models based on the sample covariance matrix</span>
+<span></span><span class="sd">&quot;&quot;&quot;Risk models based on the sample covariance matrix</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
 
 <span class="kn">import</span> <span class="nn">cvxpy</span> <span class="k">as</span> <span class="nn">cp</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -85,6 +83,7 @@
 <span class="kn">from</span> <span class="nn">cvx.markowitz.cvxerror</span> <span class="kn">import</span> <span class="n">CvxError</span>
 <span class="kn">from</span> <span class="nn">cvx.markowitz.model</span> <span class="kn">import</span> <span class="n">Model</span>
 <span class="kn">from</span> <span class="nn">cvx.markowitz.names</span> <span class="kn">import</span> <span class="n">DataNames</span> <span class="k">as</span> <span class="n">D</span>
+<span class="kn">from</span> <span class="nn">cvx.markowitz.types</span> <span class="kn">import</span> <span class="n">Expressions</span><span class="p">,</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">Variables</span>
 <span class="kn">from</span> <span class="nn">cvx.markowitz.utils.aux</span> <span class="kn">import</span> <span class="n">fill_matrix</span><span class="p">,</span> <span class="n">fill_vector</span>
 
 
@@ -92,7 +91,7 @@
 <div class="viewcode-block" id="SampleCovariance"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/sample/sample/index.html#markowitz.risk.SampleCovariance">[docs]</a><span class="k">class</span> <span class="nc">SampleCovariance</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Risk model based on the Cholesky decomposition of the sample cov matrix&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="SampleCovariance.__post_init__"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/sample/sample/index.html#markowitz.risk.SampleCovariance.__post_init__">[docs]</a>    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="SampleCovariance.__post_init__"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/sample/sample/index.html#markowitz.risk.SampleCovariance.__post_init__">[docs]</a>    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">D</span><span class="o">.</span><span class="n">CHOLESKY</span><span class="p">]</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span>
             <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">),</span>
             <span class="n">name</span><span class="o">=</span><span class="n">D</span><span class="o">.</span><span class="n">CHOLESKY</span><span class="p">,</span>
@@ -107,7 +106,7 @@
         <span class="p">)</span></div>
 
     <span class="c1"># x: array([ 5.19054e-01,  4.80946e-01, -1.59557e-12, -1.59557e-12])</span>
-<div class="viewcode-block" id="SampleCovariance.estimate"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/sample/sample/index.html#markowitz.risk.SampleCovariance.estimate">[docs]</a>    <span class="k">def</span> <span class="nf">estimate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">cp</span><span class="o">.</span><span class="n">Expression</span><span class="p">:</span>
+<div class="viewcode-block" id="SampleCovariance.estimate"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/sample/sample/index.html#markowitz.risk.SampleCovariance.estimate">[docs]</a>    <span class="k">def</span> <span class="nf">estimate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">:</span> <span class="n">Variables</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">cp</span><span class="o">.</span><span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Estimate the risk by computing the Cholesky decomposition of</span>
 <span class="sd">        self.cov&quot;&quot;&quot;</span>
 
@@ -120,7 +119,7 @@
             <span class="p">)</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="SampleCovariance.update"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/sample/sample/index.html#markowitz.risk.SampleCovariance.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="SampleCovariance.update"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/sample/sample/index.html#markowitz.risk.SampleCovariance.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">D</span><span class="o">.</span><span class="n">CHOLESKY</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">D</span><span class="o">.</span><span class="n">VOLA_UNCERTAINTY</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
             <span class="k">raise</span> <span class="n">CvxError</span><span class="p">(</span><span class="s2">&quot;Mismatch in length for chol and vola_uncertainty&quot;</span><span class="p">)</span>
 
@@ -131,7 +130,7 @@
             <span class="n">num</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">kwargs</span><span class="p">[</span><span class="n">D</span><span class="o">.</span><span class="n">VOLA_UNCERTAINTY</span><span class="p">]</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="SampleCovariance.constraints"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/sample/sample/index.html#markowitz.risk.SampleCovariance.constraints">[docs]</a>    <span class="k">def</span> <span class="nf">constraints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">):</span>
+<div class="viewcode-block" id="SampleCovariance.constraints"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/sample/sample/index.html#markowitz.risk.SampleCovariance.constraints">[docs]</a>    <span class="k">def</span> <span class="nf">constraints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">:</span> <span class="n">Variables</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expressions</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">{</span>
             <span class="s2">&quot;dummy&quot;</span><span class="p">:</span> <span class="n">variables</span><span class="p">[</span><span class="n">D</span><span class="o">.</span><span class="n">_ABS</span><span class="p">]</span>
             <span class="o">&gt;=</span> <span class="n">cp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="n">D</span><span class="o">.</span><span class="n">WEIGHTS</span><span class="p">]),</span>  <span class="c1"># Robust risk dummy variable</span>

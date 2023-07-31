@@ -34,28 +34,28 @@ Classes
       
 
    .. py:attribute:: parameter
-      :annotation: :Dict[str, cvxpy.Parameter]
+      :annotation: :cvx.markowitz.types.Parameter
 
       
 
    .. py:attribute:: data
-      :annotation: :Dict[str, cvxpy.Parameter]
+      :annotation: :cvx.markowitz.types.Parameter
 
       
 
-   .. py:method:: estimate(self, variables: Dict[str, cvxpy.Variable]) -> cvxpy.Expression
+   .. py:method:: estimate(self, variables: cvx.markowitz.types.Variables) -> cvxpy.Expression
       :abstractmethod:
 
       Estimate the variance given the portfolio weights
 
 
-   .. py:method:: update(self, **kwargs)
+   .. py:method:: update(self, **kwargs: cvx.markowitz.types.Matrix) -> None
       :abstractmethod:
 
       Update the data in the risk model
 
 
-   .. py:method:: constraints(self, variables: Dict[str, cvxpy.Variable]) -> Dict[str, cvxpy.Expression]
+   .. py:method:: constraints(self, variables: cvx.markowitz.types.Variables) -> cvx.markowitz.types.Expressions
 
       Return the constraints for the risk model
 

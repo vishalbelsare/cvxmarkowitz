@@ -71,18 +71,17 @@
            <div itemprop="articleBody">
              
   <h1>Source code for markowitz.models.trading_costs</h1><div class="highlight"><pre>
-<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;Model for trading costs&quot;&quot;&quot;</span>
+<span></span><span class="sd">&quot;&quot;&quot;Model for trading costs&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
 
 <span class="kn">import</span> <span class="nn">cvxpy</span> <span class="k">as</span> <span class="nn">cp</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="kn">from</span> <span class="nn">cvx.markowitz.model</span> <span class="kn">import</span> <span class="n">Model</span>
 <span class="kn">from</span> <span class="nn">cvx.markowitz.names</span> <span class="kn">import</span> <span class="n">DataNames</span> <span class="k">as</span> <span class="n">D</span>
+<span class="kn">from</span> <span class="nn">cvx.markowitz.types</span> <span class="kn">import</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">Variables</span>
 <span class="kn">from</span> <span class="nn">cvx.markowitz.utils.aux</span> <span class="kn">import</span> <span class="n">fill_vector</span>
 
 
@@ -90,7 +89,7 @@
 <div class="viewcode-block" id="TradingCosts"><a class="viewcode-back" href="../../../autoapi/markowitz/models/trading_costs/index.html#markowitz.models.trading_costs.TradingCosts">[docs]</a><span class="k">class</span> <span class="nc">TradingCosts</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Model for trading costs&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="TradingCosts.__post_init__"><a class="viewcode-back" href="../../../autoapi/markowitz/models/trading_costs/index.html#markowitz.models.trading_costs.TradingCosts.__post_init__">[docs]</a>    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TradingCosts.__post_init__"><a class="viewcode-back" href="../../../autoapi/markowitz/models/trading_costs/index.html#markowitz.models.trading_costs.TradingCosts.__post_init__">[docs]</a>    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">parameter</span><span class="p">[</span><span class="s2">&quot;power&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;power&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
 
         <span class="c1"># intial weights before rebalancing</span>
@@ -98,7 +97,7 @@
             <span class="n">shape</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;weights&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">)</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="TradingCosts.estimate"><a class="viewcode-back" href="../../../autoapi/markowitz/models/trading_costs/index.html#markowitz.models.trading_costs.TradingCosts.estimate">[docs]</a>    <span class="k">def</span> <span class="nf">estimate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="n">D</span><span class="p">,</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">cp</span><span class="o">.</span><span class="n">Expression</span><span class="p">:</span>
+<div class="viewcode-block" id="TradingCosts.estimate"><a class="viewcode-back" href="../../../autoapi/markowitz/models/trading_costs/index.html#markowitz.models.trading_costs.TradingCosts.estimate">[docs]</a>    <span class="k">def</span> <span class="nf">estimate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">:</span> <span class="n">Variables</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">cp</span><span class="o">.</span><span class="n">Expression</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">cp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
             <span class="n">cp</span><span class="o">.</span><span class="n">power</span><span class="p">(</span>
                 <span class="n">cp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="n">D</span><span class="o">.</span><span class="n">WEIGHTS</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;weights&quot;</span><span class="p">]),</span>
@@ -106,7 +105,7 @@
             <span class="p">)</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="TradingCosts.update"><a class="viewcode-back" href="../../../autoapi/markowitz/models/trading_costs/index.html#markowitz.models.trading_costs.TradingCosts.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="TradingCosts.update"><a class="viewcode-back" href="../../../autoapi/markowitz/models/trading_costs/index.html#markowitz.models.trading_costs.TradingCosts.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;weights&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">fill_vector</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;weights&quot;</span><span class="p">])</span></div></div>
 </pre></div>
 

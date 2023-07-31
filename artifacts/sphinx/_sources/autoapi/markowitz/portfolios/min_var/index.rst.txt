@@ -25,13 +25,13 @@ Classes
    min StdDev(r_p)
    s.t. w_p >= 0 and sum(w_p) = 1
 
-   .. py:method:: objective(self)
+   .. py:method:: objective(self) -> cvxpy.Objective
       :property:
 
       Return the objective function
 
 
-   .. py:method:: __post_init__(self)
+   .. py:method:: __post_init__(self) -> None
 
 
 

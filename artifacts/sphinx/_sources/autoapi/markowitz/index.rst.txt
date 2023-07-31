@@ -26,5 +26,6 @@ Submodules
    cvxerror/index.rst
    model/index.rst
    names/index.rst
+   types/index.rst
 
 

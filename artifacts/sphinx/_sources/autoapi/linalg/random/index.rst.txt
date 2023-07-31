@@ -17,6 +17,6 @@ Functions
 
 
 
-.. py:function:: rand_cov(n)
+.. py:function:: rand_cov(n: int) -> cvx.linalg.types.Matrix
 
 

@@ -33,26 +33,26 @@ Classes
 
       
 
-   .. py:method:: __post_init__(self)
+   .. py:method:: __post_init__(self) -> None
 
 
-   .. py:method:: estimate(self, variables) -> cvxpy.Expression
+   .. py:method:: estimate(self, variables: cvx.markowitz.types.Variables) -> cvxpy.Expression
 
       Compute the total variance
 
 
-   .. py:method:: _residual_risk(self, variables)
+   .. py:method:: _residual_risk(self, variables: cvx.markowitz.types.Variables) -> cvxpy.Expression
 
 
-   .. py:method:: _systematic_risk(self, variables)
+   .. py:method:: _systematic_risk(self, variables: cvx.markowitz.types.Variables) -> cvxpy.Expression
 
 
-   .. py:method:: update(self, **kwargs)
+   .. py:method:: update(self, **kwargs: cvx.markowitz.types.Matrix) -> None
 
       Update the data in the risk model
 
 
-   .. py:method:: constraints(self, variables)
+   .. py:method:: constraints(self, variables: cvx.markowitz.types.Variables) -> cvx.markowitz.types.Expressions
 
       Return the constraints for the risk model
 

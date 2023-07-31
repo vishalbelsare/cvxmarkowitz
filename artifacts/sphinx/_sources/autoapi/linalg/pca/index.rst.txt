@@ -24,36 +24,36 @@ Classes
 
 .. py:class:: PCA
 
+   .. py:attribute:: returns
+      :annotation: :cvx.linalg.types.Matrix
+
+      
+
    .. py:attribute:: n_components
       :annotation: :int = 0
 
       
 
-   .. py:attribute:: returns
-      :annotation: :numpy.ndarray
-
-      
-
-   .. py:method:: __post_init__(self)
+   .. py:method:: __post_init__(self) -> None
 
 
-   .. py:method:: explained_variance(self) -> numpy.ndarray
+   .. py:method:: explained_variance(self) -> cvx.linalg.types.Matrix
       :property:
 
 
-   .. py:method:: cov(self) -> numpy.ndarray
+   .. py:method:: cov(self) -> cvx.linalg.types.Matrix
       :property:
 
 
-   .. py:method:: systematic_returns(self) -> numpy.ndarray
+   .. py:method:: systematic_returns(self) -> cvx.linalg.types.Matrix
       :property:
 
 
-   .. py:method:: idiosyncratic_returns(self) -> numpy.ndarray
+   .. py:method:: idiosyncratic_returns(self) -> cvx.linalg.types.Matrix
       :property:
 
 
-   .. py:method:: idiosyncratic_vola(self) -> numpy.ndarray
+   .. py:method:: idiosyncratic_vola(self) -> cvx.linalg.types.Matrix
       :property:
 
 

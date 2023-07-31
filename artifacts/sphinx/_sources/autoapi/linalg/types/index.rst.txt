@@ -1,0 +1,14 @@
+:py:mod:`linalg.types`
+======================
+
+.. py:module:: linalg.types
+
+
+Module Contents
+---------------
+
+.. py:data:: Matrix
+   :annotation: :typing_extensions.TypeAlias
+
+   
+

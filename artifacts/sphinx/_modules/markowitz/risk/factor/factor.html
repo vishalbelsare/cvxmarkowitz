@@ -71,8 +71,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for markowitz.risk.factor.factor</h1><div class="highlight"><pre>
-<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;Factor risk model</span>
+<span></span><span class="sd">&quot;&quot;&quot;Factor risk model</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
@@ -84,6 +83,7 @@
 <span class="kn">from</span> <span class="nn">cvx.markowitz.cvxerror</span> <span class="kn">import</span> <span class="n">CvxError</span>
 <span class="kn">from</span> <span class="nn">cvx.markowitz.model</span> <span class="kn">import</span> <span class="n">Model</span>
 <span class="kn">from</span> <span class="nn">cvx.markowitz.names</span> <span class="kn">import</span> <span class="n">DataNames</span> <span class="k">as</span> <span class="n">D</span>
+<span class="kn">from</span> <span class="nn">cvx.markowitz.types</span> <span class="kn">import</span> <span class="n">Expressions</span><span class="p">,</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">Variables</span>
 <span class="kn">from</span> <span class="nn">cvx.markowitz.utils.aux</span> <span class="kn">import</span> <span class="n">fill_matrix</span><span class="p">,</span> <span class="n">fill_vector</span>
 
 
@@ -93,7 +93,7 @@
 
 <div class="viewcode-block" id="FactorModel.factors"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/factor/factor/index.html#markowitz.risk.factor.factor.FactorModel.factors">[docs]</a>    <span class="n">factors</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span></div>
 
-<div class="viewcode-block" id="FactorModel.__post_init__"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/factor/factor/index.html#markowitz.risk.factor.factor.FactorModel.__post_init__">[docs]</a>    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="FactorModel.__post_init__"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/factor/factor/index.html#markowitz.risk.factor.factor.FactorModel.__post_init__">[docs]</a>    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">D</span><span class="o">.</span><span class="n">EXPOSURE</span><span class="p">]</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span>
             <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">factors</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">),</span>
             <span class="n">name</span><span class="o">=</span><span class="n">D</span><span class="o">.</span><span class="n">EXPOSURE</span><span class="p">,</span>
@@ -126,7 +126,7 @@
             <span class="n">nonneg</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="FactorModel.estimate"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/factor/factor/index.html#markowitz.risk.factor.factor.FactorModel.estimate">[docs]</a>    <span class="k">def</span> <span class="nf">estimate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">cp</span><span class="o">.</span><span class="n">Expression</span><span class="p">:</span>
+<div class="viewcode-block" id="FactorModel.estimate"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/factor/factor/index.html#markowitz.risk.factor.factor.FactorModel.estimate">[docs]</a>    <span class="k">def</span> <span class="nf">estimate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">:</span> <span class="n">Variables</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">cp</span><span class="o">.</span><span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute the total variance</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -135,7 +135,7 @@
 
         <span class="k">return</span> <span class="n">cp</span><span class="o">.</span><span class="n">norm2</span><span class="p">(</span><span class="n">cp</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">var_systematic</span><span class="p">,</span> <span class="n">var_residual</span><span class="p">]))</span></div>
 
-<div class="viewcode-block" id="FactorModel._residual_risk"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/factor/factor/index.html#markowitz.risk.factor.factor.FactorModel._residual_risk">[docs]</a>    <span class="k">def</span> <span class="nf">_residual_risk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">):</span>
+<div class="viewcode-block" id="FactorModel._residual_risk"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/factor/factor/index.html#markowitz.risk.factor.factor.FactorModel._residual_risk">[docs]</a>    <span class="k">def</span> <span class="nf">_residual_risk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">:</span> <span class="n">Variables</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">cp</span><span class="o">.</span><span class="n">Expression</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">cp</span><span class="o">.</span><span class="n">norm2</span><span class="p">(</span>
             <span class="n">cp</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span>
                 <span class="p">[</span>
@@ -148,7 +148,7 @@
             <span class="p">)</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="FactorModel._systematic_risk"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/factor/factor/index.html#markowitz.risk.factor.factor.FactorModel._systematic_risk">[docs]</a>    <span class="k">def</span> <span class="nf">_systematic_risk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">):</span>
+<div class="viewcode-block" id="FactorModel._systematic_risk"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/factor/factor/index.html#markowitz.risk.factor.factor.FactorModel._systematic_risk">[docs]</a>    <span class="k">def</span> <span class="nf">_systematic_risk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">:</span> <span class="n">Variables</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">cp</span><span class="o">.</span><span class="n">Expression</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">cp</span><span class="o">.</span><span class="n">norm2</span><span class="p">(</span>
             <span class="n">cp</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span>
                 <span class="p">[</span>
@@ -158,7 +158,7 @@
             <span class="p">)</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="FactorModel.update"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/factor/factor/index.html#markowitz.risk.factor.factor.FactorModel.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="FactorModel.update"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/factor/factor/index.html#markowitz.risk.factor.factor.FactorModel.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># check the keywords</span>
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
@@ -204,8 +204,7 @@
             <span class="n">num</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">assets</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">kwargs</span><span class="p">[</span><span class="n">D</span><span class="o">.</span><span class="n">IDIOSYNCRATIC_VOLA_UNCERTAINTY</span><span class="p">]</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="FactorModel.constraints"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/factor/factor/index.html#markowitz.risk.factor.factor.FactorModel.constraints">[docs]</a>    <span class="k">def</span> <span class="nf">constraints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">):</span>
-        <span class="c1"># factor_weights = kwargs.get(&quot;factor_weights&quot;, self.data[&quot;exposure&quot;] @ weights)</span>
+<div class="viewcode-block" id="FactorModel.constraints"><a class="viewcode-back" href="../../../../autoapi/markowitz/risk/factor/factor/index.html#markowitz.risk.factor.factor.FactorModel.constraints">[docs]</a>    <span class="k">def</span> <span class="nf">constraints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">:</span> <span class="n">Variables</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expressions</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">{</span>
             <span class="s2">&quot;factors&quot;</span><span class="p">:</span> <span class="n">variables</span><span class="p">[</span><span class="n">D</span><span class="o">.</span><span class="n">FACTOR_WEIGHTS</span><span class="p">]</span>
             <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">D</span><span class="o">.</span><span class="n">EXPOSURE</span><span class="p">]</span> <span class="o">@</span> <span class="n">variables</span><span class="p">[</span><span class="n">D</span><span class="o">.</span><span class="n">WEIGHTS</span><span class="p">],</span>

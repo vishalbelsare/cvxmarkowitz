@@ -17,6 +17,6 @@ Functions
 
 
 
-.. py:function:: approx(name, x, target, pm)
+.. py:function:: approx(name: str, x: cvxpy.Variable, target: Any, pm: cvxpy.Expression) -> Generator[Tuple[str, cvxpy.Expression], None, None]
 
 

@@ -18,6 +18,7 @@ Submodules
    cholesky/index.rst
    pca/index.rst
    random/index.rst
+   types/index.rst
    valid/index.rst
 
 
@@ -43,48 +44,48 @@ Functions
 
 
 
-.. py:function:: cholesky(cov: numpy.ndarray) -> numpy.ndarray
+.. py:function:: cholesky(cov: cvx.linalg.types.Matrix) -> cvx.linalg.types.Matrix
 
    Compute the cholesky decomposition of a covariance matrix
 
 
 .. py:class:: PCA
 
+   .. py:attribute:: returns
+      :annotation: :cvx.linalg.types.Matrix
+
+      
+
    .. py:attribute:: n_components
       :annotation: :int = 0
 
       
 
-   .. py:attribute:: returns
-      :annotation: :numpy.ndarray
-
-      
-
-   .. py:method:: __post_init__(self)
+   .. py:method:: __post_init__(self) -> None
 
 
-   .. py:method:: explained_variance(self) -> numpy.ndarray
+   .. py:method:: explained_variance(self) -> cvx.linalg.types.Matrix
       :property:
 
 
-   .. py:method:: cov(self) -> numpy.ndarray
+   .. py:method:: cov(self) -> cvx.linalg.types.Matrix
       :property:
 
 
-   .. py:method:: systematic_returns(self) -> numpy.ndarray
+   .. py:method:: systematic_returns(self) -> cvx.linalg.types.Matrix
       :property:
 
 
-   .. py:method:: idiosyncratic_returns(self) -> numpy.ndarray
+   .. py:method:: idiosyncratic_returns(self) -> cvx.linalg.types.Matrix
       :property:
 
 
-   .. py:method:: idiosyncratic_vola(self) -> numpy.ndarray
+   .. py:method:: idiosyncratic_vola(self) -> cvx.linalg.types.Matrix
       :property:
 
 
 
-.. py:function:: valid(matrix: numpy.ndarray) -> tuple[numpy.ndarray, numpy.ndarray]
+.. py:function:: valid(matrix: cvx.linalg.types.Matrix) -> tuple[cvx.linalg.types.Matrix, cvx.linalg.types.Matrix]
 
    Construct the valid subset of matrix (correlation) matrix
    :param matrix: n x n matrix

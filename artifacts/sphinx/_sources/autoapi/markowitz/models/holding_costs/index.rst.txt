@@ -28,15 +28,15 @@ Classes
 
    Model for holding costs
 
-   .. py:method:: __post_init__(self)
+   .. py:method:: __post_init__(self) -> None
 
 
-   .. py:method:: estimate(self, variables: Dict[str, cvxpy.Variable]) -> cvxpy.Expression
+   .. py:method:: estimate(self, variables: cvx.markowitz.types.Variables) -> cvxpy.Expression
 
       Estimate the variance given the portfolio weights
 
 
-   .. py:method:: update(self, **kwargs)
+   .. py:method:: update(self, **kwargs: cvx.markowitz.types.Matrix) -> None
 
       Update the data in the risk model
 

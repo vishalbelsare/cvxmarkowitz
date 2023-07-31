@@ -26,7 +26,7 @@ Functions
 
 
 
-.. py:function:: deserialize(problem_file)
+.. py:function:: deserialize(problem_file: str | bytes | PathLike[str] | PathLike[bytes] | int) -> Any
 
 
 .. py:class:: _Problem
@@ -37,48 +37,48 @@ Functions
       
 
    .. py:attribute:: model
-      :annotation: :Dict[str, cvx.markowitz.model.Model]
+      :annotation: :dict[str, cvx.markowitz.model.Model]
 
       
 
-   .. py:method:: update(self, **kwargs)
+   .. py:method:: update(self, **kwargs: cvx.markowitz.types.Matrix) -> _Problem
 
       Update the problem
 
 
-   .. py:method:: solve(self, solver=cp.ECOS, **kwargs)
+   .. py:method:: solve(self, solver: str = cp.ECOS, **kwargs: Any) -> float
 
       Solve the problem
 
 
-   .. py:method:: value(self)
+   .. py:method:: value(self) -> float
       :property:
 
 
-   .. py:method:: is_dpp(self)
+   .. py:method:: is_dpp(self) -> bool
 
 
-   .. py:method:: data(self)
+   .. py:method:: data(self) -> Generator[tuple[tuple[str, str], cvx.markowitz.types.Matrix], None, None]
       :property:
 
 
-   .. py:method:: parameter(self)
+   .. py:method:: parameter(self) -> cvx.markowitz.types.Parameter
       :property:
 
 
-   .. py:method:: variables(self)
+   .. py:method:: variables(self) -> cvx.markowitz.types.Variables
       :property:
 
 
-   .. py:method:: weights(self)
+   .. py:method:: weights(self) -> cvx.markowitz.types.Matrix
       :property:
 
 
-   .. py:method:: factor_weights(self)
+   .. py:method:: factor_weights(self) -> cvx.markowitz.types.Matrix
       :property:
 
 
-   .. py:method:: serialize(self, problem_file)
+   .. py:method:: serialize(self, problem_file: cvx.markowitz.types.File) -> None
 
 
 
@@ -90,53 +90,53 @@ Functions
       
 
    .. py:attribute:: factors
-      :annotation: :int
+      :annotation: :int | None
 
       
 
    .. py:attribute:: model
-      :annotation: :Dict[str, cvx.markowitz.model.Model]
+      :annotation: :dict[str, cvx.markowitz.model.Model]
 
       
 
    .. py:attribute:: constraints
-      :annotation: :Dict[str, cvxpy.Constraint]
+      :annotation: :dict[str, cvxpy.Constraint]
 
       
 
    .. py:attribute:: variables
-      :annotation: :Dict[str, cvxpy.Variable]
+      :annotation: :cvx.markowitz.types.Variables
 
       
 
    .. py:attribute:: parameter
-      :annotation: :Dict[str, cvxpy.Parameter]
+      :annotation: :cvx.markowitz.types.Parameter
 
       
 
-   .. py:method:: __post_init__(self)
+   .. py:method:: __post_init__(self) -> None
 
 
-   .. py:method:: objective(self)
+   .. py:method:: objective(self) -> cvxpy.Expression
       :property:
 
       Return the objective function
 
 
-   .. py:method:: build(self)
+   .. py:method:: build(self) -> _Problem
 
       Build the cvxpy problem
 
 
-   .. py:method:: weights(self)
+   .. py:method:: weights(self) -> cvxpy.Variable
       :property:
 
 
-   .. py:method:: risk(self)
+   .. py:method:: risk(self) -> cvx.markowitz.model.Model
       :property:
 
 
-   .. py:method:: factor_weights(self)
+   .. py:method:: factor_weights(self) -> cvxpy.Variable
       :property:
 
 

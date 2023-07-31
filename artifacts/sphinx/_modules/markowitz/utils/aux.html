@@ -71,11 +71,12 @@
            <div itemprop="articleBody">
              
   <h1>Source code for markowitz.utils.aux</h1><div class="highlight"><pre>
-<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">cvx.markowitz.types</span> <span class="kn">import</span> <span class="n">Matrix</span>
 
 
-<div class="viewcode-block" id="fill_vector"><a class="viewcode-back" href="../../../autoapi/markowitz/utils/aux/index.html#markowitz.utils.aux.fill_vector">[docs]</a><span class="k">def</span> <span class="nf">fill_vector</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">num</span><span class="p">):</span>
+<div class="viewcode-block" id="fill_vector"><a class="viewcode-back" href="../../../autoapi/markowitz/utils/aux/index.html#markowitz.utils.aux.fill_vector">[docs]</a><span class="k">def</span> <span class="nf">fill_vector</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">num</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Matrix</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Fill a vector of length num with x</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -84,7 +85,7 @@
     <span class="k">return</span> <span class="n">z</span></div>
 
 
-<div class="viewcode-block" id="fill_matrix"><a class="viewcode-back" href="../../../autoapi/markowitz/utils/aux/index.html#markowitz.utils.aux.fill_matrix">[docs]</a><span class="k">def</span> <span class="nf">fill_matrix</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">):</span>
+<div class="viewcode-block" id="fill_matrix"><a class="viewcode-back" href="../../../autoapi/markowitz/utils/aux/index.html#markowitz.utils.aux.fill_matrix">[docs]</a><span class="k">def</span> <span class="nf">fill_matrix</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">rows</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">cols</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Matrix</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Fill a matrix of size (rows, cols) with x</span>
 <span class="sd">    &quot;&quot;&quot;</span>
