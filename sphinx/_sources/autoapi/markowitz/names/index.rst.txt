@@ -166,4 +166,14 @@ Classes
 
       
 
+   .. py:attribute:: OMEGA
+      :annotation: = omega
+
+      
+
+   .. py:attribute:: SIGMA_TARGET
+      :annotation: = sigma_target
+
+      
+
 
