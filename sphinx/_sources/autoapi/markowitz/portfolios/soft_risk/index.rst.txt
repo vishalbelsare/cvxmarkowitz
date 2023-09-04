@@ -34,13 +34,13 @@ Classes
 
       
 
-   .. py:method:: objective(self)
+   .. py:method:: objective(self) -> cvxpy.Maximize
       :property:
 
       Return the objective function
 
 
-   .. py:method:: __post_init__(self)
+   .. py:method:: __post_init__(self) -> None
 
 
 
