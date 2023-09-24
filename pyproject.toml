@@ -8,12 +8,12 @@ repository = "https://github.com/cvxgrp/cvxmarkowitz"
 packages = [{include = "cvx"}]
 
 [tool.poetry.dependencies]
-python = ">=3.8,<3.12"
+python = ">=3.9,<3.12"
 cvxpy = "*"
 fire = "*"
 
 [tool.poetry.group.test.dependencies]
-pytest = "7.4.0"
+pytest = "7.4.2"
 pytest-cov = "4.1.0"
 mock = "*"
 
@@ -24,13 +24,12 @@ loguru = "*"
 scikit-learn = "*"
 cvxpyanalyzer = "*"
 clarabel = "^0.5.1"
-mosek = "*"
 cvxsimulator = ">=0.7.3"
 cvxbson= "*"
 tqdm = "*"
 
 [build-system]
-requires = ["poetry-core"]
+requires = ["poetry>=1.6.0"]
 build-backend = "poetry.core.masonry.api"
 
 # Relevant documentation:
