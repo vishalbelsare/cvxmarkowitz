@@ -8,7 +8,7 @@ Module Contents
 ---------------
 
 .. py:data:: Matrix
-   :annotation: :typing_extensions.TypeAlias
+   :type: typing_extensions.TypeAlias
 
    
 

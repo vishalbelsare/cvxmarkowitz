@@ -24,38 +24,39 @@ Classes
 
 .. py:class:: Model
 
+
    Bases: :py:obj:`abc.ABC`
 
    Abstract risk model
 
    .. py:attribute:: assets
-      :annotation: :int
+      :type: int
 
       
 
    .. py:attribute:: parameter
-      :annotation: :cvx.markowitz.types.Parameter
+      :type: cvx.markowitz.types.Parameter
 
       
 
    .. py:attribute:: data
-      :annotation: :cvx.markowitz.types.Parameter
+      :type: cvx.markowitz.types.Parameter
 
       
 
-   .. py:method:: estimate(self, variables: cvx.markowitz.types.Variables) -> cvxpy.Expression
+   .. py:method:: estimate(variables: cvx.markowitz.types.Variables) -> cvxpy.Expression
       :abstractmethod:
 
       Estimate the variance given the portfolio weights
 
 
-   .. py:method:: update(self, **kwargs: cvx.markowitz.types.Matrix) -> None
+   .. py:method:: update(**kwargs: cvx.markowitz.types.Matrix) -> None
       :abstractmethod:
 
       Update the data in the risk model
 
 
-   .. py:method:: constraints(self, variables: cvx.markowitz.types.Variables) -> cvx.markowitz.types.Expressions
+   .. py:method:: constraints(variables: cvx.markowitz.types.Variables) -> cvx.markowitz.types.Expressions
 
       Return the constraints for the risk model
 

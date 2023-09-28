@@ -22,157 +22,161 @@ Classes
 
 .. py:class:: DataNames
 
+
    .. py:attribute:: RETURNS
-      :annotation: = returns
+      :value: 'returns'
 
       
 
    .. py:attribute:: MU
-      :annotation: = mu
+      :value: 'mu'
 
       
 
    .. py:attribute:: MU_UNCERTAINTY
-      :annotation: = mu_uncertainty
+      :value: 'mu_uncertainty'
 
       
 
    .. py:attribute:: CHOLESKY
-      :annotation: = chol
+      :value: 'chol'
 
       
 
    .. py:attribute:: VOLA_UNCERTAINTY
-      :annotation: = vola_uncertainty
+      :value: 'vola_uncertainty'
 
       
 
    .. py:attribute:: LOWER_BOUND_ASSETS
-      :annotation: = lower_assets
+      :value: 'lower_assets'
 
       
 
    .. py:attribute:: LOWER_BOUND_FACTORS
-      :annotation: = lower_factors
+      :value: 'lower_factors'
 
       
 
    .. py:attribute:: UPPER_BOUND_ASSETS
-      :annotation: = upper_assets
+      :value: 'upper_assets'
 
       
 
    .. py:attribute:: UPPER_BOUND_FACTORS
-      :annotation: = upper_factors
+      :value: 'upper_factors'
 
       
 
    .. py:attribute:: EXPOSURE
-      :annotation: = exposure
+      :value: 'exposure'
 
       
 
    .. py:attribute:: HOLDING_COSTS
-      :annotation: = holding_costs
+      :value: 'holding_costs'
 
       
 
    .. py:attribute:: IDIOSYNCRATIC_VOLA
-      :annotation: = idiosyncratic_vola
+      :value: 'idiosyncratic_vola'
 
       
 
    .. py:attribute:: IDIOSYNCRATIC_VOLA_UNCERTAINTY
-      :annotation: = idiosyncratic_vola_uncertainty
+      :value: 'idiosyncratic_vola_uncertainty'
 
       
 
    .. py:attribute:: SYSTEMATIC_VOLA_UNCERTAINTY
-      :annotation: = systematic_vola_uncertainty
+      :value: 'systematic_vola_uncertainty'
 
       
 
    .. py:attribute:: FACTOR_WEIGHTS
-      :annotation: = factor_weights
+      :value: 'factor_weights'
 
       
 
    .. py:attribute:: WEIGHTS
-      :annotation: = weights
+      :value: 'weights'
 
       
 
    .. py:attribute:: _ABS
-      :annotation: = _abs
+      :value: '_abs'
 
       
 
 
 .. py:class:: ModelName
 
+
    .. py:attribute:: RISK
-      :annotation: = risk
+      :value: 'risk'
 
       
 
    .. py:attribute:: RETURN
-      :annotation: = return
+      :value: 'return'
 
       
 
    .. py:attribute:: BOUND_ASSETS
-      :annotation: = bound_assets
+      :value: 'bound_assets'
 
       
 
    .. py:attribute:: BOUND_FACTORS
-      :annotation: = bound_factors
+      :value: 'bound_factors'
 
       
 
 
 .. py:class:: ConstraintName
 
+
    .. py:attribute:: BUDGET
-      :annotation: = budget
+      :value: 'budget'
 
       
 
    .. py:attribute:: CONCENTRATION
-      :annotation: = concentration
+      :value: 'concentration'
 
       
 
    .. py:attribute:: LONG_ONLY
-      :annotation: = long_only
+      :value: 'long_only'
 
       
 
    .. py:attribute:: LEVERAGE
-      :annotation: = leverage
+      :value: 'leverage'
 
       
 
    .. py:attribute:: RISK
-      :annotation: = risk
+      :value: 'risk'
 
       
 
 
 .. py:class:: ParameterName
 
+
    .. py:attribute:: SIGMA_MAX
-      :annotation: = sigma_max
+      :value: 'sigma_max'
 
       
 
    .. py:attribute:: OMEGA
-      :annotation: = omega
+      :value: 'omega'
 
       
 
    .. py:attribute:: SIGMA_TARGET
-      :annotation: = sigma_target
+      :value: 'sigma_target'
 
       
 

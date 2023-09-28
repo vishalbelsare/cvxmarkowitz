@@ -19,28 +19,28 @@ Classes
 
 .. py:class:: SoftRisk
 
+
    Bases: :py:obj:`cvx.markowitz.builder.Builder`
 
    maximize w^T mu - omega * (sigma - sigma_target)_+
    subject to w >= 0, w^T 1 = 1, sigma <= sigma_max
 
+   .. py:property:: objective
+      :type: cvxpy.Maximize
+
+      Return the objective function
+
    .. py:attribute:: _sigma
-      :annotation: :cvxpy.Variable
+      :type: cvxpy.Variable
 
       
 
    .. py:attribute:: _sigma_target_times_omega
-      :annotation: :cvxpy.CallbackParam
+      :type: cvxpy.CallbackParam
 
       
 
-   .. py:method:: objective(self) -> cvxpy.Maximize
-      :property:
-
-      Return the objective function
-
-
-   .. py:method:: __post_init__(self) -> None
+   .. py:method:: __post_init__() -> None
 
 
 

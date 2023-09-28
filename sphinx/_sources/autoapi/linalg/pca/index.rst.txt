@@ -24,37 +24,39 @@ Classes
 
 .. py:class:: PCA
 
+
+   .. py:property:: explained_variance
+      :type: cvx.linalg.types.Matrix
+
+
+   .. py:property:: cov
+      :type: cvx.linalg.types.Matrix
+
+
+   .. py:property:: systematic_returns
+      :type: cvx.linalg.types.Matrix
+
+
+   .. py:property:: idiosyncratic_returns
+      :type: cvx.linalg.types.Matrix
+
+
+   .. py:property:: idiosyncratic_vola
+      :type: cvx.linalg.types.Matrix
+
+
    .. py:attribute:: returns
-      :annotation: :cvx.linalg.types.Matrix
+      :type: cvx.linalg.types.Matrix
 
       
 
    .. py:attribute:: n_components
-      :annotation: :int = 0
+      :type: int
+      :value: 0
 
       
 
-   .. py:method:: __post_init__(self) -> None
-
-
-   .. py:method:: explained_variance(self) -> cvx.linalg.types.Matrix
-      :property:
-
-
-   .. py:method:: cov(self) -> cvx.linalg.types.Matrix
-      :property:
-
-
-   .. py:method:: systematic_returns(self) -> cvx.linalg.types.Matrix
-      :property:
-
-
-   .. py:method:: idiosyncratic_returns(self) -> cvx.linalg.types.Matrix
-      :property:
-
-
-   .. py:method:: idiosyncratic_vola(self) -> cvx.linalg.types.Matrix
-      :property:
+   .. py:method:: __post_init__() -> None
 
 
 
