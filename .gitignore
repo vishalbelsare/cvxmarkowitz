@@ -3,6 +3,9 @@
 .vscode
 .ruff_cache
 
+# Big data file
+assets.csv
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
