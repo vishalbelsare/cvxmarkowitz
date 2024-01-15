@@ -26,12 +26,13 @@ from cvx.simulator.grid import resample_index
 
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mImportError[0m                               Traceback (most recent call last)
-Cell [0;32mIn[1], line 6[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [0;32mIn[1], line 4[0m
+[1;32m      1[0m [38;5;28;01mimport[39;00m [38;5;21;01mpandas[39;00m [38;5;28;01mas[39;00m [38;5;21;01mpd[39;00m
 [1;32m      2[0m pd[38;5;241m.[39moptions[38;5;241m.[39mplotting[38;5;241m.[39mbackend [38;5;241m=[39m [38;5;124m"[39m[38;5;124mplotly[39m[38;5;124m"[39m
-[1;32m      4[0m [38;5;28;01mimport[39;00m [38;5;21;01myfinance[39;00m [38;5;28;01mas[39;00m [38;5;21;01myf[39;00m
-[0;32m----> 6[0m [38;5;28;01mfrom[39;00m [38;5;21;01mcvx[39;00m[38;5;21;01m.[39;00m[38;5;21;01msimulator[39;00m[38;5;21;01m.[39;00m[38;5;21;01mbuilder[39;00m [38;5;28;01mimport[39;00m builder
+[0;32m----> 4[0m [38;5;28;01mimport[39;00m [38;5;21;01myfinance[39;00m [38;5;28;01mas[39;00m [38;5;21;01myf[39;00m
+[1;32m      6[0m [38;5;28;01mfrom[39;00m [38;5;21;01mcvx[39;00m[38;5;21;01m.[39;00m[38;5;21;01msimulator[39;00m[38;5;21;01m.[39;00m[38;5;21;01mbuilder[39;00m [38;5;28;01mimport[39;00m builder
 [1;32m      7[0m [38;5;28;01mfrom[39;00m [38;5;21;01mcvx[39;00m[38;5;21;01m.[39;00m[38;5;21;01msimulator[39;00m[38;5;21;01m.[39;00m[38;5;21;01mgrid[39;00m [38;5;28;01mimport[39;00m resample_index
 
-[0;31mImportError[0m: cannot import name 'builder' from 'cvx.simulator.builder' (/home/runner/work/cvxmarkowitz/cvxmarkowitz/.venv/lib/python3.10/site-packages/cvx/simulator/builder.py)
+[0;31mModuleNotFoundError[0m: No module named 'yfinance'
 
