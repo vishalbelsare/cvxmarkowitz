@@ -1,0 +1,26 @@
+repository: "jebel-quant/rhiza"
+ref: "v1.12.0"
+
+profiles:
+  - github-project
+
+templates:
+  - legal
+
+# Template-owned paths this repo declines to sync. Matched against *destination*
+# paths — where the file lands here — so entries are written as `.github/...`,
+# never clone-relative (`bundles/...`), which matches nothing silently.
+exclude:
+  # SECURITY.md. The template's copy enumerates security measures generically;
+  # the accurate list differs per repo, so this one is maintained here. Excluding
+  # it does not delete the file — an excluded path is never treated as an orphan,
+  # so the existing SECURITY.md stays exactly as it is and simply stops being
+  # overwritten on each sync.
+  - SECURITY.md
+
+  # Branch and tag rulesets. The template ships a generic pair; the protection
+  # rules that actually apply here (required checks, tag patterns) are decided
+  # per repo, so they are maintained in this tree. Excluding them does not
+  # delete the files — an excluded path is never treated as an orphan.
+  - .github/rulesets/main-branch-protection.json
+  - .github/rulesets/tag-protection.json

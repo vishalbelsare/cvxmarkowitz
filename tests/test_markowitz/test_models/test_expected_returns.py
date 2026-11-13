@@ -1,24 +1,28 @@
+"""Unit tests for the ExpectedReturns model.
+
+Covers baseline and robust formulations and input validation.
+"""
+
 from __future__ import annotations
 
 import cvxpy as cp
 import numpy as np
 import pytest
 
-from cvx.markowitz.builder import CvxError
-from cvx.markowitz.models.expected_returns import ExpectedReturns
-from cvx.markowitz.names import DataNames as D
+from cvxmarkowitz import CvxDataError
+from cvxmarkowitz.models.expected_returns import ExpectedReturns
+from cvxmarkowitz.names import DataNames as D
 
 
 def test_expected_returns():
+    """Estimate plain expected return with zero uncertainty and padding behavior."""
     assets = 3
     model = ExpectedReturns(assets=assets)
-    model.update(**{D.MU: np.array([0.1, 0.2]), "mu_uncertainty": np.array([0.0, 0.0])})
+    model.update(**{D.MU: np.array([0.1, 0.2]), D.MU_UNCERTAINTY: np.array([0.0, 0.0])})
 
     # expected returns not explicitly set are zero
     assert model.data[D.MU].value == pytest.approx(np.array([0.1, 0.2, 0.0]))
-    assert model.parameter["mu_uncertainty"].value == pytest.approx(
-        np.array([0.0, 0.0, 0.0])
-    )
+    assert model.parameter[D.MU_UNCERTAINTY].value == pytest.approx(np.array([0.0, 0.0, 0.0]))
 
     weights = cp.Variable(assets)
     weights.value = np.array([1.0, 1.0, 2.0])
@@ -32,15 +36,14 @@ def test_expected_returns():
 
 
 def test_expected_returns_robust():
+    """Include uncertainty penalty and verify the robust expected return value."""
     assets = 3
     model = ExpectedReturns(assets=assets)
     model.update(mu=np.array([0.1, 0.2]), mu_uncertainty=np.array([0.01, 0.03]))
 
     # expected returns not explicitly set are zero
-    assert model.data["mu"].value == pytest.approx(np.array([0.1, 0.2, 0.0]))
-    assert model.parameter["mu_uncertainty"].value == pytest.approx(
-        np.array([0.01, 0.03, 0.0])
-    )
+    assert model.data[D.MU].value == pytest.approx(np.array([0.1, 0.2, 0.0]))
+    assert model.parameter[D.MU_UNCERTAINTY].value == pytest.approx(np.array([0.01, 0.03, 0.0]))
 
     weights = cp.Variable(assets)
     weights.value = np.array([1.0, 1.0, 2.0])
@@ -54,7 +57,23 @@ def test_expected_returns_robust():
 
 
 def test_mismatch():
+    """Mismatched mu and mu_uncertainty lengths should raise CvxDataError."""
     assets = 3
     model = ExpectedReturns(assets=assets)
-    with pytest.raises(CvxError):
+    with pytest.raises(CvxDataError):
         model.update(mu=np.array([0.1, 0.2]), mu_uncertainty=np.array([0.03]))
+
+
+def test_keywords_declares_the_parameter_backed_input():
+    """`keywords` lists mu_uncertainty, which `data` on its own does not.
+
+    This is the override that lets `Problem.update` guard a keyword held in
+    `parameter`. Asserting `data` does *not* contain it keeps the test honest:
+    were mu_uncertainty ever moved into `data`, the override would become
+    redundant rather than silently wrong, and this test would say so.
+    """
+    model = ExpectedReturns(assets=3)
+
+    assert set(model.keywords) == {D.MU, D.MU_UNCERTAINTY}
+    assert D.MU_UNCERTAINTY not in model.data
+    assert D.MU_UNCERTAINTY in model.parameter

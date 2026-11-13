@@ -1,45 +1,188 @@
-[tool.poetry]
+[project]
 name = "cvxmarkowitz"
-version = "0.0.0"
-description = "Markowitz"
-authors = ["Thomas Schmelzer", "Kasper Johansson", "Philipp Schiele", "Stephen Boyd"]
+# [project].version is derived from the newest git tag by hatch-vcs, so the number
+# lives in exactly one place. A build from a checkout that cannot see the tag falls
+# back to a dev version, hence fetch-depth: 0 in any job that builds a distribution.
+dynamic = ["version"]
+description = "Build DPP-compliant Markowitz portfolio problems with cvxpy once, then re-solve them with fresh data"
+authors = [{name = "Thomas Schmelzer", email = "thomas.schmelzer@gmail.com"},
+    {name = "Kasper Johansson"},
+    {name = "Philipp Schiele"},
+    {name = "Stephen Boyd"}]
+
 readme = "README.md"
-repository = "https://github.com/cvxgrp/cvxmarkowitz"
-packages = [{include = "cvx"}]
+license = "Apache-2.0"
+classifiers = [
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
 
-[tool.poetry.dependencies]
-python = ">=3.9,<3.12"
-cvxpy-base = "*"
-clarabel = "*"
-fire = "*"
+requires-python = ">=3.11"
+# Private :: Do Not Upload (prevents rhiza_release.yml from publishing to PyPI)
+dependencies = [
+    "cvxpy-base>=1.9.2",
+    "numpy>=2.4.6",
+    "clarabel>=0.11.1",
+]
 
-[tool.poetry.group.test.dependencies]
-pytest = "8.2.2"
-pytest-cov = "5.0.0"
-pre-commit = "3.7.1"
-mock = "*"
+[project.urls]
+Homepage = "https://github.com/cvxgrp/cvxmarkowitz"
+Repository = "https://github.com/cvxgrp/cvxmarkowitz"
 
-[tool.poetry.group.dev.dependencies]
-pandas = "*"
-plotly = "*"
-loguru = "*"
-scikit-learn = "*"
-#cvxpyanalyzer = "*"
-cvxsimulator = ">=0.7.3"
-cvxbson= "*"
-ipykernel = "*"
+[dependency-groups]
+# cvx-linalg is a test/example helper, not a runtime dependency: nothing under
+# src/ imports it. It builds Cholesky factors and random covariances for the
+# tests, the README example and the experiments/ scripts, so the library's
+# consumers should not be made to install it.
+dev = [
+    "fire>=0.7.1",
+    "mock>=5.2.0",
+    "yfinance>=1.6.0",
+    "loguru>=0.7.3",
+    "tinycta>=0.14.0",
+    "plotly>=6.9.0",
+    "cvxsimulator>=1.5.1",
+    "cvx-linalg>=0.9.6",
+    "scikit-learn>=1.9.0",
+    "marimo>=0.23.16",
+    "pytest>=9.1.1",
+]
+test = [
+    "pytest>=9.1.1",
+    "cvx-linalg>=0.9.6",
+]
 
 [build-system]
-requires = ["poetry>=1.6.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
 
-# Relevant documentation:
-# https://medium.com/clarityai-engineering/how-to-create-and-distribute-a-minimalist-cli-tool-with-python-poetry-click-and-pipx-c0580af4c026
+[tool.hatch.version]
+source = "vcs"
 
-[tool.ruff]
-select = ["E", "F", "I"]
-line-length = 100
-target-version = "py310"
-exclude = [
-    "*__init__.py"
-]
+[tool.hatch.build.targets.wheel]
+packages = ["src/cvxmarkowitz"]
+
+
+[tool.rhiza-task]
+# Settings recovered from the make layer that rhiza v1.4.0 retired. Each entry
+# below differs from rhiza-task's own default; the settings that matched the
+# default were deliberately dropped rather than restated (see the note at the
+# end of this table).
+
+# Was `COVERAGE_FAIL_UNDER = 100` in the repo-owned Makefile; rhiza-task
+# defaults to 90. Without this the `test` gate passes at 91% coverage and the
+# 100% invariant this repo maintains stops being enforced. Note that a
+# `fail-under` under [tool.coverage.report] would NOT substitute: the gate
+# passes --cov-fail-under on the command line, which outranks the config file.
+coverage-fail-under = 100
+
+# Was `TYPECHECKER ?= both` in .rhiza/make.d/python.mk; rhiza-task defaults to
+# `ty` alone. Without this mypy --strict stops running, and CLAUDE.md is
+# explicit that mypy and ty cover different ground here (cvxpy is treated as
+# untyped for mypy, so only ty checks the optimisation semantics). This is also
+# stricter than the make layer was: the old shell `case` let mypy's exit status
+# win, so a `ty` failure could pass.
+typechecker = "both"
+
+# Was `RHIZA_CI_OS_MATRIX` in .rhiza/.env; rhiza-task defaults to
+# ["ubuntu-latest"]. This MUST live here now: v1.4.0 stopped shipping
+# .rhiza/.gitignore, whose `!.env` negation was the only reason .rhiza/.env was
+# tracked, so the file is developer-local from here on and a CI checkout never
+# contains it. Without this line CI silently narrows to Linux only.
+ci-os-matrix = ["ubuntu-latest", "macos-latest", "windows-latest"]
+
+# Not set, on purpose:
+#   source-folder          "src" is already the default.
+#   marimo-folder          "docs/notebooks" is already the default.
+#   mkdocs-extra-packages  the Makefile's `--with 'mkdocstrings[python]'` only
+#                          restated the default. Naming this setting REPLACES
+#                          the default list, so a redundant line is the one
+#                          someone later edits to add a package and silently
+#                          drops mkdocstrings from the book build with.
+#   license-ignore-packages  the make layer's only entry was `+= docutils`,
+#                          contributed by marimo.mk. rhiza-task appends docutils
+#                          itself whenever marimo is in the task registry.
+#   pytest-rhiza           v1.3.3 had no RHIZA_CHECKS_VERSION pin and ran the
+#                          in-tree .rhiza/tests/ instead. Taking the CLI default
+#                          is an upgrade decision, not a preserved value.
+#   layers                 "python" is the default, and `layers` selects the
+#                          language layer only -- book/marimo tasks are always
+#                          registered, so this repo's mkdocs.yml still builds.
+[tool.deptry.package_module_name_map]
+cvxpy-base = "cvxpy"
+cvx-linalg = "cvx"
+cvxsimulator = "cvx"
+scikit-learn = "sklearn"
+numpy = "numpy"
+clarabel = "clarabel"
+fire = "fire"
+mock = "mock"
+yfinance = "yfinance"
+loguru = "loguru"
+tinycta = "tinycta"
+plotly = "plotly"
+marimo = "marimo"
+pytest = "pytest"
+
+[tool.deptry.per_rule_ignores]
+# clarabel is declared but never imported on purpose: it is a solver backend that
+# cvxpy resolves by name at runtime. Nothing else belongs here -- a dependency
+# that src/ does not import is either a backend like this one or misplaced.
+DEP002 = ["clarabel"]
+
+# Tests here are grouped by the behaviour they exercise rather than mirrored
+# one-to-one onto source modules: tests/test_markowitz/ covers src/cvxmarkowitz/
+# under a tree whose intermediate directories carry a test_ prefix, so the parity
+# checker reads every module as both untested and orphaned. Per-module coverage is
+# guaranteed instead by the coverage gate: Makefile sets COVERAGE_FAIL_UNDER = 100,
+# raising the template's default of 90, and `make test` reports 442/442 statements.
+[tool.check_test_layout]
+enforce = false
+reason = "Tests are grouped by behaviour under tests/test_markowitz/; per-module coverage is guaranteed by the full pytest coverage gate."
+
+[tool.mypy]
+# cvxpy ships an incomplete py.typed surface: its functional atoms
+# (cp.norm2, cp.sum, cp.abs, cp.hstack, ...) are exported dynamically and are
+# invisible to static analysis, so `mypy --strict` reports spurious
+# attr-defined / no-any-return / no-untyped-call errors at every cvxpy call
+# site. Treat cvxpy as untyped so those expressions resolve to Any.
+#
+# What this costs, stated plainly: under this override every cvxpy symbol is Any
+# to mypy, including the classes on our own public surface (cp.Expression,
+# cp.Variable, cp.Parameter, cp.Problem, cp.Minimize/Maximize). So mypy's "no
+# issues found" covers the dataclass plumbing and the numpy edges, NOT the
+# optimisation semantics -- do not read it as more than that.
+#
+# What covers the rest: `ty`, which runs in the same `make typecheck` target and
+# does resolve cvxpy's real types (verified: it rejects an attribute typo on a
+# cp.Variable and rejects returning a cp.Variable where cp.Problem is declared,
+# and it is what flags the Parameter.value operator issue in soft_risk.py). The
+# two checkers are complementary here, which is why both run. Removing `ty` from
+# the target on the grounds that "mypy --strict already passes" would silently
+# drop all cvxpy type checking.
+#
+# Narrowing this to `disable_error_code` on cvxpy instead was tried and does not
+# work: per-module overrides apply to errors reported *in* that module, while
+# these 34 errors are reported in our files. Scoping the disables to
+# cvxmarkowitz.* would work, but it trades attr-defined and operator across all
+# of our own code for coverage `ty` already provides properly.
+[[tool.mypy.overrides]]
+module = ["cvxpy", "cvxpy.*"]
+follow_imports = "skip"
+follow_imports_for_stubs = true
+ignore_missing_imports = true
+
+# bump-my-version only auto-discovers .bumpversion.toml, .bumpversion.cfg,
+# setup.cfg and pyproject.toml, and this table is what it finds. There is no
+# current_version and no [[tool.bumpversion.files]] entry because [project].version
+# is dynamic: there is no written number to read or rewrite, so it reads the newest
+# tag via `git describe` — which is the same source hatch-vcs builds from, so the
+# bump it offers and the version it produces cannot disagree. What is left here are
+# the two settings the release flow needs.
+[tool.bumpversion]
+allow_dirty = false
+# The release flow commits and tags itself so the changelog lands in the bump commit.
+commit = false
+tag = false

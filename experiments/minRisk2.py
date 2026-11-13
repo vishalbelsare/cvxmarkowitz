@@ -1,15 +1,17 @@
+"""Example script: constrained minimum-variance demo with utilities."""
+
 from __future__ import annotations
 
 import cvxpy as cp
 import numpy as np
 import pandas as pd
+from cvx.linalg import cholesky
 from loguru import logger
 
-from cvx.linalg import cholesky
-from cvx.markowitz.names import ConstraintName as C
-from cvx.markowitz.names import DataNames as D
-from cvx.markowitz.portfolios.min_var import MinVar
-from cvx.markowitz.portfolios.utils import approx
+from cvxmarkowitz.names import ConstraintName as C
+from cvxmarkowitz.names import DataNames as D
+from cvxmarkowitz.portfolios.min_var import MinVar
+from cvxmarkowitz.portfolios.utils import approx
 
 if __name__ == "__main__":
     returns = (
@@ -25,14 +27,10 @@ if __name__ == "__main__":
 
     builder = MinVar(assets=20)
 
-    builder.parameter["max_concentration"] = cp.Parameter(
-        1, name="max_concentration", nonneg=True
-    )
+    builder.parameter["max_concentration"] = cp.Parameter(1, name="max_concentration", nonneg=True)
 
     # You can add constraints before you build the problem
-    builder.constraints[C.CONCENTRATION] = (
-        cp.sum_largest(builder.weights, 2) <= builder.parameter["max_concentration"]
-    )
+    builder.constraints[C.CONCENTRATION] = cp.sum_largest(builder.weights, 2) <= builder.parameter["max_concentration"]
 
     # here we add a constraints
     # w[19] + w[17] <= 0.0001
@@ -44,9 +42,7 @@ if __name__ == "__main__":
     row[19] = 1
     row[17] = 1
 
-    for name, constraint in approx(
-        "xxx", row @ builder.weights, 0.0, builder.parameter["random"]
-    ):
+    for name, constraint in approx("xxx", row @ builder.weights, 0.0, builder.parameter["random"]):
         # print(constraint)
         builder.constraints[name] = constraint
 
@@ -60,7 +56,7 @@ if __name__ == "__main__":
     print(problem.parameter)
     # assert False
 
-    assert problem.is_dpp(), "Problem is not DPP"
+    assert problem.is_dpp(), "Problem is not DPP"  # noqa: S101
 
     logger.info(f"Problem is DPP: {problem.is_dpp()}")
     logger.info(problem)

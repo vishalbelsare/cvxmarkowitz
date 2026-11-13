@@ -1,17 +1,105 @@
-# To get started with Dependabot version updates, you'll need to specify which
-# package ecosystems to update and where the package manifests are located.
-# Please see the documentation for all configuration options:
-# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+# This file is part of the jebel-quant/rhiza repository
+# (https://github.com/jebel-quant/rhiza).
+#
+# Configuration: Dependabot
+#
+# Purpose: Automate dependency updates for Python packages, GitHub Actions, and Docker images.
+#
+# Documentation: https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
 
 version: 2
 updates:
-  - package-ecosystem: "pip" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  # Python dependencies using uv
+  - package-ecosystem: "uv"
+    directory: "/"
+    # Bump uv.lock only; leave pyproject.toml ranges alone unless a new version falls
+    # outside them. Without this, Dependabot's default ("auto") treats any project it
+    # cannot find on PyPI -- private, unpublished, or whose name belongs to another
+    # project -- as an application and rewrites every `>=` floor to the latest version,
+    # which then fails the lowest-direct-dependency CI job.
+    versioning-strategy: "increase-if-necessary"
     schedule:
       interval: "weekly"
+      day: "tuesday"
+      time: "09:00"
+      timezone: "Asia/Dubai"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "python"
+    groups:
+      python-dependencies:
+        patterns:
+          - "*"
+        update-types:
+          - "patch"
+          - "minor"
+    commit-message:
+      prefix: "chore(deps)"
+      prefix-development: "chore(deps-dev)"
+      include: "scope"
 
+  # GitHub Actions
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      # Check for updates to GitHub Actions every week
       interval: "weekly"
+      day: "tuesday"
+      time: "09:00"
+      timezone: "Asia/Dubai"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "github-actions"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+        update-types:
+          - "patch"
+          - "minor"
+
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
+
+  # Python dependencies (pip) for /.rhiza/requirements — internal build deps, no auto-PRs
+  - package-ecosystem: "pip"
+    directory: "/.rhiza/requirements"
+    schedule:
+      interval: "weekly"
+      day: "tuesday"
+      time: "09:00"
+      timezone: "Asia/Dubai"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+    open-pull-requests-limit: 0
+    labels:
+      - "dependencies"
+      - "python"
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
+
+  # Docker
+  #- package-ecosystem: "docker"
+  #  directory: "/docker"
+  #  schedule:
+  #    interval: "weekly"
+  #    day: "tuesday"
+  #    time: "09:00"
+  #    timezone: "Asia/Dubai"
+  #  open-pull-requests-limit: 10
+  #  labels:
+  #    - "dependencies"
+  #    - "docker"
+  #  commit-message:
+  #    prefix: "chore(deps)"
+  #    include: "scope"

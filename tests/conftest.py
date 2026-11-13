@@ -1,4 +1,10 @@
-"""global fixtures"""
+"""global fixtures.
+
+Security Notes:
+- S101 (assert usage): Asserts are appropriate in test code for validating conditions
+- S603/S607 (subprocess usage): Any subprocess calls use controlled inputs in test environments
+"""
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -9,12 +15,15 @@ import pytest
 
 @pytest.fixture(scope="session", name="resource_dir")
 def resource_fixture():
-    """resource fixture"""
+    """Resource fixture."""
     return Path(__file__).parent / "resources"
 
 
-@pytest.fixture(
-    params=[s for s in [cp.ECOS, cp.CLARABEL] if s in cp.installed_solvers()]
-)
+@pytest.fixture(params=[s for s in [cp.ECOS, cp.CLARABEL] if s in cp.installed_solvers()])
 def solver(request):
+    """Yield installed cvxpy solvers for parametrized tests.
+
+    Selects from a small set of preferred solvers and filters to those
+    available in the current environment.
+    """
     return request.param

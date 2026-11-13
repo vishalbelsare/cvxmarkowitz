@@ -1,11 +1,7 @@
-# [cvxmarkowitz](http://www.cvxgrp.org/cvxmarkowitz/book)
+# [cvxmarkowitz](http://www.cvxgrp.org/cvxmarkowitz)
 
-[![PyPI version](https://badge.fury.io/py/cvxmarkowitz.svg)](https://badge.fury.io/py/cvxmarkowitz)
-[![Apache 2.0 License](https://img.shields.io/badge/License-APACHEv2-brightgreen.svg)](https://github.com/cvxgrp/cvxmarkowitz/blob/master/LICENSE)
-[![PyPI download month](https://img.shields.io/pypi/dm/cvxmarkowitz.svg)](https://pypi.python.org/pypi/cvxmarkowitz/)
-[![Coverage Status](https://coveralls.io/repos/github/cvxgrp/cvxmarkowitz/badge.png?branch=main)](https://coveralls.io/github/cvxgrp/cvxmarkowitz?branch=main)
-
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/cvxgrp/cvxmarkowitz)
+[![Apache 2.0 License](https://img.shields.io/badge/License-APACHEv2-brightgreen.svg)](https://github.com/cvxgrp/cvxmarkowitz/blob/main/LICENSE)
+[![Coverage](https://www.cvxgrp.org/cvxmarkowitz/coverage-badge.svg)](https://www.cvxgrp.org/cvxmarkowitz/reports/html-coverage/)
 
 ## Motivation
 
@@ -32,44 +28,167 @@ the number of assets fixed by setting the weights for the assets not used to
 zero. Hence we do **not** need to recompile the problem as a new asset has to be
 added.
 
-Every problem has be constructed by a Builder. Here's a builder for a classic
-[minimum variance problem](cvx/markowitz/portfolios/min_var.py).
-The builder inherits from the [Builder](cvxmarkowitz/markowitz/builder.py)
-and implements the abstract method [build](cvxmarkowitz/markowitz/builder.py#L15).
+The padding is one-directional and it has to be consistent. Data for *more*
+assets than the problem was built for does not fit and raises a `CvxDataError`,
+and so does a payload whose models disagree about how large the universe is --
+handing the risk model two assets and the bounds four would otherwise leave the
+padded tail both riskless and unbounded, and the solver would put the whole
+portfolio there. `update` checks this across all models before it writes
+anything.
+
+Every problem has to be constructed by a Builder. Here's a builder for a classic
+[minimum variance problem](src/cvxmarkowitz/portfolios/min_var.py).
+The builder inherits from the [Builder](src/cvxmarkowitz/builder.py)
+and implements the abstract property [objective](src/cvxmarkowitz/builder.py).
 The builder remains flexible. At this stage it is possible to add or remove
-constraints,  Only once we trigger the build() method, we construct
+constraints. Only once we trigger the build() method do we construct
 the problem and compile it.
 
-For injecting values for data and parameter into the problem,
-we use the [update](cvxmarkowitz/markowitz/builder.py#L19) method.
+For injecting values for data and parameters into the problem,
+we use the [update](src/cvxmarkowitz/problem.py) method. It overwrites the
+parameter values **in place** and returns `None` — there is only ever one
+problem, which is precisely what lets CVXPY reuse the cached compilation.
+
+The builder picks a risk model for you: a `FactorModel` when you pass `factors`,
+a `SampleCovariance` otherwise. To use a different one — `CVar`, say — pass it in
+under `ModelName.RISK` and the builder keeps yours instead of defaulting:
+
+```python
+from cvxmarkowitz import MinVar
+from cvxmarkowitz.names import ModelName as M
+from cvxmarkowitz.risk import CVar
+
+builder = MinVar(assets=14, model={M.RISK: CVar(alpha=0.95, rows=50, assets=14)})
+print(type(builder.risk).__name__)
+```
+
+```result
+CVar
+```
 
 ## Installation
 
-You can install the package via [PyPI](https://pypi.org/project/cvxmarkowitz/):
+The package is not published on PyPI. Install it from the git source:
 
 ```bash
-pip install cvxmarkowitz
+pip install git+https://github.com/cvxgrp/cvxmarkowitz
 ```
 
-## Poetry
+## Usage
 
-We assume you share already the love for [Poetry](https://python-poetry.org).
-Once you have installed poetry you can perform
+Build a minimum-variance problem once, then re-solve it repeatedly with new
+data. The compiled problem is [DPP](https://www.cvxpy.org/tutorial/advanced/index.html#disciplined-parametrized-programming)-compliant,
+so subsequent solves reuse the cached compilation.
+
+```python
+import numpy as np
+from cvx.linalg import cholesky
+
+from cvxmarkowitz import MinVar
+from cvxmarkowitz.names import DataNames as D
+
+# Build a long-only, budget-constrained minimum-variance problem for 4 assets.
+problem = MinVar(assets=4).build()
+
+# Inject data and parameters. Here only 2 of the 4 asset slots are used;
+# the unused assets are pinned to zero weight.
+problem.update(
+    **{
+        D.CHOLESKY: cholesky(np.array([[1.0, 0.5], [0.5, 2.0]])),
+        D.LOWER_BOUND_ASSETS: np.zeros(2),
+        D.UPPER_BOUND_ASSETS: np.ones(2),
+        D.VOLA_UNCERTAINTY: np.zeros(2),
+    }
+)
+
+objective = problem.solve()  # defaults to the CLARABEL solver
+
+print("objective:", round(objective, 4))
+print("weights:", np.round(problem.weights, 3))
+```
+
+```result
+objective: 0.9354
+weights: [0.75 0.25 0.   0.  ]
+```
+
+### Reusing a built problem
+
+The problems are parameterized (DPP-compliant), so a single built problem can be
+re-solved with fresh data. Build once, then `update` and `solve` in a loop — the
+cvxpy canonicalization is paid for on the first solve and reused afterwards.
+
+```python
+problem = MinVar(assets=4).build()  # build once
+
+for correlation in (0.0, 0.5, 0.9):
+    problem.update(
+        **{
+            D.CHOLESKY: cholesky(np.array([[1.0, correlation], [correlation, 2.0]])),
+            D.LOWER_BOUND_ASSETS: np.zeros(2),
+            D.UPPER_BOUND_ASSETS: np.ones(2),
+            D.VOLA_UNCERTAINTY: np.zeros(2),
+        }
+    )
+    print(f"rho={correlation}: objective={problem.solve():.4f}")
+```
+
+```result
+rho=0.0: objective=0.8165
+rho=0.5: objective=0.9354
+rho=0.9: objective=0.9958
+```
+
+## Errors
+
+Everything the package raises derives from `CvxError`, so a single
+`except CvxError` still catches all of it. The subclasses below separate the
+failure modes that want different handling:
+
+| Error | Raised when | Retry helps? |
+|---|---|---|
+| `CvxDataError` | required data is missing, or shapes disagree | yes, with corrected input |
+| `CvxBuildError` | the assembled problem is not DPP-compliant | no — the formulation has to change |
+| `CvxSolverError` | the solver returned a non-optimal status | no — try another solver or relax the problem |
+
+The `CvxBuildError` check is a raise rather than an `assert`, so it still fires
+under `python -O`.
+
+## Development
+
+This project uses [uv](https://github.com/astral-sh/uv) and a
+[Rhiza](https://github.com/jebel-quant/rhiza)-managed `Makefile`. To create the
+virtual environment defined in `pyproject.toml` and locked in `uv.lock`:
 
 ```bash
 make install
 ```
 
-to replicate the virtual environment we have defined in
-[pyproject.toml](pyproject.toml) and fixed in [poetry.lock](poetry.lock).
+## marimo
 
-## Support for Jupyter
-
-you could install [JupyterLab](https://jupyter.org) within your new
-virtual environment. Executing
+We install [marimo](https://marimo.io) on the fly within the virtual
+environment. Executing
 
 ```bash
-make jupyter
+make marimo
 ```
 
-installs JupyterLab in your virtual environment for the project.
+will install and start marimo.
+
+## experiments
+
+`experiments/` holds standalone research scripts — backtests and the figures
+behind the talks — not part of the installed package. They pull in the `dev`
+dependency group (`yfinance`, `loguru`, `cvxsimulator`, `tinycta`, `plotly`),
+so run them against the full development environment:
+
+```bash
+make install
+uv run --group dev python experiments/minRisk1.py
+```
+
+They are deliberately outside the quality gates: `make typecheck`,
+`make docs-coverage`, `make deptry` and `make security` all scope to `src/`, and
+the coverage gate scopes to `tests/`. Only `make fmt` reaches them, since
+pre-commit runs repo-wide. Treat them as scratch work — if something here earns
+a stability guarantee, it belongs in `src/cvxmarkowitz/`.
